@@ -7,7 +7,7 @@ import {
   RiEyeLine, RiEyeOffLine,
 } from '@remixicon/react';
 import {
-  VaultAvatar, VaultBadge, VaultButton, VaultButtonGroup, VaultCheckbox, VaultDropdownTrigger, VaultField,
+  VaultAvatar, VaultBadge, VaultBreadcrumb, VaultButton, VaultButtonGroup, VaultCheckbox, VaultDropdownTrigger, VaultField,
   VaultPagination, VaultProgress, VaultSearch, VaultTabs,
 } from '../base/VaultControls';
 import { VaultSparkline } from '../base/VaultCharts';
@@ -67,7 +67,9 @@ export function ApplicationTopbar({ title, leading, center, actions, profile, cl
   // Without a centre the actions take the width they need instead of half the bar (Map topbar was squeezed).
   return <header className={`application-topbar ${className}`.trim()} data-layout={center ? 'three' : 'two'}>
     <span className="application-topbar__brand" aria-hidden="true"><img src={publicAsset('/aisee-mark.svg')} alt="" /></span>
-    <div className="application-topbar__lead">{leading ?? (title && <strong>{title}</strong>)}</div>
+    <div className="application-topbar__lead">{leading ?? (typeof title === 'string'
+      ? <VaultBreadcrumb label="Vị trí hiện tại" items={[{ label: title }]} />
+      : title && <strong>{title}</strong>)}</div>
     {center && <div className="application-topbar__center">{center}</div>}
     <div className="application-topbar__end">{actions}{profile}</div>
   </header>;
