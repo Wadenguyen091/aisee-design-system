@@ -53,7 +53,7 @@ export function ApplicationToolbar() {
 
 /**
  * App top bar — the one header every module page uses. Full-bleed, 56 tall, hairline below.
- * Left: title (or breadcrumb / any node). Centre: optional tabs. Right: actions, then the profile control.
+ * Left: full-bleed AISEE mark, then title (or breadcrumb / any node). Centre: optional tabs. Right: actions, then the profile control.
  */
 export function ApplicationTopbar({ title, leading, center, actions, profile, className = '' }: {
   title?: ReactNode;
@@ -66,6 +66,7 @@ export function ApplicationTopbar({ title, leading, center, actions, profile, cl
 }) {
   // Without a centre the actions take the width they need instead of half the bar (Map topbar was squeezed).
   return <header className={`application-topbar ${className}`.trim()} data-layout={center ? 'three' : 'two'}>
+    <span className="application-topbar__brand" aria-hidden="true"><img src={publicAsset('/aisee-mark.svg')} alt="" /></span>
     <div className="application-topbar__lead">{leading ?? (title && <strong>{title}</strong>)}</div>
     {center && <div className="application-topbar__center">{center}</div>}
     <div className="application-topbar__end">{actions}{profile}</div>
