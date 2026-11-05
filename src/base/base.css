@@ -1,0 +1,1030 @@
+/* Design-system base component styles (library). Loaded after the app stylesheet
+   so the cascade matches the original single-file order. */
+
+/* Precision controls ----------------------------------------------------------
+   A quiet, single-border language for Map and every shared Vault control. */
+.vault-app {
+  --vault-control-height: var(--vault-button-height);
+  --vault-control-radius: var(--vault-radius-control);
+  --vault-control-line: var(--ds-control-border);
+  --vault-control-line-hover: var(--ds-control-border-hover);
+  --vault-control-bg: var(--ds-control-background);
+}
+
+.vault-button {
+  display:inline-flex;
+  height: var(--vault-button-height);
+  align-items:center;
+  justify-content:center;
+  gap: var(--ds-spacing-control-gap);
+  border: var(--ds-border-width-control) solid var(--ds-control-border);
+  border-radius: var(--ds-button-radius);
+  padding: 0 var(--ds-button-padding-inline);
+  color: var(--vault-text);
+  background: transparent;
+  box-shadow: none;
+  font-size: var(--vault-button-font-size);
+  line-height: var(--vault-button-line-height);
+  font-weight: var(--ds-button-font-weight);
+  letter-spacing: -.01em;
+  white-space:nowrap;
+  transition: color var(--ds-duration-normal) var(--ds-ease-standard), background-color var(--ds-duration-normal) var(--ds-ease-standard), border-color var(--ds-duration-normal) var(--ds-ease-standard), box-shadow var(--ds-duration-normal) var(--ds-ease-standard), transform var(--ds-duration-fast) var(--ds-ease-standard), opacity var(--ds-duration-fast) var(--ds-ease-standard);
+}
+.vault-button[data-size='sm'] { --vault-button-icon-size:var(--ds-control-icon-sm); height:var(--ds-control-height-sm); padding-inline:var(--ds-space-3); }
+.vault-button[data-size='md'] { --vault-button-icon-size:var(--ds-control-icon-md); height:var(--ds-control-height-md); padding-inline:var(--ds-space-4); }
+.vault-button > svg { width:var(--vault-button-icon-size); height:var(--vault-button-icon-size); }
+.vault-button.is-icon-only,
+.vault-button.is-icon-only[data-size='sm'],
+.vault-button.is-icon-only[data-size='md'] { width:var(--ds-control-height-md); padding:0; }
+.vault-button.is-icon-only[data-size='sm'] { width:var(--ds-control-height-sm); }
+.vault-button:active:not(:disabled) { transform: translateY(1px); }
+.vault-button:focus-visible,
+.vault-toggle button:focus-visible,
+.vault-dropdown-trigger:focus-visible,
+.vault-switch:focus-visible,
+.vault-button-group > button:focus-visible {
+  outline: var(--ds-focus-outline-width) solid var(--ds-color-focus);
+  outline-offset: var(--ds-focus-ring-offset);
+  box-shadow: none;
+}
+.vault-button:disabled,
+.vault-toggle button:disabled,
+.vault-dropdown-trigger:disabled {
+  cursor: not-allowed;
+  opacity: var(--ds-state-disabled-opacity);
+  transform: none;
+}
+.vault-button[data-loading='true'] { color:transparent !important; position:relative; opacity:1; }
+.vault-button__spinner {
+  position:absolute;
+  width:var(--ds-control-icon-md);
+  height:var(--ds-control-icon-md);
+  color:var(--ds-color-on-action);
+  fill:currentColor;
+  animation:vault-control-spin .7s linear infinite;
+}
+.vault-button--secondary .vault-button__spinner { color:var(--ds-color-on-inverse-surface); }
+.vault-button--tertiary .vault-button__spinner { color:var(--ds-color-text-secondary); }
+.vault-button--text .vault-button__spinner { color:var(--ds-color-text-secondary); }
+.vault-button--primary,
+:root[data-theme='dark'] .vault-button--primary {
+  border-radius:var(--ds-radius-full);
+  border-color: color-mix(in srgb, var(--ds-color-on-action) 16%, transparent) !important;
+  color: var(--ds-color-on-action) !important;
+  background: var(--ds-color-action) !important;
+  box-shadow: none !important;
+}
+.vault-button--primary:hover,
+:root[data-theme='dark'] .vault-button--primary:hover { background: var(--ds-color-action-hover) !important; }
+.vault-button--primary[data-tone='danger'],
+:root[data-theme='dark'] .vault-button--primary[data-tone='danger'] { border-color:var(--ds-color-danger) !important; color:var(--ds-color-on-action) !important; background:var(--ds-color-danger) !important; }
+.vault-button--primary[data-tone='danger']:hover,
+:root[data-theme='dark'] .vault-button--primary[data-tone='danger']:hover { background:color-mix(in srgb,var(--ds-color-danger) 86%,var(--ds-color-text)) !important; }
+.vault-button--primary[data-loading='true'],
+:root[data-theme='dark'] .vault-button--primary[data-loading='true'] {
+  border-color:color-mix(in srgb,var(--ds-color-on-action) 16%,transparent)!important;
+  color:transparent!important;
+  background:var(--ds-color-action)!important;
+  opacity:1;
+}
+.vault-button--primary:disabled:not([data-loading='true']),
+:root[data-theme='dark'] .vault-button--primary:disabled:not([data-loading='true']) {
+  border-color:var(--ds-control-border)!important;
+  color:var(--ds-color-text-disabled)!important;
+  background:var(--ds-color-surface-muted)!important;
+  box-shadow:none!important;
+  opacity:1;
+}
+.vault-button--primary .vault-button__spinner,
+:root[data-theme='dark'] .vault-button--primary .vault-button__spinner { color:var(--ds-color-on-action); }
+.vault-button--secondary,
+:root[data-theme='dark'] .vault-button--secondary {
+  border-radius:var(--ds-radius-full);
+  border-color: color-mix(in srgb,var(--ds-color-on-inverse-surface) 12%,transparent);
+  color: var(--ds-color-on-inverse-surface);
+  background: var(--ds-color-inverse-surface);
+  box-shadow: none;
+}
+.vault-button--secondary:hover,
+:root[data-theme='dark'] .vault-button--secondary:hover {
+  border-color:color-mix(in srgb,var(--ds-color-on-inverse-surface) 18%,transparent);
+  color:var(--ds-color-on-inverse-surface);
+  background:var(--ds-color-inverse-surface-hover);
+  box-shadow: none;
+}
+.vault-button--secondary[data-loading='true'],
+:root[data-theme='dark'] .vault-button--secondary[data-loading='true'] {
+  border-color:color-mix(in srgb,var(--ds-color-on-inverse-surface) 12%,transparent)!important;
+  background:var(--ds-color-inverse-surface)!important;
+  opacity:1;
+}
+.vault-button--tertiary,
+:root[data-theme='dark'] .vault-button--tertiary {
+  border-color: var(--ds-control-border);
+  color: var(--ds-color-text-secondary);
+  background: var(--ds-color-surface-muted);
+  box-shadow: none;
+}
+.vault-button--tertiary:hover,
+:root[data-theme='dark'] .vault-button--tertiary:hover { border-color:var(--ds-control-border-hover);color:var(--ds-color-text);background:var(--ds-color-surface-hover); }
+.vault-button--tertiary[data-loading='true'],
+:root[data-theme='dark'] .vault-button--tertiary[data-loading='true'] {
+  border-color:var(--ds-control-border)!important;
+  background:var(--ds-color-surface-muted)!important;
+  opacity:1;
+}
+#root .vault-button--text,
+#root:root[data-theme='dark'] .vault-button--text { height:var(--ds-control-height-sm)!important;min-height:var(--ds-control-height-sm)!important;border:0!important;border-radius:0!important;padding-inline:var(--ds-space-1);color:var(--ds-color-text-secondary);background:transparent!important;box-shadow:none!important; }
+.vault-button--text:hover,
+:root[data-theme='dark'] .vault-button--text:hover { color:var(--ds-color-text);text-decoration:underline;text-underline-offset:4px; }
+.vault-button--text:disabled,
+:root[data-theme='dark'] .vault-button--text:disabled { color:var(--ds-color-text-disabled);background:transparent!important; }
+
+.vault-toggle {
+  display:flex;
+  box-sizing:border-box;
+  height: var(--ds-toolbar-height);
+  align-items:center;
+  gap: 2px;
+  border: var(--vault-button-group-border-width) solid var(--ds-control-border);
+  border-radius: var(--ds-radius-full);
+  padding: 1px;
+  background: var(--ds-control-background);
+  box-shadow: none;
+}
+.vault-toggle button {
+  height: var(--ds-toolbar-control-height);
+  min-width: 40px;
+  border: var(--ds-border-width-control) solid transparent;
+  border-radius: var(--ds-radius-full);
+  padding: 0 var(--vault-space-3);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  color: var(--vault-text-muted);
+  font-size: var(--ds-font-size-micro);
+  line-height: var(--vault-leading-xs);
+  font-weight: var(--ds-font-weight-semibold);
+  letter-spacing: .02em;
+  text-transform:uppercase;
+  transition: color var(--ds-duration-normal) var(--ds-ease-standard), background-color var(--ds-duration-normal) var(--ds-ease-standard), box-shadow var(--ds-duration-normal) var(--ds-ease-standard);
+}
+.vault-toggle button svg { width:14px; height:14px; flex:0 0 auto; fill:currentColor; }
+.vault-dropdown-trigger {
+  display:grid;
+  width:100%;
+  height:var(--vault-dropdown-height);
+  grid-template-columns:var(--vault-button-icon-size) minmax(0,1fr) var(--vault-button-icon-size);
+  align-items:center;
+  gap:var(--ds-spacing-control-gap);
+  padding:0 var(--ds-spacing-control-padding-inline);
+  font-size:var(--vault-button-font-size);
+  line-height:var(--vault-button-line-height);
+  border:var(--ds-border-width-control) solid var(--ds-control-border);
+  border-radius:var(--ds-radius-full);
+  font-weight:var(--ds-font-weight-semibold);
+  text-align:left;
+  transition:color var(--ds-duration-normal) var(--ds-ease-standard), background-color var(--ds-duration-normal) var(--ds-ease-standard), border-color var(--ds-duration-normal) var(--ds-ease-standard), box-shadow var(--ds-duration-normal) var(--ds-ease-standard);
+}
+.vault-dropdown-trigger:not(.has-icon) { grid-template-columns:minmax(0,1fr) var(--vault-button-icon-size); }
+.vault-dropdown-trigger>span { align-self:center; overflow:hidden; line-height:var(--vault-button-line-height); text-overflow:ellipsis; white-space:nowrap; }
+.vault-dropdown-trigger > svg { width:var(--vault-button-icon-size); height:var(--vault-button-icon-size); align-self:center; }
+.vault-dropdown-trigger > .vault-dropdown-chevron { justify-self:end; }
+.vault-dropdown-chevron { color:var(--ds-color-text-muted); transition:transform var(--ds-duration-fast) var(--ds-ease-standard); }
+.vault-dropdown-trigger[aria-expanded='true'] .vault-dropdown-chevron { transform:rotate(180deg); }
+.vault-dropdown-trigger--primary {
+  border-color:var(--ds-control-border);
+  color:var(--ds-color-text);
+  background:var(--ds-color-surface-muted);
+}
+.vault-dropdown-trigger--primary:hover,
+.vault-dropdown-trigger--primary[aria-expanded='true'] { border-color:var(--ds-control-border-hover); background:var(--ds-color-surface-hover); }
+.vault-dropdown-trigger--secondary { border-color:var(--ds-control-border); color:var(--ds-color-text-secondary); background:var(--ds-control-background); }
+.vault-dropdown-trigger--secondary:hover,
+.vault-dropdown-trigger--secondary[aria-expanded='true'] { border-color:var(--ds-control-border); color:var(--ds-color-text); background:var(--ds-color-surface-hover); }
+.vault-dropdown-trigger[data-selected='true'] { border-color:var(--ds-control-border); color:var(--ds-color-text); background:var(--ds-color-surface-raised); }
+#root .vault-dropdown-trigger[aria-expanded='true'] { border-width:var(--ds-border-width-control); border-color:var(--ds-color-border-subtle)!important; outline:0; background:color-mix(in srgb,var(--ds-color-surface-hover) 72%,var(--ds-control-background))!important; box-shadow:none!important; }
+.vault-dropdown-trigger--tertiary,
+:root[data-theme='dark'] .vault-dropdown-trigger--tertiary { border-color:var(--ds-control-border); color:var(--ds-color-text-secondary); background:transparent; }
+.vault-dropdown-trigger--tertiary:hover,
+.vault-dropdown-trigger--tertiary[aria-expanded='true'] { border-color:var(--ds-control-border-hover); color:var(--ds-color-text); background:var(--ds-color-surface-hover); }
+.vault-dropdown-field { display:block; width:100%; min-width:0; }
+.vault-dropdown-field__label { color:var(--ds-color-text-secondary); font-size:var(--ds-font-size-label); line-height:var(--ds-line-height-label); font-weight:var(--ds-font-weight-medium); }
+.vault-dropdown-field__hint { overflow:hidden; color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-caption); text-overflow:ellipsis; white-space:nowrap; }
+.vault-toggle button:hover:not([aria-pressed='true']) { color:var(--ds-color-text); background:var(--ds-color-surface-hover); }
+.vault-toggle button[aria-pressed='true'],
+:root[data-theme='dark'] .vault-toggle button[aria-pressed='true'] {
+  border-color: var(--ds-color-action);
+  color: var(--ds-color-action);
+  background: color-mix(in srgb, var(--ds-color-action) 10%, var(--ds-control-background));
+  box-shadow: none;
+}
+
+@keyframes vault-control-spin { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .vault-button,
+  .vault-toggle button,
+  .vault-dropdown-trigger,
+  .vault-dropdown-menu>button { transition:none; }
+  .vault-dropdown-menu { animation:none!important; }
+  .vault-button__spinner,
+  .vault-field__spinner,
+  .vault-search-control__spinner { animation-duration:1.4s; }
+}
+
+.vault-search-field { color: var(--vault-text-muted); }
+input.vault-search {
+  height: var(--vault-control-height);
+  border: var(--ds-border-width-control) solid var(--ds-control-border) !important;
+  border-radius: var(--ds-radius-full);
+  color: var(--vault-text) !important;
+  background: var(--ds-control-background) !important;
+  box-shadow: none !important;
+  transition: color var(--ds-duration-normal) var(--ds-ease-standard), background-color var(--ds-duration-normal) var(--ds-ease-standard), border-color var(--ds-duration-normal) var(--ds-ease-standard), outline-color var(--ds-duration-normal) var(--ds-ease-standard);
+}
+input.vault-search::placeholder { color: var(--vault-text-muted); }
+input.vault-search:hover { border-color: var(--ds-control-border-hover) !important; }
+input.vault-search:focus,
+input.vault-search:focus-visible {
+  border-color: var(--vault-focus) !important;
+  outline: var(--ds-focus-outline-width) solid var(--ds-color-focus-soft) !important;
+  outline-offset: var(--ds-focus-ring-offset) !important;
+  background: var(--vault-surface-raised) !important;
+  box-shadow: none !important;
+}
+
+.vault-field { display:grid; min-width:0; gap:0; color:var(--ds-color-text); }
+.vault-field__label { font-size:var(--ds-font-size-label); line-height:var(--ds-line-height-label); font-weight:var(--ds-font-weight-semibold); }
+.vault-field__control { display:flex; height:var(--ds-input-height); align-items:center; gap:var(--ds-space-2); border:var(--ds-border-width-control) solid var(--ds-control-border); border-radius:var(--ds-radius-full); padding:0 var(--ds-spacing-control-padding-inline); color:var(--ds-color-text-muted); background:var(--ds-control-background); transition:border-color var(--ds-duration-normal) var(--ds-ease-standard),outline-color var(--ds-duration-normal) var(--ds-ease-standard),background var(--ds-duration-normal) var(--ds-ease-standard); }
+.vault-field__control:hover { border-color:var(--ds-control-border-hover); }
+#root .vault-field__control:focus-within { border-width:var(--ds-border-width-control); border-color:var(--ds-control-border)!important; background:var(--ds-color-surface-hover); box-shadow:none; }
+.vault-field__control:has(input:focus-visible) { outline:0; }
+.vault-field__control>svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); flex:none; }
+.vault-field__control>input { width:100%; min-width:0; border:0!important; outline:0!important; color:var(--ds-color-text); background:transparent!important; box-shadow:none!important; font:inherit; font-size:var(--ds-font-size-body); }
+#root .vault-field__control>input:hover,
+#root .vault-field__control>input:focus,
+#root .vault-field__control>input:focus-visible { border:0!important; outline:0!important; box-shadow:none!important; }
+.vault-field__control>input::placeholder { color:var(--ds-color-text-muted); }
+.vault-field__message { margin-top:var(--ds-space-2); color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-caption); }
+.vault-field.is-invalid .vault-field__control { border-color:color-mix(in srgb,var(--ds-color-danger) 52%,transparent); }
+.vault-field.is-invalid .vault-field__message { color:var(--ds-color-danger); }
+.vault-field[data-loading='true'] .vault-field__control { color:var(--ds-color-text-muted); background:var(--ds-color-surface-muted); }
+.vault-field__spinner { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); flex:none; color:var(--ds-color-text-muted); fill:currentColor; animation:vault-control-spin .7s linear infinite; }
+
+.vault-search-control { display:grid; width:100%; height:var(--ds-control-height-md); grid-template-columns:var(--ds-icon-size-md) minmax(0,1fr) auto; align-items:center; gap:var(--ds-space-2); border:var(--ds-border-width-control) solid var(--ds-control-border); border-radius:var(--ds-radius-full); padding:0 var(--ds-space-1) 0 var(--ds-space-3); color:var(--ds-color-text-muted); background:var(--ds-control-background); }
+.vault-search-control:hover { border-color:var(--ds-control-border-hover); }
+#root .vault-search-control:focus-within { border-width:var(--ds-border-width-control); border-color:var(--ds-control-border)!important; background:var(--ds-color-surface-hover); box-shadow:none!important; }
+.vault-search-control>svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); fill:currentColor; }
+.vault-search-control>input { width:100%; min-width:0; border:0!important; outline:0!important; color:var(--ds-color-text); background:transparent!important; box-shadow:none!important; font:inherit; font-size:var(--ds-font-size-body); }
+.vault-search-control>input::-webkit-search-cancel-button { display:none; }
+.vault-search-control>input::placeholder { color:var(--ds-color-text-muted); }
+#root .vault-search-control>button { display:grid; width:calc(var(--ds-control-height-md) - var(--ds-space-1) - var(--ds-space-1) - var(--ds-border-width-control) - var(--ds-border-width-control)); height:calc(var(--ds-control-height-md) - var(--ds-space-1) - var(--ds-space-1) - var(--ds-border-width-control) - var(--ds-border-width-control)); min-height:0!important; place-items:center; justify-self:end; border:0; border-radius:var(--ds-radius-full)!important; padding:0!important; color:var(--ds-color-text-muted); background:var(--ds-color-surface-raised)!important; line-height:0; }
+#root .vault-search-control>button:hover { color:var(--ds-color-text); background:var(--ds-color-surface-overlay)!important; }
+.vault-search-control>button svg { display:block; width:var(--ds-icon-size-sm); height:var(--ds-icon-size-sm); fill:currentColor; }
+.vault-search-control__spinner { animation:vault-control-spin .7s linear infinite; }
+.vault-avatar { position:relative; display:inline-grid; flex:none; place-items:center; overflow:visible; border:var(--ds-border-width-control) solid var(--ds-color-border-subtle); border-radius:var(--ds-radius-full)!important; color:var(--ds-color-text); background:var(--ds-color-surface-raised); font-size:11px; font-weight:var(--ds-font-weight-semibold); line-height:1; }
+.vault-avatar[data-size='sm'] { width:24px; height:24px; }
+.vault-avatar[data-size='md'] { width:32px; height:32px; }
+.vault-avatar[data-size='lg'] { width:40px; height:40px; }
+.vault-avatar>img,.vault-avatar>span { width:100%; height:100%; display:grid; place-items:center; overflow:hidden; border-radius:var(--ds-radius-full)!important; object-fit:cover; filter:grayscale(1) contrast(1.08); }
+.vault-avatar.is-subscriber { border:0; padding:3px; background:linear-gradient(135deg,var(--ds-color-action),var(--ds-color-info) 48%,var(--ds-color-warning)); }
+.vault-avatar.is-subscriber>img,.vault-avatar.is-subscriber>span { background:var(--ds-color-surface-raised); }
+.vault-avatar>i { position:absolute; right:-1px; bottom:-1px; width:9px; height:9px; border:2px solid var(--ds-color-surface); border-radius:var(--ds-radius-full); background:var(--ds-color-text-muted); }
+.vault-avatar>i[data-status='online'] { background:var(--ds-color-success); }
+.vault-avatar>i[data-status='away'] { background:var(--ds-color-warning); }
+#root .vault-avatar,#root .vault-avatar>img,#root .vault-avatar>span,#root .vault-avatar>i { border-radius:var(--ds-radius-full)!important; }
+
+.vault-badge { display:inline-flex; width:max-content; min-width:var(--ds-badge-height); height:var(--ds-badge-height); align-items:center; justify-content:center; gap:var(--ds-space-1); border:var(--ds-border-width-control) solid var(--ds-color-border-subtle); border-radius:var(--ds-radius-full); padding:0 var(--ds-space-2); color:var(--ds-color-text-secondary); background:var(--ds-color-surface-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-caption); font-weight:var(--ds-font-weight-semibold); white-space:nowrap; }
+.vault-badge--info { border-color:color-mix(in srgb,var(--ds-color-info) 28%,transparent); color:var(--ds-color-info); background:var(--ds-color-info-soft); }
+.vault-badge--success { border-color:color-mix(in srgb,var(--ds-color-success) 28%,transparent); color:var(--ds-color-success); background:var(--ds-color-success-soft); }
+.vault-badge--warning { border-color:color-mix(in srgb,var(--ds-color-warning) 28%,transparent); color:var(--ds-color-warning); background:var(--ds-color-warning-soft); }
+.vault-badge--danger { border-color:color-mix(in srgb,var(--ds-color-danger) 28%,transparent); color:var(--ds-color-danger); background:var(--ds-color-danger-soft); }
+.vault-badge--ink, #root .vault-badge--ink { border-color:transparent!important; color:inherit; background:color-mix(in srgb, currentColor 14%, transparent); }
+.vault-badge--category { border-color:color-mix(in srgb,var(--ds-color-category-2) 28%,transparent); color:var(--ds-color-category-2); background:var(--ds-color-category-2-soft); }
+
+.vault-toggle-field { display:inline-flex; align-items:center; gap:var(--ds-space-4); color:var(--ds-color-text-secondary); font-size:var(--ds-font-size-body); }
+.vault-toggle-field>strong { font-weight:var(--ds-font-weight-medium); }
+/* hideLabel: the label stays as the accessible name only (table and list columns). */
+.vault-toggle-field[data-hide-label]>strong { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.vault-switch { display:inline-flex; height:var(--ds-control-height-md); align-items:center; border:0; padding:0; color:var(--ds-color-text-secondary); background:transparent; }
+.vault-switch>span { position:relative; width:36px; height:20px; flex:none; border:var(--ds-border-width-control) solid var(--ds-control-border); border-radius:var(--ds-radius-sm); background:var(--ds-color-surface-raised); transition:border-color var(--ds-duration-normal) var(--ds-ease-standard),background var(--ds-duration-normal) var(--ds-ease-standard); }
+.vault-switch:hover:not(:disabled)>span { border-color:var(--ds-control-border-hover); background:var(--ds-color-surface-hover); }
+.vault-switch>span::after { position:absolute; top:3px; left:3px; width:12px; height:12px; border-radius:var(--ds-radius-sm); background:var(--ds-color-text-muted); content:""; transition:transform var(--ds-duration-normal) var(--ds-ease-standard),background var(--ds-duration-normal) var(--ds-ease-standard); }
+.vault-checkbox{position:relative;display:inline-flex;min-height:var(--ds-control-height-sm);align-items:center;gap:var(--ds-space-2);cursor:pointer;color:var(--ds-color-text-secondary);font-size:var(--ds-font-size-label)}
+.vault-checkbox>input{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+.vault-checkbox>span{display:grid;width:20px;height:20px;flex:none;place-items:center;border:var(--ds-border-width-control) solid var(--ds-control-border);border-radius:var(--ds-radius-full);background:var(--ds-control-background);transition:border-color var(--ds-duration-normal) var(--ds-ease-standard),background var(--ds-duration-normal) var(--ds-ease-standard)}
+.vault-checkbox>span svg{width:16px;height:16px;fill:currentColor}.vault-checkbox>span i{width:8px;height:2px;background:currentColor}
+.vault-checkbox>strong{font-weight:var(--ds-font-weight-medium)}
+.vault-checkbox[data-state='checked']>span,.vault-checkbox[data-state='indeterminate']>span{border-color:var(--ds-color-text);color:var(--ds-color-surface);background:var(--ds-color-text)}
+.vault-checkbox:hover>span{background:var(--ds-color-surface-hover)}.vault-checkbox[data-state='checked']:hover>span,.vault-checkbox[data-state='indeterminate']:hover>span{background:var(--ds-color-text)}
+.vault-checkbox:has(input:focus-visible)>span{outline:var(--ds-weight-lg) solid var(--ds-color-border-strong);outline-offset:2px}.vault-checkbox[data-disabled]{cursor:not-allowed;opacity:.42}
+.vault-tooltip{position:relative;display:inline-flex}.vault-tooltip>[role='tooltip']{position:absolute;z-index:30;left:50%;width:max-content;max-width:240px;transform:translate(-50%,-6px);pointer-events:none;border:var(--ds-border-width-control) solid var(--ds-color-border-subtle);border-radius:var(--ds-radius-sm);padding:var(--ds-space-2) var(--ds-space-3);color:var(--ds-color-text);background:var(--ds-color-surface-raised);font-size:var(--ds-font-size-caption);line-height:var(--ds-line-height-caption);opacity:0;visibility:hidden;transition:opacity var(--ds-duration-fast) var(--ds-ease-standard),transform var(--ds-duration-fast) var(--ds-ease-standard)}
+.vault-tooltip[data-placement='top']>[role='tooltip']{bottom:calc(100% + var(--ds-space-2))}.vault-tooltip[data-placement='bottom']>[role='tooltip']{top:calc(100% + var(--ds-space-2));transform:translate(-50%,6px)}
+.vault-tooltip:hover>[role='tooltip'],.vault-tooltip:focus-within>[role='tooltip']{transform:translate(-50%,0);opacity:1;visibility:visible}
+.vault-breadcrumb ol{display:flex;min-height:var(--ds-control-height-md);align-items:center;gap:var(--ds-space-1);margin:0;padding:0;list-style:none}.vault-breadcrumb li{display:flex;align-items:center;gap:var(--ds-space-1);color:var(--ds-color-text-muted);font-size:var(--ds-font-size-label)}
+.vault-breadcrumb li>svg{width:var(--ds-icon-size-sm);height:var(--ds-icon-size-sm);color:color-mix(in srgb,var(--ds-color-text-muted) 58%,transparent);fill:currentColor}.vault-breadcrumb a,.vault-breadcrumb span{display:inline-flex;align-items:center;gap:var(--ds-space-2);padding:0 var(--ds-space-2);color:inherit}.vault-breadcrumb a:hover{color:var(--ds-color-text);background:var(--ds-color-surface-hover)}.vault-breadcrumb [aria-current='page']{color:var(--ds-color-text);font-weight:var(--ds-font-weight-semibold)}.vault-breadcrumb a svg,.vault-breadcrumb span svg{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md);fill:currentColor}
+.vault-pagination{display:flex;align-items:center;gap:var(--ds-space-1)}.vault-pagination>span{display:flex;align-items:center;gap:var(--ds-space-1)}.vault-pagination>span>i{display:grid;width:var(--ds-control-height-sm);height:var(--ds-control-height-sm);place-items:center;color:var(--ds-color-text-muted)}.vault-pagination>span>i svg{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md);fill:currentColor}.vault-pagination .vault-button:not(.is-icon-only){min-width:var(--ds-control-height-sm);padding-inline:var(--ds-space-2)}.vault-pagination .vault-button{border-color:var(--ds-control-border);color:var(--ds-color-text-secondary);background:var(--ds-color-surface-muted)}.vault-pagination .vault-button[aria-current='page']{border-color:var(--ds-control-border-hover);color:var(--ds-color-text);background:var(--ds-color-surface-hover)}.vault-pagination .vault-button:hover:not(:disabled){border-color:var(--ds-control-border-hover);color:var(--ds-color-text);background:color-mix(in srgb,var(--ds-color-surface-hover) 84%,var(--ds-color-text) 3%)}
+.vault-dashboard-nav{display:grid;width:240px;border:var(--ds-border-width-control) solid color-mix(in srgb,var(--ds-color-text) 5%,transparent);background:var(--ds-color-surface)}.vault-dashboard-nav>button{position:relative;display:grid;height:var(--ds-control-height-md);grid-template-columns:var(--ds-icon-size-md) minmax(0,1fr) auto;align-items:center;gap:var(--ds-space-3);border:0;border-bottom:var(--ds-border-width-control) solid color-mix(in srgb,var(--ds-color-text) 5%,transparent);border-radius:0!important;padding:0 var(--ds-space-3);color:var(--ds-color-text-muted);background:transparent;text-align:left}.vault-dashboard-nav>button:last-child{border-bottom:0}.vault-dashboard-nav>button svg{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md);fill:currentColor}.vault-dashboard-nav>button>span:not(.vault-badge){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vault-dashboard-nav>button>.vault-badge{justify-self:end}.vault-dashboard-nav>button:hover{color:var(--ds-color-text);background:var(--ds-color-surface-hover)}.vault-dashboard-nav>button[aria-current='page']{color:var(--ds-color-text);background:linear-gradient(90deg,color-mix(in srgb,var(--ds-color-text) 4%,var(--ds-color-surface)) 0%,var(--ds-color-surface) 100%)}.vault-dashboard-nav>button[aria-current='page']::before{position:absolute;inset:0 auto 0 0;width:var(--ds-weight-md);background:var(--ds-color-text-secondary);content:""}.vault-dashboard-nav>button:disabled{opacity:.36}
+#root .vault-dropdown-menu{display:grid;width:100%;overflow:hidden;border:var(--ds-border-width-control) solid var(--ds-color-border-subtle);border-radius:2px!important;background:var(--ds-color-surface);box-shadow:var(--ds-shadow-overlay);transform-origin:top;animation:vault-dropdown-menu-in var(--ds-duration-fast) var(--ds-ease-standard)}
+#root .vault-dropdown-menu>button{position:relative;display:grid;width:100%;height:var(--ds-control-height-md);grid-template-columns:var(--ds-icon-size-md) minmax(0,1fr) auto;align-items:center;gap:var(--ds-space-3);border:0!important;border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle)!important;border-radius:0!important;padding:0 var(--ds-space-3);color:var(--ds-color-text-muted);background:transparent;font-size:var(--ds-font-size-label);text-align:left;transition:color var(--ds-duration-fast) var(--ds-ease-standard),background-color var(--ds-duration-fast) var(--ds-ease-standard)}
+#root .vault-dropdown-menu>button:last-child{border-bottom:0!important}#root .vault-dropdown-menu>button:hover:not(:disabled){color:var(--ds-color-text);background:var(--ds-color-surface-hover)}#root .vault-dropdown-menu>button[aria-selected='true']{color:var(--ds-color-text);background:linear-gradient(90deg,color-mix(in srgb,var(--ds-color-text) 4%,var(--ds-color-surface)) 0%,var(--ds-color-surface) 100%);box-shadow:none!important}#root .vault-dropdown-menu>button[aria-selected='true']::before{position:absolute;inset:0 auto 0 0;width:var(--ds-weight-md);background:var(--ds-color-text-secondary);content:""}#root .vault-dropdown-menu>button:disabled{cursor:not-allowed;opacity:.36}
+.vault-dropdown-menu__icon{display:grid;width:var(--ds-icon-size-md);height:var(--ds-icon-size-md);place-items:center}.vault-dropdown-menu__icon svg,.vault-dropdown-menu__check{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md);fill:currentColor}.vault-dropdown-menu__label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vault-dropdown-menu>button>.vault-badge{justify-self:end}.vault-dropdown-menu__check{justify-self:end}
+@keyframes vault-dropdown-menu-in{from{opacity:0;transform:translateY(-2px)}to{opacity:1;transform:translateY(0)}}
+.vault-switch[aria-checked='true']>span { background:var(--ds-color-text); }
+.vault-switch[aria-checked='true']>span::after { background:var(--ds-color-surface); transform:translateX(16px); }
+
+.vault-button-group { display:inline-grid; box-sizing:border-box; width:max-content; max-width:100%; height:var(--vault-button-group-height); min-height:var(--vault-button-group-height); grid-template-columns:repeat(var(--vault-segment-count),minmax(max-content,1fr)); align-items:stretch; gap:0; overflow:hidden; border:0; border-radius:var(--ds-radius-sm); padding:2px; background:var(--ds-color-surface-muted); box-shadow:inset 0 0 0 var(--vault-button-group-border-width) var(--ds-control-border); }
+.vault-button-group[data-size='sm'] { height:var(--ds-control-height-sm); min-height:var(--ds-control-height-sm); }
+.vault-button-group[data-full-width='true'] { width:100%; grid-template-columns:repeat(var(--vault-segment-count),minmax(0,1fr)); }
+#root .vault-button-group>.vault-button { position:relative; width:100%; min-width:0; height:auto!important; min-height:0!important; align-self:stretch; border:0!important; border-radius:calc(var(--ds-radius-sm) - 2px)!important; padding:0 var(--ds-space-3); color:var(--ds-color-text-secondary)!important; background:transparent!important; box-shadow:none!important; font-size:var(--ds-font-size-label); font-weight:var(--ds-font-weight-medium); line-height:var(--ds-line-height-label); outline:0!important; transition:color var(--ds-duration-fast) var(--ds-ease-standard),background-color var(--ds-duration-fast) var(--ds-ease-standard),box-shadow var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-button-group[data-size='sm']>.vault-button { padding-inline:var(--ds-space-2); font-size:var(--ds-font-size-caption); }
+.vault-button-group>.vault-button svg { width:var(--ds-icon-size-sm); height:var(--ds-icon-size-sm); flex:0 0 auto; }
+#root .vault-button-group>.vault-button:hover:not(:disabled):not([data-state='selected']) { color:var(--ds-color-text)!important; background:color-mix(in srgb,var(--ds-color-surface-hover) 72%,transparent)!important; }
+#root .vault-button-group>.vault-button[data-state='selected'] { z-index:1; color:var(--ds-color-text)!important; background:var(--ds-color-surface-raised)!important; box-shadow:0 1px 2px color-mix(in srgb,var(--ds-color-text) 14%,transparent),0 0 0 1px color-mix(in srgb,var(--ds-color-text) 9%,transparent)!important; font-weight:var(--ds-font-weight-semibold); }
+#root .vault-button-group>.vault-button[data-state='selected']:hover { background:var(--ds-color-surface-raised)!important; }
+#root .vault-button-group[data-variant='primary']>.vault-button[data-state='selected'] { color:var(--ds-primitive-on-red)!important; background:var(--ds-primitive-red-500)!important; box-shadow:0 1px 3px color-mix(in srgb,var(--ds-primitive-red-500) 30%,transparent),0 0 0 1px color-mix(in srgb,var(--ds-primitive-red-500) 72%,var(--ds-color-text))!important; }
+#root .vault-button-group[data-variant='primary']>.vault-button[data-state='selected']:hover { background:var(--ds-primitive-red-600)!important; }
+#root .vault-button-group__badge { display:inline-grid; box-sizing:border-box; width:18px; min-width:18px; height:18px; flex:0 0 18px; place-items:center; border-radius:50%!important; padding:0; color:var(--ds-color-text-secondary); background:var(--ds-color-surface-raised); font-size:10px; font-weight:var(--ds-font-weight-semibold); line-height:1; }
+#root .vault-button-group>.vault-button[data-state='selected']>.vault-button-group__badge { color:var(--ds-color-text); background:var(--ds-color-surface-overlay); }
+#root .vault-button-group[data-variant='primary']>.vault-button[data-state='selected']>.vault-button-group__badge { color:var(--ds-primitive-red-600); background:var(--ds-primitive-on-red); }
+#root .vault-button-group>.vault-button:focus-visible { z-index:2; outline:var(--ds-focus-outline-width) solid var(--ds-color-focus-border)!important; outline-offset:-2px!important; }
+.vault-button-group:has(>.vault-button:focus-visible) { outline:0; }
+#root .vault-button-group>.vault-button:active:not(:disabled) { background:color-mix(in srgb,var(--ds-color-surface-hover) 84%,var(--ds-color-text) 4%)!important; }
+#root .vault-button-group>.vault-button:disabled { cursor:not-allowed; color:var(--ds-color-text-disabled)!important; background:transparent!important; opacity:.56; }
+.vault-tabs { display:flex; width:100%; max-width:100%; height:var(--ds-control-height-md); align-items:stretch; overflow-x:auto; border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle); background:transparent; }
+#root .vault-tabs>button { position:relative; display:inline-flex; min-width:0; height:100%; flex:1 1 0; align-items:center; justify-content:center; gap:var(--ds-space-2); border:0; border-bottom:var(--ds-weight-lg) solid transparent; border-radius:0!important; padding:0 var(--ds-space-4); color:var(--ds-color-text-muted); background:transparent; box-shadow:none!important; font-size:var(--ds-font-size-label); font-weight:var(--ds-font-weight-medium); white-space:nowrap; }
+.vault-tabs>button:hover:not(:disabled),.vault-tabs>button.ds-force-hover:not(:disabled) { color:var(--ds-color-text); background:transparent; }
+#root .vault-tabs>button[aria-selected='true'] { border-bottom-color:var(--ds-color-text); border-radius:0!important; color:var(--ds-color-text); background:linear-gradient(to top,color-mix(in srgb,var(--ds-color-text) 5%,transparent) 0%,color-mix(in srgb,var(--ds-color-text) 2%,transparent) 48%,transparent 100%); box-shadow:none!important; }
+.vault-tabs>button:focus-visible { z-index:1; border-bottom-color:var(--ds-color-text); outline:0; background:linear-gradient(to top,color-mix(in srgb,var(--ds-color-text) 5%,transparent) 0%,color-mix(in srgb,var(--ds-color-text) 2%,transparent) 48%,transparent 100%); }
+.vault-tabs>button:disabled { cursor:not-allowed; color:var(--ds-color-text-disabled); background:transparent; }
+.vault-tabs>button>svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); flex:none; fill:currentColor; }
+.vault-tabs>button>.vault-tab-badge { display:grid;min-width:var(--ds-control-height-xs);height:var(--ds-control-height-xs);flex:none;place-items:center;border-radius:var(--ds-radius-full);padding:0 var(--ds-space-1);color:var(--ds-color-text-secondary);background:var(--ds-color-surface-raised);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);line-height:var(--ds-line-height-caption);font-weight:var(--ds-font-weight-semibold); }
+#root .vault-tabs>button[aria-selected='true']>.vault-tab-badge { color:var(--ds-color-text);background:var(--ds-color-surface-overlay); }
+
+.vault-chart{display:grid;min-width:0;align-content:start;gap:var(--ds-space-4);margin:0;padding:var(--ds-space-5);color:var(--ds-color-text);font-style:normal}.vault-chart figcaption{display:flex;min-height:var(--ds-control-height-xs);align-items:center;justify-content:space-between;gap:var(--ds-space-3);color:var(--ds-color-text-secondary);font-size:var(--ds-font-size-label);font-weight:var(--ds-font-weight-semibold);letter-spacing:.04em;text-transform:uppercase}.vault-chart figcaption>i{display:grid;width:var(--ds-control-height-sm);height:var(--ds-control-height-sm);place-items:center;border-radius:var(--ds-radius-full);color:var(--ds-color-text);background:var(--ds-color-surface-raised);font-style:normal}.vault-chart figcaption>i svg{width:var(--ds-icon-size-lg);height:var(--ds-icon-size-lg)}.vault-chart--meter>strong{font-size:var(--ds-text-headline-5xl-size);line-height:var(--ds-text-headline-5xl-line);letter-spacing:-.05em}.vault-chart--meter>strong small{margin-left:var(--ds-space-1);font-size:var(--ds-text-headline-2xl-size);line-height:1}.vault-chart__segments,.vault-chart__dots{display:flex;height:var(--ds-space-3);align-items:stretch;gap:var(--ds-space-1)}.vault-chart__segments>i{min-width:6px;flex:1;border-radius:0!important;background:var(--ds-color-surface-raised)}.vault-chart__segments>i[data-active],.vault-chart__dots>i[data-active]{background:var(--ds-color-action)}.vault-chart__dots{height:var(--ds-space-2);align-items:center}.vault-chart__dots>i{width:var(--ds-space-2);height:var(--ds-space-2);flex:none;border-radius:var(--ds-radius-full);background:var(--ds-color-surface-raised)}.vault-chart--radial>div{position:relative;display:grid;width:152px;height:152px;place-items:center;justify-self:center}.vault-chart--radial svg{position:absolute;inset:0;width:100%;height:100%}.vault-chart--radial line{stroke:var(--ds-color-surface-raised);stroke-width:3}.vault-chart--radial line[data-active]{stroke:var(--ds-color-action)}.vault-chart--radial>div>span{display:flex;align-items:baseline;gap:2px}.vault-chart--radial>div>span svg{position:static;width:var(--ds-icon-size-display);height:var(--ds-icon-size-display)}.vault-chart--radial>div>span strong{font-size:var(--ds-text-headline-3xl-size)}.vault-chart--radial>div>span small{font-size:var(--ds-font-size-body)}.vault-chart--arc>div{position:relative}.vault-chart--arc svg{display:block;width:100%;height:132px}.vault-chart--arc path{fill:none;stroke-width:5}.vault-chart__arc-track{stroke:var(--ds-color-surface-raised)}.vault-chart__arc-value{stroke:var(--ds-color-action)}.vault-chart--arc line{stroke:var(--ds-color-text);stroke-width:2}.vault-chart--arc circle{fill:var(--ds-color-text)}.vault-chart--arc>div>strong{position:absolute;right:50%;bottom:var(--ds-space-1);transform:translateX(50%);font-size:var(--ds-text-headline-xl-size)}.vault-chart--arc footer{display:flex;justify-content:space-between;color:var(--ds-color-text-muted);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-semibold)}.vault-chart--line figcaption strong{color:var(--ds-color-action);font-size:var(--ds-font-size-body);letter-spacing:0}.vault-chart--line svg{width:100%;height:190px;overflow:visible;color:var(--ds-color-action)}.vault-chart--line polyline{fill:none;stroke:currentColor;stroke-width:3;vector-effect:non-scaling-stroke}.vault-chart__area{fill:url(#vault-chart-area)}.vault-chart--line circle{fill:var(--ds-color-surface);stroke:currentColor;stroke-width:3;vector-effect:non-scaling-stroke}.vault-chart__guide{stroke:var(--ds-color-border-strong);stroke-width:1;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}.vault-chart--bars>div{display:grid;gap:var(--ds-space-3)}.vault-chart--bars>div>span{display:grid;grid-template-columns:32px minmax(0,1fr) 64px;align-items:center;gap:var(--ds-space-3)}.vault-chart--bars b,.vault-chart--bars strong{font-size:var(--ds-font-size-label)}.vault-chart--bars strong{text-align:right}.vault-chart--bars em{display:flex;height:var(--ds-space-4);gap:var(--ds-space-1);font-style:normal}.vault-chart--bars em>i{min-width:3px;flex:1;border-radius:0!important;background:var(--ds-color-surface-raised)}.vault-chart--bars em>i[data-active]{background:var(--ds-color-action)}
+
+/* Notice (toast + alert) — one flat row: tinted icon cell, copy, quiet actions.
+   64px tall, hairline frame drawn with outline so the box stays on the 4px grid. No gradients, no heavy stroke. */
+.vault-notice { --vault-notice-signal:var(--ds-color-info); --vault-notice-soft:var(--ds-color-info-soft); position:relative; display:flex; width:100%; min-height:64px; align-items:stretch; overflow:hidden; border:0; border-radius:0!important; padding:0; color:var(--ds-color-text); background:var(--ds-color-surface); outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle); outline-offset:calc(var(--ds-border-width-control) * -1); }
+.vault-notice.is-toast { max-width:560px; }
+.vault-notice__icon { display:grid; width:64px; flex:none; place-items:center; color:var(--vault-notice-signal); background:var(--vault-notice-soft); }
+.vault-notice__icon > svg { width:var(--ds-icon-size-xl); height:var(--ds-icon-size-xl); fill:currentColor; }
+.vault-notice__body { display:flex; min-width:0; flex:1; align-items:center; gap:var(--ds-space-2); padding:var(--ds-space-3) var(--ds-space-4); }
+.vault-notice__copy { display:grid; min-width:0; flex:1; align-content:center; gap:var(--ds-space-1); }
+.vault-notice__heading { display:block; min-width:0; }
+.vault-notice__heading strong { display:block; overflow:hidden; font-size:var(--ds-font-size-body); line-height:var(--ds-line-height-body); font-weight:var(--ds-font-weight-semibold); text-overflow:ellipsis; white-space:nowrap; }
+.vault-notice small { display:block; overflow:hidden; color:var(--ds-color-text-secondary); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); text-overflow:ellipsis; white-space:nowrap; }
+#root .vault-notice__action { flex:none; }
+#root .vault-notice__close { flex:none; color:var(--ds-color-text-muted); }
+#root .vault-notice__close:hover { color:var(--ds-color-text); }
+.vault-notice.is-info { --vault-notice-signal:var(--ds-color-info); --vault-notice-soft:var(--ds-color-info-soft); }
+.vault-notice.is-success { --vault-notice-signal:var(--ds-color-success); --vault-notice-soft:var(--ds-color-success-soft); }
+.vault-notice.is-warning { --vault-notice-signal:var(--ds-color-warning); --vault-notice-soft:var(--ds-color-warning-soft); }
+.vault-notice.is-danger { --vault-notice-signal:var(--ds-color-danger); --vault-notice-soft:var(--ds-color-danger-soft); }
+
+.vault-progress { width:min(100%,144px); height:var(--ds-badge-height); }
+.vault-progress>span { display:grid; height:100%; grid-template-columns:repeat(20,minmax(2px,1fr)); gap:2px; }
+.vault-progress i { display:block; height:100%; border-radius:0!important; background:var(--ds-color-surface-raised); transition:background-color var(--ds-duration-normal) var(--ds-ease-standard),opacity var(--ds-duration-normal) var(--ds-ease-standard); }
+.vault-progress i[data-active='true'] { background:var(--ds-color-text); }
+
+/* Charts use a continuous curve; the component supplies token-bound SVG
+   gradients so both the stroke and area fade toward both edges. */
+.vault-chart__line {
+  fill:none;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.vault-chart__plot{position:relative;width:100%;height:190px}
+.vault-chart__plot>svg{display:block;width:100%;height:100%}
+#root .vault-chart__marker{position:absolute;width:10px;height:10px;transform:translate(-50%,-50%);border-radius:9999px!important;background:var(--ds-color-action)}
+.vault-chart--line figcaption strong,
+.vault-chart--columns figcaption strong{display:inline-flex;min-width:24px;height:24px;align-items:center;justify-content:center;border-radius:var(--ds-radius-full);padding:0 var(--ds-space-2);color:var(--ds-color-on-action);background:var(--ds-color-action);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-bold);letter-spacing:0}
+.vault-sparkline{display:block;width:100%;height:56px;overflow:visible;color:var(--ds-color-category-2)}.vault-sparkline[data-tone='success']{color:var(--ds-color-success)}.vault-sparkline[data-tone='danger']{color:var(--ds-color-danger)}.vault-sparkline__line{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.vault-chart__columns{position:relative;display:grid;height:228px;grid-template-columns:repeat(var(--vault-columns,7),minmax(16px,1fr));align-items:end;gap:var(--ds-space-3);padding:var(--ds-space-6) var(--ds-space-2) var(--ds-space-5);border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle)}
+.vault-chart__columns::before,.vault-chart__columns::after{position:absolute;right:var(--ds-space-2);left:var(--ds-space-2);height:1px;background:var(--ds-color-border-subtle);content:""}.vault-chart__columns::before{top:33%}.vault-chart__columns::after{top:66%}
+/* v70: one column per data point (was a fixed 7); more than 10 points tighten the gap. */
+.vault-chart__columns[data-dense]{gap:var(--ds-space-1)}
+.vault-chart__columns>span{position:relative;z-index:1;display:grid;height:100%;grid-template-rows:20px minmax(0,1fr) 20px;align-items:end;justify-items:center;gap:var(--ds-space-2)}
+.vault-chart__columns b{align-self:start;color:var(--ds-color-text-muted);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-semibold);opacity:0;transition:opacity var(--ds-duration-normal) var(--ds-ease-standard)}
+.vault-chart__columns .vault-chart__value-badge{display:inline-flex;min-width:24px;height:24px;align-items:center;justify-content:center;border-radius:var(--ds-radius-full);padding:0 var(--ds-space-2);color:var(--ds-color-on-action);background:var(--ds-color-action);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-bold)}
+.vault-chart__columns i{width:min(36px,72%);height:var(--vault-column-height);align-self:end;border-radius:0!important;background:linear-gradient(180deg,var(--ds-color-action) 0%,transparent 100%);opacity:1;transition:filter var(--ds-duration-normal) var(--ds-ease-standard)}
+.vault-chart__columns small{color:var(--ds-color-text-muted);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-semibold)}
+.vault-chart__columns>span[data-highlight] b{color:var(--ds-color-text);opacity:1}.vault-chart__columns>span[data-highlight] i{filter:saturate(1.08) brightness(1.06)}.vault-chart__columns>span[data-highlight] small{color:var(--ds-color-text)}
+.vault-chart__segments>i[data-active],
+.vault-chart__dots>i[data-active],
+.vault-chart--bars em>i[data-active]{background:var(--ds-color-action)}
+.vault-chart--donut figcaption strong{color:var(--ds-color-text-secondary);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-semibold);letter-spacing:.06em;text-transform:uppercase}.vault-chart__donut-layout{display:grid;min-height:300px;grid-template-columns:minmax(240px,.82fr) minmax(300px,1.18fr);align-items:center;gap:clamp(var(--ds-space-6),5vw,72px);padding:var(--ds-space-6);background:transparent}.vault-chart__donut-ring{position:relative;display:grid;width:236px;height:236px;place-items:center;justify-self:center}.vault-chart__donut-ring::before{position:absolute;width:194px;height:194px;border-radius:var(--ds-radius-full);background:radial-gradient(circle,color-mix(in srgb,var(--ds-color-category-1) 12%,transparent) 0%,transparent 68%);content:""}.vault-chart__donut-ring::after{position:absolute;width:132px;height:132px;border:var(--ds-border-width-control) solid var(--ds-color-border-subtle);border-radius:var(--ds-radius-full);background:var(--ds-color-surface);box-shadow:inset 0 0 0 8px color-mix(in srgb,var(--ds-color-text) 2%,transparent);content:""}.vault-chart__donut-ring svg{position:relative;z-index:1;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 10px 24px color-mix(in srgb,var(--ds-color-text) 12%,transparent));transform:rotate(-90deg)}.vault-chart__donut-ring circle{fill:none;stroke-width:13;vector-effect:non-scaling-stroke}.vault-chart__donut-track{stroke:color-mix(in srgb,var(--ds-color-text) 7%,transparent)}.vault-chart__donut-segment{stroke-linecap:round}.vault-chart__donut-ring>span{position:absolute;z-index:2;display:grid;place-items:center;gap:5px}.vault-chart__donut-ring>span strong{font-size:42px;line-height:1;letter-spacing:-.05em}.vault-chart__donut-ring>span small,.vault-chart__donut-ring>span b{color:var(--ds-color-text-muted);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-semibold);letter-spacing:.12em;text-transform:uppercase}.vault-chart__donut-ring>span b{font-size:10px;letter-spacing:.08em}.vault-chart__donut-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-4) var(--ds-space-6)}.vault-chart__donut-legend>span{display:grid;min-height:36px;grid-template-columns:10px minmax(0,1fr) auto;align-items:center;column-gap:var(--ds-space-3)}.vault-chart__donut-legend>span>i{width:10px;height:10px;border-radius:var(--ds-radius-full);background:var(--ds-color-category-1)}.vault-chart__donut-legend b{font-size:var(--ds-font-size-label);font-weight:var(--ds-font-weight-semibold)}.vault-chart__donut-legend strong{color:var(--ds-color-text);font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-label);text-align:right}.vault-chart [data-color='1']{stroke:var(--ds-color-category-1);background:var(--ds-color-category-1)}.vault-chart [data-color='2']{stroke:var(--ds-color-category-2);background:var(--ds-color-category-2)}.vault-chart [data-color='3']{stroke:var(--ds-color-category-3);background:var(--ds-color-category-3)}.vault-chart [data-color='4']{stroke:var(--ds-color-category-4);background:var(--ds-color-category-4)}.vault-chart [data-color='5']{stroke:var(--ds-color-category-5);background:var(--ds-color-category-5)}.vault-chart [data-color='6']{stroke:var(--ds-color-category-6);background:var(--ds-color-category-6)}.vault-chart [data-color='7']{stroke:var(--ds-color-category-7);background:var(--ds-color-category-7)}
+
+/* ==========================================================================
+   Overlays & content — Dialog, Popover, Menu, Textarea, Kbd, Skeleton
+   Grid: every size is a token or a multiple of 4. Rows are full-bleed: they
+   touch the panel edges and are separated by hairlines, never inset pills.
+   ========================================================================== */
+
+/* Dialog ------------------------------------------------------------------ */
+.vault-dialog__backdrop { position:fixed; inset:0; z-index:var(--ds-z-modal); display:grid; place-items:center; padding:var(--ds-space-4); background:var(--ds-color-scrim); }
+.vault-dialog__backdrop[data-inline] { position:absolute; z-index:1; }
+.vault-dialog { display:flex; width:100%; max-height:calc(100dvh - var(--ds-space-8)); flex-direction:column; overflow:hidden; border:var(--ds-border-width-control) solid var(--ds-color-border); color:var(--ds-color-text); background:var(--ds-color-surface); font-family:var(--ds-font-family-ui); animation:vault-dialog-in var(--ds-duration-normal) var(--ds-ease-standard); }
+.vault-dialog[data-size='sm'] { max-width:384px; }
+.vault-dialog[data-size='md'] { max-width:480px; }
+.vault-dialog[data-size='lg'] { max-width:640px; }
+.vault-dialog__header { display:grid; flex:none; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:var(--ds-space-3); padding:var(--ds-space-5); border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-divider); }
+.vault-dialog__header[data-has-icon] { grid-template-columns:var(--ds-control-height-md) minmax(0,1fr) auto; }
+.vault-dialog__icon { display:grid; width:var(--ds-control-height-md); height:var(--ds-control-height-md); place-items:center; color:var(--ds-color-text); background:var(--ds-color-surface-muted); }
+.vault-dialog__icon svg { width:var(--ds-icon-size-xl); height:var(--ds-icon-size-xl); }
+.vault-dialog__heading { display:grid; min-width:0; gap:var(--ds-space-1); padding-top:var(--ds-space-1); }
+.vault-dialog__heading h2 { margin:0; overflow-wrap:anywhere; font-size:var(--ds-font-size-body-lg); line-height:var(--ds-line-height-body-lg); font-weight:var(--ds-font-weight-semibold); }
+.vault-dialog__heading p { margin:0; color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); }
+.vault-dialog__body { display:grid; min-height:0; flex:1; align-content:start; gap:var(--ds-space-4); overflow-y:auto; padding:var(--ds-space-5); }
+.vault-dialog__body[data-flush] { gap:0; padding:0; }
+.vault-dialog__footer { display:flex; flex:none; flex-wrap:wrap; justify-content:flex-end; gap:var(--ds-space-2); padding:var(--ds-space-4) var(--ds-space-5); border-top:var(--ds-border-width-control) solid var(--ds-color-border-divider); background:var(--ds-color-surface-muted); }
+@keyframes vault-dialog-in { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+
+/* Popover ----------------------------------------------------------------- */
+.vault-popover { position:relative; display:inline-flex; }
+.vault-popover__panel { position:absolute; z-index:var(--ds-z-popover); top:calc(100% + var(--ds-space-2)); max-width:calc(100vw - var(--ds-space-8)); overflow:hidden; border:var(--ds-border-width-control) solid var(--ds-color-border); color:var(--ds-color-text); background:var(--ds-color-surface); font-family:var(--ds-font-family-ui); animation:vault-dropdown-menu-in var(--ds-duration-fast) var(--ds-ease-standard); }
+.vault-popover__panel[data-placement='bottom-end'] { right:0; }
+.vault-popover__panel[data-placement='bottom-start'] { left:0; }
+.vault-popover__panel[data-placement='top-start'] { top:auto; bottom:calc(100% + var(--ds-space-2)); left:0; }
+.vault-popover__panel[data-placement='top-end'] { top:auto; bottom:calc(100% + var(--ds-space-2)); right:0; }
+.vault-popover__header { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:var(--ds-space-3); padding:var(--ds-space-4); border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-divider); }
+.vault-popover__header > div { display:grid; gap:var(--ds-space-1); padding-top:var(--ds-space-1); }
+.vault-popover__header strong { font-size:var(--ds-font-size-body); line-height:var(--ds-line-height-body); font-weight:var(--ds-font-weight-semibold); }
+.vault-popover__header span { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); }
+.vault-popover__section { display:grid; gap:var(--ds-space-3); padding:var(--ds-space-4); border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-divider); }
+.vault-popover__section:last-child { border-bottom:0; }
+.vault-popover__label { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); font-weight:var(--ds-font-weight-semibold); text-transform:uppercase; letter-spacing:.04em; }
+.vault-popover__footer { display:flex; justify-content:flex-end; gap:var(--ds-space-2); padding:var(--ds-space-3) var(--ds-space-4); border-top:var(--ds-border-width-control) solid var(--ds-color-border-divider); background:var(--ds-color-surface-muted); }
+
+/* Menu -------------------------------------------------------------------- */
+.vault-menu { --vault-menu-row:var(--ds-control-height-md); display:grid; min-width:192px; overflow:hidden auto; color:var(--ds-color-text); background:var(--ds-color-surface); font-family:var(--ds-font-family-ui); }
+.vault-menu[data-density='compact'] { --vault-menu-row:var(--ds-control-height-sm); }
+.vault-menu:where(:not(.vault-dialog__body *)) { border:var(--ds-border-width-control) solid var(--ds-color-border); animation:vault-dropdown-menu-in var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-menu__item { position:relative; display:grid; width:100%; height:var(--vault-menu-row); grid-template-columns:var(--ds-icon-size-md) minmax(0,1fr) auto auto; align-items:center; gap:var(--ds-space-3); border:0!important; border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle)!important; border-radius:0!important; padding:0 var(--ds-space-4); color:var(--ds-color-text-secondary); background:transparent; font:inherit; font-size:var(--ds-font-size-body); line-height:var(--ds-line-height-body); text-align:left; cursor:pointer; }
+#root .vault-menu__item:last-child, #root .vault-menu__group:last-child > .vault-menu__item:last-child { border-bottom:0!important; }
+#root .vault-menu__item:hover:not(:disabled), #root .vault-menu__item:focus-visible { color:var(--ds-color-text); background:var(--ds-color-surface-hover); outline:0; }
+#root .vault-menu__item:focus-visible { box-shadow:inset var(--ds-border-width-selected) 0 0 var(--ds-color-text)!important; }
+#root .vault-menu__item[aria-checked='true'] { color:var(--ds-color-text); font-weight:var(--ds-font-weight-medium); }
+#root .vault-menu__item[data-tone='danger'] { color:var(--ds-color-danger); }
+#root .vault-menu__item[data-tone='danger']:hover:not(:disabled) { background:var(--ds-color-danger-soft); }
+#root .vault-menu__item:disabled { color:var(--ds-color-text-disabled); cursor:not-allowed; }
+.vault-menu__icon { display:grid; width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); place-items:center; }
+.vault-menu__icon svg, .vault-menu__check { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); }
+.vault-menu__label { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.vault-menu__hint { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); }
+.vault-menu__separator { height:var(--ds-space-1); flex:none; border-block:var(--ds-border-width-control) solid var(--ds-color-border-subtle); background:var(--ds-color-surface-muted); }
+.vault-menu__group { display:grid; }
+.vault-menu__caption { display:flex; height:var(--ds-control-height-xs); align-items:center; padding:0 var(--ds-space-4); color:var(--ds-color-text-muted); background:var(--ds-color-surface-muted); font-size:var(--ds-font-size-caption); font-weight:var(--ds-font-weight-semibold); text-transform:uppercase; letter-spacing:.04em; }
+.vault-menu__input { margin:var(--ds-space-2) var(--ds-space-4); }
+
+/* Kbd --------------------------------------------------------------------- */
+.vault-kbd { display:inline-flex; min-width:20px; height:20px; align-items:center; justify-content:center; padding:0 var(--ds-space-1); border:var(--ds-border-width-control) solid var(--ds-color-border); color:var(--ds-color-text-secondary); background:var(--ds-color-surface-muted); font-family:var(--ds-font-family-mono); font-size:var(--ds-font-size-caption); line-height:16px; font-weight:var(--ds-font-weight-medium); white-space:nowrap; }
+
+/* Form rows & textarea ---------------------------------------------------- */
+.vault-field[data-labelled], .vault-form-row { display:grid; min-width:0; gap:var(--ds-space-2); }
+.vault-textarea > textarea { width:100%; min-height:80px; resize:vertical; border:var(--ds-border-width-control) solid var(--ds-control-border); border-radius:var(--ds-radius-xs); padding:var(--ds-space-2) var(--ds-space-3); color:var(--ds-color-text); background:var(--ds-control-background); font:inherit; font-size:var(--ds-font-size-body); line-height:var(--ds-line-height-body); outline:0; transition:border-color var(--ds-duration-normal) var(--ds-ease-standard), background var(--ds-duration-normal) var(--ds-ease-standard); }
+.vault-textarea > textarea[data-mono] { font-family:var(--ds-font-family-mono); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); }
+.vault-textarea > textarea:hover { border-color:var(--ds-control-border-hover); }
+#root .vault-textarea > textarea:focus-visible { border-color:var(--ds-color-text-muted)!important; background:var(--ds-color-surface-hover); }
+.vault-textarea.is-invalid > textarea { border-color:var(--ds-color-danger); }
+
+/* Skeleton ---------------------------------------------------------------- */
+.vault-skeleton { display:block; max-width:100%; background:linear-gradient(90deg, var(--ds-color-surface-muted) 0%, var(--ds-color-surface-raised) 48%, var(--ds-color-surface-muted) 96%); background-size:240% 100%; animation:vault-skeleton-shimmer 1.4s linear infinite; }
+.vault-skeleton[data-shape='text'] { height:12px; }
+.vault-skeleton-lines { display:grid; gap:var(--ds-space-2); }
+#root .vault-skeleton[data-shape='circle'] { border-radius:50%!important; }
+@keyframes vault-skeleton-shimmer { from { background-position:100% 0; } to { background-position:-140% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .vault-dialog, .vault-popover__panel, .vault-menu, .vault-skeleton { animation:none!important; }
+}
+
+/* Toggle · grid variant ------------------------------------------------------ */
+.vault-toggle[data-columns] { display:grid; height:auto; grid-template-columns:repeat(var(--vault-toggle-columns), minmax(0, 1fr)); gap:var(--ds-space-1); border-radius:var(--ds-radius-xs); padding:var(--ds-space-1); }
+.vault-toggle[data-columns] button { height:var(--ds-control-height-sm); min-width:0; padding:0 var(--ds-space-2); font-size:var(--ds-font-size-caption); letter-spacing:0; text-transform:none; }
+
+/* Swatch picker ------------------------------------------------------------ */
+.vault-swatch-picker { display:grid; grid-template-columns:repeat(var(--vault-swatch-columns), minmax(0, 1fr)); gap:var(--ds-space-2); }
+#root .vault-swatch-picker > button { display:grid; height:var(--ds-control-height-sm); place-items:center; border:var(--ds-border-width-control) solid var(--ds-color-border-subtle)!important; background:var(--ds-color-surface-muted); cursor:pointer; }
+#root .vault-swatch-picker > button:hover { border-color:var(--ds-color-border-strong)!important; }
+#root .vault-swatch-picker > button[aria-checked='true'] { border-color:var(--ds-color-text)!important; box-shadow:inset 0 0 0 var(--ds-border-width-control) var(--ds-color-text)!important; }
+#root .vault-swatch-picker > button > i { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); border-radius:50%!important; background:var(--vault-swatch); }
+
+/* Description list ---------------------------------------------------------- */
+.vault-description-list { display:grid; margin:0; }
+.vault-description-list__row { display:grid; min-height:var(--ds-control-height-touch); grid-template-columns:minmax(0, 1fr) auto; align-items:center; gap:var(--ds-space-4); padding:var(--ds-space-2) var(--ds-space-5); border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle); }
+.vault-description-list__row:last-child { border-bottom:0; }
+.vault-description-list dt { display:flex; min-width:0; align-items:center; gap:var(--ds-space-3); color:var(--ds-color-text); font-size:var(--ds-font-size-body); line-height:var(--ds-line-height-body); }
+.vault-description-list__icon { display:grid; flex:none; width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); place-items:center; color:var(--ds-color-text-muted); }
+.vault-description-list__icon svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); }
+.vault-description-list dd { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:var(--ds-space-1); margin:0; color:var(--ds-color-text-secondary); font-size:var(--ds-font-size-caption); }
+
+/* Forms inside dialog bodies keep the 16px field rhythm. */
+.vault-dialog__body > form { display:grid; gap:var(--ds-space-4); }
+.vault-field-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:var(--ds-space-3); }
+@media (max-width: 480px) { .vault-field-grid { grid-template-columns:1fr; } }
+
+/* 4px grid compensation ------------------------------------------------------
+   Hairlines must not push boxes off the grid: dividers are absorbed into the
+   adjacent padding and outer frames are drawn inside the box with an outline. */
+.vault-dialog, .vault-popover__panel, .vault-menu:where(:not(.vault-dialog__body *)) { border:0; outline:var(--ds-border-width-control) solid var(--ds-color-border); outline-offset:calc(var(--ds-border-width-control) * -1); }
+.vault-dialog__header { padding-bottom:calc(var(--ds-space-5) - var(--ds-border-width-control)); }
+.vault-dialog__footer { padding-top:calc(var(--ds-space-4) - var(--ds-border-width-control)); }
+.vault-popover__header { padding-bottom:calc(var(--ds-space-4) - var(--ds-border-width-control)); }
+.vault-popover__header strong { line-height:var(--ds-line-height-body-lg); }
+.vault-popover__section { padding-bottom:calc(var(--ds-space-4) - var(--ds-border-width-control)); }
+.vault-popover__section:last-child { padding-bottom:var(--ds-space-4); }
+.vault-popover__footer { padding-top:calc(var(--ds-space-3) - var(--ds-border-width-control)); }
+.vault-toggle[data-columns] button { gap:var(--ds-space-2); }
+.vault-textarea > textarea { padding-block:calc(var(--ds-space-2) - var(--ds-border-width-control)); line-height:20px; }
+.vault-textarea > textarea[data-mono] { line-height:16px; }
+
+.vault-kbd { padding:0 calc(var(--ds-space-1) - var(--ds-border-width-control)); }
+.vault-textarea > textarea { padding-inline:calc(var(--ds-space-3) - var(--ds-border-width-control)); }
+.vault-description-list__row { padding-bottom:calc(var(--ds-space-2) - var(--ds-border-width-control)); }
+.vault-description-list__row:last-child { padding-bottom:var(--ds-space-2); }
+.vault-toggle[data-columns] { padding:calc(var(--ds-space-1) - 1px); }
+.vault-toggle[data-columns] button { padding:0 calc(var(--ds-space-2) - var(--ds-border-width-control)); }
+
+.vault-menu:focus { outline-color:var(--ds-color-border); }
+.vault-menu:focus-visible { outline:var(--ds-border-width-control) solid var(--ds-color-border); }
+
+/* The global toolbar rule pins every .vault-toggle to 40px; the grid variant grows with its rows. */
+#root .vault-toggle[data-columns] { height:auto!important; }
+#root .vault-toggle[data-columns] > button { height:var(--ds-control-height-sm)!important; }
+
+.vault-field__message { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); }
+.vault-field.is-invalid > .vault-field__message { color:var(--ds-color-danger); }
+
+/* Menu states: the check mark carries "selected" — drop the global pressed ring; disabled follows the control disabled rule. */
+#root .vault-menu__item[aria-checked='true']:not(:focus-visible) { box-shadow:none!important; }
+#root .vault-menu__item:disabled { color:var(--ds-color-text-secondary); opacity:var(--ds-state-disabled-opacity); }
+
+/* Dark theme: --ds-color-danger is a light ink tone there, so a filled danger button needs the dark ink on top (≈7:1), not white. */
+:root[data-theme='dark'] .vault-button--primary[data-tone='danger'] { color:var(--ds-color-danger-dark) !important; }
+
+/* Menu rhythm: every row — item and group caption — is exactly one row tall (40 comfortable / 32 compact)
+   and rows sit flush. Separators add no height; they only darken the divider of the row above. */
+.vault-menu__caption { height:var(--vault-menu-row); border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle); }
+#root .vault-menu__group > .vault-menu__item:last-child { border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle)!important; }
+#root .vault-menu > .vault-menu__item:last-child, #root .vault-menu > .vault-menu__group:last-child > .vault-menu__item:last-child { border-bottom:0!important; }
+.vault-menu__separator { height:0; border:0; background:none; }
+#root .vault-menu__item:has(+ .vault-menu__separator), #root .vault-menu__group:has(+ .vault-menu__separator) > .vault-menu__item:last-child { border-bottom-color:var(--ds-color-border)!important; }
+
+/* Progress states (library-owned; previously only styled on the DS page). */
+.vault-progress[data-state='complete'] i[data-active='true'] { background:var(--ds-color-success); }
+.vault-progress[data-state='loading'] i { animation:vault-progress-sweep 1400ms var(--ds-ease-standard) infinite; animation-delay:calc(var(--vault-progress-i, 0) * 50ms); }
+@keyframes vault-progress-sweep { 0%, 100% { background:var(--ds-color-surface-raised); } 8% { background:var(--ds-color-text); } 28% { background:var(--ds-color-surface-raised); } }
+@media (prefers-reduced-motion: reduce) { .vault-progress[data-state='loading'] i { animation:none; background:var(--ds-color-text-muted); opacity:.48; } }
+
+/* Dialog — friendlier, still full-bleed. Header is one 64px row: a tinted icon cell flush to the left edge
+   (same anatomy as Notice), title + description, a quiet close. Footer sits on the dialog surface (no grey band). */
+.vault-dialog { outline-color:var(--ds-color-border-subtle); }
+.vault-dialog__header { min-height:64px; align-items:center; gap:var(--ds-space-4); padding:0 var(--ds-space-4) 0 var(--ds-space-5); }
+.vault-dialog__header[data-has-icon] { grid-template-columns:64px minmax(0,1fr) auto; padding-left:0; }
+.vault-dialog__icon { width:64px; height:auto; align-self:stretch; color:var(--vault-dialog-signal, var(--ds-color-text)); background:var(--vault-dialog-soft, var(--ds-color-surface-muted)); }
+.vault-dialog__heading { gap:0; padding:var(--ds-space-3) 0 calc(var(--ds-space-3) - var(--ds-border-width-control)); }
+.vault-dialog[data-tone='danger'] { --vault-dialog-signal:var(--ds-color-danger); --vault-dialog-soft:var(--ds-color-danger-soft); }
+.vault-dialog__footer { background:var(--ds-color-surface); }
+
+/* Swatch picker — full-bleed segmented row, 40px cells split by hairlines. Selected = soft tint of the colour
+   plus a check in the dot; no heavy stroke. */
+.vault-swatch-picker { gap:0; overflow:hidden; outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle); outline-offset:calc(var(--ds-border-width-control) * -1); }
+#root .vault-swatch-picker > button { height:var(--ds-control-height-md); border:0!important; background:var(--ds-color-surface); box-shadow:var(--ds-border-width-control) 0 0 var(--ds-color-border-subtle)!important; transition:background-color var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-swatch-picker > button:hover { background:var(--ds-color-surface-hover); }
+#root .vault-swatch-picker > button[aria-checked='true'] { background:color-mix(in srgb, var(--vault-swatch) 16%, var(--ds-color-surface)); box-shadow:var(--ds-border-width-control) 0 0 var(--ds-color-border-subtle)!important; }
+#root .vault-swatch-picker > button:focus-visible { outline:var(--ds-border-width-selected) solid var(--ds-color-text); outline-offset:calc(var(--ds-border-width-selected) * -1); }
+#root .vault-swatch-picker > button > i { display:grid; width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); place-items:center; transition:width var(--ds-duration-fast) var(--ds-ease-standard), height var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-swatch-picker > button[aria-checked='true'] > i { width:var(--ds-icon-size-xl); height:var(--ds-icon-size-xl); }
+.vault-swatch-picker i > svg { width:12px; height:12px; fill:#fff; }
+
+/* Toggle grid (columns) — same full-bleed segmented treatment: 40px cells, hairline dividers,
+   selected cell is the inverse surface (like Secondary), no outline ring. */
+#root .vault-toggle[data-columns] { gap:0; overflow:hidden; border:0!important; border-radius:0!important; padding:0!important; background:var(--ds-color-surface); outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle); outline-offset:calc(var(--ds-border-width-control) * -1); }
+#root .vault-toggle[data-columns] > button { height:var(--ds-control-height-md)!important; border:0!important; border-radius:0!important; padding:0 var(--ds-space-2)!important; color:var(--ds-color-text-secondary); background:transparent; font-size:var(--ds-font-size-caption); font-weight:var(--ds-font-weight-medium); text-transform:none; letter-spacing:0; box-shadow:var(--ds-border-width-control) 0 0 var(--ds-color-border-subtle), 0 var(--ds-border-width-control) 0 var(--ds-color-border-subtle)!important; }
+#root .vault-toggle[data-columns] > button:hover:not([aria-pressed='true']) { color:var(--ds-color-text); background:var(--ds-color-surface-hover); }
+#root .vault-toggle[data-columns] > button[aria-pressed='true'] { color:var(--ds-color-surface); background:var(--ds-color-text); font-weight:var(--ds-font-weight-semibold); }
+#root .vault-toggle[data-columns] > button:focus-visible { outline:var(--ds-border-width-selected) solid var(--ds-color-text); outline-offset:calc(var(--ds-border-width-selected) * -1); }
+
+/* Kbd — a quiet key cap: no border, soft fill, UI font. 20px tall; combos are separate caps. */
+.vault-kbd { min-width:20px; height:20px; border:0!important; padding:0 var(--ds-space-1); color:var(--ds-color-text-secondary); background:color-mix(in srgb, var(--ds-color-text) 8%, var(--ds-color-surface)); font-family:var(--ds-font-family-ui); font-size:var(--ds-font-size-caption); line-height:20px; font-weight:var(--ds-font-weight-semibold); }
+.vault-kbd + .vault-kbd { margin-left:var(--ds-space-1); }
+
+.vault-dialog__header[data-has-icon] > .vault-dialog__icon { margin-bottom:calc(var(--ds-border-width-control) * -1); }
+
+/* Sheet — side panel from the right. Shares header/footer anatomy with Dialog. */
+.vault-sheet__backdrop { position:fixed; inset:0; z-index:var(--ds-z-modal); display:flex; justify-content:flex-end; background:var(--ds-color-scrim); }
+.vault-sheet__backdrop[data-inline] { position:absolute; z-index:1; }
+.vault-sheet { display:flex; width:100%; height:100%; flex-direction:column; overflow:hidden; color:var(--ds-color-text); background:var(--ds-color-surface); font-family:var(--ds-font-family-ui); outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle); outline-offset:calc(var(--ds-border-width-control) * -1); animation:vault-sheet-in var(--ds-duration-normal) var(--ds-ease-standard); }
+.vault-sheet[data-size='sm'] { max-width:360px; }
+.vault-sheet[data-size='md'] { max-width:400px; }
+.vault-sheet[data-size='lg'] { max-width:560px; }
+.vault-sheet[data-size='xl'] { max-width:1040px; }
+.vault-sheet[data-tone='danger'] { --vault-dialog-signal:var(--ds-color-danger); --vault-dialog-soft:var(--ds-color-danger-soft); }
+.vault-sheet > .vault-dialog__header { flex:none; }
+.vault-sheet__toolbar { flex:none; border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-divider); }
+.vault-sheet__body { display:grid; min-height:0; flex:1; align-content:start; overflow-y:auto; }
+.vault-sheet > .vault-dialog__footer { margin-top:auto; }
+@keyframes vault-sheet-in { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { .vault-sheet { animation:none; } }
+
+/* Spinner — a ring, not a glyph: 16px, 2px track at 24% + 2px arc. Reads at any size and survives the flat policy. */
+.vault-spinner { display:block; box-sizing:border-box; border:2px solid color-mix(in srgb, currentColor 24%, transparent); border-top-color:currentColor; background:none; }
+#root .vault-spinner { border-radius:var(--ds-radius-full)!important; }
+.vault-button__spinner.vault-spinner { width:16px; height:16px; }
+
+/* Text floor: counters and initials never drop below 12px. */
+#root .vault-button-group__badge { width:20px; min-width:20px; height:20px; flex:0 0 20px; font-size:var(--ds-font-size-caption); }
+.vault-avatar > span { font-size:var(--ds-font-size-caption); }
+
+/* Close button — one look everywhere (Toast, Dialog, Sheet): 32px text button, muted icon, hover lifts to text. */
+#root .vault-close { width:32px; color:var(--ds-color-text-muted); }
+#root .vault-close:hover { color:var(--ds-color-text); background:var(--ds-color-surface-hover)!important; }
+.vault-close svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); }
+
+/* Dialog / Sheet header v3 — lighter: optional 20px icon inline with the title (no grey cell),
+   title 16/24, description 12/16, close aligned to the title line. 56px without description, 72px with. */
+.vault-dialog__header, .vault-dialog__header[data-has-icon] { min-height:56px; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:var(--ds-space-3); padding:var(--ds-space-4) var(--ds-space-4) calc(var(--ds-space-4) - var(--ds-border-width-control)) var(--ds-space-5); }
+.vault-dialog__header[data-has-icon] { grid-template-columns:24px minmax(0,1fr) auto; }
+.vault-dialog__icon, .vault-dialog__header[data-has-icon] > .vault-dialog__icon { width:24px; height:24px; margin:0; align-self:start; color:var(--vault-dialog-signal, var(--ds-color-text-secondary)); background:none; }
+.vault-dialog__icon svg { width:var(--ds-icon-size-xl); height:var(--ds-icon-size-xl); }
+.vault-dialog__heading { gap:0; padding:0; }
+.vault-dialog__heading h2 { font-size:var(--ds-font-size-body-lg); line-height:24px; }
+.vault-dialog__heading p { font-size:var(--ds-font-size-caption); line-height:16px; }
+.vault-dialog__header > .vault-close { margin:-4px -4px 0 0; }
+
+/* Menu hover / focus = Dashboard nav active: soft neutral gradient + 2px rail on the left. */
+#root .vault-menu__item:hover:not(:disabled), #root .vault-menu__item:focus-visible { color:var(--ds-color-text); background:linear-gradient(90deg, color-mix(in srgb, var(--ds-color-text) 6%, var(--ds-color-surface)) 0%, var(--ds-color-surface) 100%); box-shadow:none!important; }
+#root .vault-menu__item:hover:not(:disabled)::before, #root .vault-menu__item:focus-visible::before { position:absolute; inset:0 auto 0 0; width:var(--ds-weight-md, 2px); background:var(--ds-color-text-secondary); content:''; }
+#root .vault-menu__item[data-tone='danger']:hover:not(:disabled) { background:linear-gradient(90deg, var(--ds-color-danger-soft) 0%, var(--ds-color-surface) 100%); }
+#root .vault-menu__item[data-tone='danger']:hover:not(:disabled)::before { background:var(--ds-color-danger); }
+
+/* Tabs never squash labels: each tab is at least its content, extra space is shared, overflow scrolls. */
+#root .vault-tabs > button { flex:1 0 auto; white-space:nowrap; padding-inline:var(--ds-space-4); }
+.vault-tabs { scrollbar-width:none; }
+.vault-tabs::-webkit-scrollbar { display:none; }
+
+/* Spinner ring must beat the global flat policy (#root * border-color !important), else the ring is uniform and looks frozen */
+#root .vault-spinner{border-color:color-mix(in srgb,currentColor 24%,transparent)!important;border-top-color:currentColor!important}
+
+/* ---------------------------------------------------------------- Dialog v4
+   Three blocks, top to bottom:
+   1. Hero header — 64 icon circle, title, description, centred on a top-down gradient (tone tint → surface).
+   2. Body — full-bleed band with hairlines above and below.
+   3. Footer — actions share the width equally.
+   Close = icon-only circle on a white (surface) chip, pinned top-right. Grid: header 184 (with description). */
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] { position:relative; display:flex; min-height:0; flex-direction:column; align-items:center; gap:0; padding:var(--ds-space-8) var(--ds-space-12) var(--ds-space-6); border-bottom:0; text-align:center; background:linear-gradient(180deg, var(--vault-dialog-soft, color-mix(in srgb, var(--ds-color-text) 6%, var(--ds-color-surface))) 0%, var(--ds-color-surface) 100%); }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] > .vault-dialog__icon { display:grid; width:64px; height:64px; flex:none; margin:0 0 var(--ds-space-4); place-items:center; align-self:center; border-radius:var(--ds-radius-full)!important; color:var(--vault-dialog-signal, var(--ds-color-text)); background:var(--vault-chip); }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] > .vault-dialog__icon svg { width:28px; height:28px; fill:currentColor; }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] > .vault-dialog__heading { display:grid; gap:var(--ds-space-1); padding:0; justify-items:center; }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] h2 { font-size:var(--ds-font-size-title); line-height:var(--ds-line-height-title); }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] p { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-body); line-height:20px; }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] > .vault-close { position:absolute; top:var(--ds-space-3); right:var(--ds-space-3); margin:0; }
+#root .vault-dialog > .vault-dialog__body { padding:calc(var(--ds-space-5) - var(--ds-border-width-control)) var(--ds-space-5) var(--ds-space-5); border:0; border-top:var(--ds-border-width-control) solid var(--ds-color-border-divider)!important; background:var(--ds-color-surface-muted); }
+#root .vault-dialog > .vault-dialog__body + .vault-dialog__body { padding-top:var(--ds-space-5); border-top:0!important; }
+#root .vault-dialog > .vault-dialog__body[data-flush] + .vault-dialog__body, #root .vault-dialog > .vault-dialog__body + .vault-dialog__body[data-flush] { padding-top:0; }
+#root .vault-dialog > .vault-dialog__body[data-flush] { padding:0; background:var(--ds-color-surface); }
+#root .vault-dialog > .vault-dialog__footer { flex-wrap:nowrap; align-items:center; gap:var(--ds-space-2); padding:calc(var(--ds-space-4) - var(--ds-border-width-control)) var(--ds-space-5) var(--ds-space-4); border:0; border-top:var(--ds-border-width-control) solid var(--ds-color-border-divider)!important; background:var(--ds-color-surface); }
+#root .vault-dialog > .vault-dialog__footer > .vault-button:not(.vault-button--text) { flex:1 1 0; min-width:0; }
+#root .vault-dialog > .vault-dialog__footer > .vault-button--text { flex:none; margin-right:auto; }
+
+/* Close: one look everywhere — icon-only circle on a white surface chip */
+#root .vault-close { width:32px; height:32px; flex:none; border-radius:var(--ds-radius-full)!important; color:var(--ds-color-text-secondary); background:var(--vault-chip)!important; }
+#root .vault-close:hover { color:var(--ds-color-text); background:var(--ds-color-surface-hover)!important; }
+#root .vault-close:focus-visible { outline:var(--ds-weight-md) solid var(--ds-color-text); outline-offset:var(--ds-space-0-5, 2px); }
+
+/* White chip for close buttons and the dialog icon circle (raised chip in dark) */
+:root, [data-theme-scope="light"] { --vault-chip:#FFFFFF; }
+:root[data-theme="dark"], [data-theme-scope="dark"] { --vault-chip:var(--ds-color-surface-overlay); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) { --vault-chip:var(--ds-color-surface-overlay); } }
+#root .vault-dialog > .vault-dialog__body:has(+ .vault-dialog__body) { padding-bottom:calc(var(--ds-space-5) - var(--ds-border-width-control)); }
+
+/* Dialog v4.1 — no strokes at all: blocks separate by fill only (gradient header → muted body band → surface footer) */
+#root .vault-dialog { outline:0; border:0!important; }
+#root .vault-dialog > .vault-dialog__body[data-flush] { background:var(--ds-color-surface-muted); }
+#root .vault-dialog > .vault-dialog__body, #root .vault-dialog > .vault-dialog__body + .vault-dialog__body { padding:var(--ds-space-5); border:0!important; }
+#root .vault-dialog > .vault-dialog__body[data-flush], #root .vault-dialog > .vault-dialog__body + .vault-dialog__body[data-flush] { padding:0; }
+#root .vault-dialog > .vault-dialog__body[data-flush] + .vault-dialog__body { padding-top:var(--ds-space-5); }
+#root .vault-dialog > .vault-dialog__body:has(+ .vault-dialog__body) { padding-bottom:var(--ds-space-5); }
+#root .vault-dialog > .vault-dialog__body[data-flush] > .application-list { border-top:0; }
+#root .vault-dialog > .vault-dialog__footer { padding:var(--ds-space-4) var(--ds-space-5); border:0!important; }
+
+/* Dialog v4.2 — body shares the footer surface; only the header carries tint */
+#root .vault-dialog > .vault-dialog__body, #root .vault-dialog > .vault-dialog__body[data-flush] { background:var(--ds-color-surface); }
+#root .vault-dialog > .vault-dialog__footer { padding-top:0; }
+#root .vault-dialog > .vault-dialog__body[data-flush] + .vault-dialog__footer, #root .vault-dialog > .vault-dialog__header + .vault-dialog__footer { padding-top:var(--ds-space-4); }
+
+/* Hover = left-to-right gradient (same grammar as selected, without the rail) — dashboard nav and dropdown rows */
+#root .vault-dashboard-nav>button:hover:not(:disabled):not([aria-current='page']), #root .vault-dashboard-nav>button.ds-force-hover:not([aria-current='page']), #root .vault-dropdown-menu>button:hover:not(:disabled):not([aria-selected='true']) { color:var(--ds-color-text); background:linear-gradient(90deg, color-mix(in srgb, var(--ds-color-text) 4%, var(--ds-color-surface)) 0%, var(--ds-color-surface) 100%); }
+
+/* Dialog header alignment: feature/form popups align start (icon, title, description flush left); confirmations stay centred */
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'][data-align='start'] { align-items:flex-start; padding:var(--ds-space-8) var(--ds-space-14, 56px) var(--ds-space-6) var(--ds-space-5); text-align:left; }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'][data-align='start'] > .vault-dialog__icon { align-self:flex-start; }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'][data-align='start'] > .vault-dialog__heading { justify-items:start; }
+
+/* Centred dialog (confirmations): body copy centres with the header */
+#root .vault-dialog:has(> .vault-dialog__header[data-align='center']) > .vault-dialog__body :is(p, .vault-dialog__copy) { text-align:center; }
+
+/* Popover v2 — same grammar as Dialog: one subtle outer edge (it floats on content), no inner strokes; header tint fades top-down; sections and footer share the surface */
+#root .vault-popover__panel { border:0!important; outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle); outline-offset:calc(var(--ds-border-width-control) * -1); background:var(--ds-color-surface); }
+#root .vault-popover__header { align-items:center; padding:var(--ds-space-4); border:0!important; background:linear-gradient(180deg, color-mix(in srgb, var(--ds-color-text) 5%, var(--ds-color-surface)) 0%, var(--ds-color-surface) 100%); }
+#root .vault-popover__header > div { padding-top:0; }
+#root .vault-popover__section, #root .vault-popover__section:last-child { padding:var(--ds-space-2) var(--ds-space-4) var(--ds-space-4); border:0!important; }
+#root .vault-popover__header + .vault-popover__section { padding-top:var(--ds-space-2); }
+#root .vault-popover__footer { padding:var(--ds-space-2) var(--ds-space-4) var(--ds-space-4); border:0!important; background:var(--ds-color-surface); }
+
+/* Swatch picker v3 — no frame, no dividers, no strokes. 40 round hit area, 28 colour dot.
+   Hover: neutral halo. Selected: soft halo tinted with the swatch itself + white check. */
+#root .vault-swatch-picker { display:flex; flex-wrap:wrap; gap:var(--ds-space-2); overflow:visible; outline:0; }
+#root .vault-swatch-picker > button { display:grid; width:var(--ds-control-height-md); height:var(--ds-control-height-md); flex:none; place-items:center; padding:0; border:0!important; border-radius:var(--ds-radius-full)!important; background:transparent; box-shadow:none!important; cursor:pointer; transition:background-color var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-swatch-picker > button:hover { background:var(--ds-color-surface-hover); }
+#root .vault-swatch-picker > button[aria-checked='true'] { background:color-mix(in srgb, var(--vault-swatch) 22%, transparent); box-shadow:none!important; }
+#root .vault-swatch-picker > button:focus-visible { outline:var(--ds-weight-md) solid var(--ds-color-text); outline-offset:0; }
+#root .vault-swatch-picker > button > i, #root .vault-swatch-picker > button[aria-checked='true'] > i { display:grid; width:28px; height:28px; place-items:center; border-radius:var(--ds-radius-full)!important; background:var(--vault-swatch); transition:none; }
+#root .vault-swatch-picker i > svg { width:16px; height:16px; fill:#fff; }
+
+/* Dialog · danger v2 — one continuous surface: neutral at the top, red glow rising from the bottom.
+   Solid red icon disc with a white glyph, red title, centred copy; no block tints, no strokes. */
+:root, [data-theme-scope] { --vault-dialog-danger-ink:var(--ds-color-danger); }
+:root[data-theme="dark"] { --vault-dialog-danger-ink:color-mix(in srgb, var(--ds-primitive-red-500) 60%, #FF8A80); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) { --vault-dialog-danger-ink:color-mix(in srgb, var(--ds-primitive-red-500) 60%, #FF8A80); } }
+#root .vault-dialog[data-tone='danger'] { background:linear-gradient(180deg, var(--ds-color-surface) 30%, color-mix(in srgb, var(--ds-primitive-red-500) 20%, var(--ds-color-surface)) 100%); }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__header[data-layout='hero'],
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__body,
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__footer { background:transparent; }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__header[data-layout='hero'] > .vault-dialog__icon { color:#FFFFFF; background:color-mix(in srgb, var(--ds-primitive-red-500) 72%, var(--ds-color-surface)); }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__header[data-layout='hero'] h2 { color:var(--vault-dialog-danger-ink); }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__header[data-layout='hero'] p,
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__body p { color:var(--ds-color-text-secondary); }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__footer .vault-button[data-priority='primary'][data-tone='danger'] { border-color:color-mix(in srgb, #FFFFFF 14%, transparent)!important; color:#FFFFFF!important; background:color-mix(in srgb, var(--ds-primitive-red-500) 72%, var(--ds-color-surface))!important; }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__footer .vault-button[data-priority='primary'][data-tone='danger']:hover { background:color-mix(in srgb, var(--ds-primitive-red-500) 86%, var(--ds-color-surface))!important; }
+
+/* Danger v2.1 — same background as the form dialog (neutral header gradient → surface); red lives only in icon, title and action */
+#root .vault-dialog[data-tone='danger'] { background:var(--ds-color-surface); }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__header[data-layout='hero'] { background:linear-gradient(180deg, color-mix(in srgb, var(--ds-color-text) 6%, var(--ds-color-surface)) 0%, var(--ds-color-surface) 100%); }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__body, #root .vault-dialog[data-tone='danger'] > .vault-dialog__footer { background:var(--ds-color-surface); }
+
+/* Dialog spacing v5 — one 24 rhythm: 24 edge on every side, 24 between header → content → actions. Close sits 16 from the corner. */
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'], #root .vault-dialog > .vault-dialog__header[data-layout='hero'][data-align='start'] { padding:var(--ds-space-6); }
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] > .vault-close { top:var(--ds-space-4); right:var(--ds-space-4); }
+#root .vault-dialog > .vault-dialog__body, #root .vault-dialog > .vault-dialog__body + .vault-dialog__body { padding:0 var(--ds-space-6) var(--ds-space-6); }
+#root .vault-dialog > .vault-dialog__body:has(+ .vault-dialog__body) { padding-bottom:var(--ds-space-6); }
+#root .vault-dialog > .vault-dialog__body[data-flush], #root .vault-dialog > .vault-dialog__body + .vault-dialog__body[data-flush] { padding:0; }
+#root .vault-dialog > .vault-dialog__body[data-flush] + .vault-dialog__body { padding-top:var(--ds-space-6); }
+#root .vault-dialog > .vault-dialog__footer, #root .vault-dialog > .vault-dialog__body[data-flush] + .vault-dialog__footer { padding:0 var(--ds-space-6) var(--ds-space-6); }
+#root .vault-dialog > .vault-dialog__body[data-flush] + .vault-dialog__footer, #root .vault-dialog > .vault-dialog__header + .vault-dialog__footer { padding-top:var(--ds-space-6); }
+#root .vault-dialog > .vault-dialog__body[data-flush] .application-list__row { padding-inline:var(--ds-space-6); }
+
+/* =====================================================================
+   VISAL surface grammar — shared tokens. Every list row, floating panel,
+   modal header and footer reads from here, so one edit moves the system.
+   1. Rows        hover = horizontal gradient · selected = stronger gradient + 2px rail
+   2. Headers     vertical tint gradient fading into the surface, never a stroke
+   3. Edges       floating panels get one 6% inset hairline; modals sit on the scrim with none
+   4. Blocks      compact panels pad 16 · modal surfaces pad 24 · rows pad 16 · rows 40
+   5. Chips       icons/avatars/close sit in round chips (--vault-chip)
+   ===================================================================== */
+:root,
+[data-theme-scope] {
+  --vault-row-hover: linear-gradient(90deg, color-mix(in srgb, var(--ds-color-text) 4%, var(--ds-color-surface)) 0%, var(--ds-color-surface) 100%);
+  --vault-row-selected: linear-gradient(90deg, color-mix(in srgb, var(--ds-color-text) 7%, var(--ds-color-surface)) 0%, var(--ds-color-surface) 100%);
+  --vault-rail-width: 2px;
+  --vault-rail-color: var(--ds-color-text-secondary);
+  --vault-header-tint: linear-gradient(180deg, color-mix(in srgb, var(--ds-color-text) 6%, var(--ds-color-surface)) 0%, var(--ds-color-surface) 100%);
+  --vault-edge: var(--ds-color-border-subtle);
+  --vault-row-pad: var(--ds-space-4);
+  --vault-panel-pad: var(--ds-space-4);
+  --vault-block-pad: var(--ds-space-6);
+}
+
+/* 1 · Rows ------------------------------------------------------------ */
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item) { position:relative; padding-inline:var(--vault-row-pad); }
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item):is(:hover, :focus-visible, .ds-force-hover):not(:disabled):not([aria-current='page'], [aria-selected='true'], [aria-checked='true'], [data-tone='danger']) { color:var(--ds-color-text); background:var(--vault-row-hover); }
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item):is([aria-current='page'], [aria-selected='true'], [aria-checked='true']) { color:var(--ds-color-text); background:var(--vault-row-selected); }
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item):is([aria-current='page'], [aria-selected='true'], [aria-checked='true'])::before { position:absolute; inset:0 auto 0 0; width:var(--vault-rail-width); background:var(--vault-rail-color); content:''; }
+
+/* 3 · Edges: floating panels ----------------------------------------- */
+#root :is(.vault-popover__panel, .vault-menu, .vault-dropdown-menu, .application-profile__menu, .vault-sheet, .vault-notice, .application-auth) { border:0!important; outline:var(--ds-border-width-control) solid var(--vault-edge); outline-offset:calc(var(--ds-border-width-control) * -1); }
+#root :is(.application-profile__menu, .vault-dialog__body, .vault-popover__panel) .vault-menu { outline:0; }
+#root .vault-dialog { outline:0; }
+
+/* 2 · Headers ---------------------------------------------------------- */
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] { border:0!important; background:var(--vault-header-tint); }
+#root :is(.vault-popover__header, .vault-sheet > .vault-dialog__header) { border:0!important; }
+#root .vault-sheet > .vault-dialog__header { min-height:72px; align-items:center; padding:var(--vault-panel-pad) var(--vault-panel-pad) var(--vault-panel-pad) var(--vault-block-pad); }
+#root .vault-sheet__toolbar { border:0!important; }
+#root .application-profile__identity { padding-inline:var(--vault-panel-pad); }
+#root .application-auth__brand { height:72px; grid-template-columns:40px minmax(0,1fr); gap:var(--ds-space-3); padding:0 var(--vault-block-pad); }
+#root .application-auth__brand > span { width:40px; height:40px; border-radius:var(--ds-radius-full)!important; font-size:var(--ds-font-size-body-lg); }
+
+/* 4 · Blocks & footers ------------------------------------------------- */
+#root .vault-popover__header { padding:var(--vault-panel-pad); }
+#root .vault-popover__section, #root .vault-popover__section:last-child { padding:var(--ds-space-2) var(--vault-panel-pad) var(--vault-panel-pad); }
+#root .vault-popover__footer { padding:var(--ds-space-2) var(--vault-panel-pad) var(--vault-panel-pad); }
+#root .vault-sheet > .vault-dialog__footer { padding:var(--vault-panel-pad) var(--vault-block-pad); border:0!important; background:var(--ds-color-surface); }
+#root .vault-sheet .application-sheet-section { padding-inline:var(--vault-block-pad); }
+#root .application-auth > footer { border:0!important; background:var(--ds-color-surface); }
+#root .vault-sheet .application-props > div { padding-inline:var(--vault-block-pad); }
+/* Rail belongs to selected only — never to hover */
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item):not([aria-current='page'], [aria-selected='true'], [aria-checked='true'])::before { content:none; }
+/* Group captions are labels, not blocks: no fill band, same row padding */
+#root .vault-menu__caption { padding-inline:var(--vault-row-pad); background:transparent; }
+/* Description copy = 14/20 everywhere (dialog, auth, popover hero) — keeps headers on the 4 grid */
+#root .application-auth header p { line-height:20px; }
+
+/* Header tint is Dialog-only. Profile, dropdown, popover, sheet, auth and cards keep a plain surface head.
+   Where a plain head sits on top of rows (profile identity, auth brand), it gets the same 6% hairline as the rows
+   below, so every separator in the panel has one weight. */
+#root :is(.vault-popover__header, .vault-sheet > .vault-dialog__header, .application-profile__identity, .application-auth__brand, .application-card__header, .application-card--stat > .application-kpi) { background:var(--ds-color-surface); }
+#root :is(.application-profile__identity, .application-auth__brand) { border:0!important; border-bottom:var(--ds-border-width-control) solid var(--ds-color-border-subtle)!important; }
+
+/* Line chart plot on the 4 grid */
+#root .vault-chart__plot { height:192px; }
+#root .vault-chart__plot > svg { height:100%; }
+
+/* Row states own their edges: a hovered or selected row paints its fill over the hairline above and below,
+   so the gradient reads as one clean block (no layout shift: the hairlines stay, they are just covered). */
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item, .application-search__row) { isolation:isolate; }
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item):is(:hover, :focus-visible, .ds-force-hover):not(:disabled):not([aria-current='page'], [aria-selected='true'], [aria-checked='true'], [data-tone='danger'])::after,
+#root .application-search__row:is(.is-recent:hover, :hover:not([data-active]))::after { position:absolute; inset:-1px 0; z-index:-1; background:var(--vault-row-hover); pointer-events:none; content:''; }
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item):is([aria-current='page'], [aria-selected='true'], [aria-checked='true'])::after,
+#root .application-search__row[data-active]::after { position:absolute; inset:-1px 0; z-index:-1; background:var(--vault-row-selected); pointer-events:none; content:''; }
+#root :is(.vault-dashboard-nav > button, .vault-dropdown-menu > button, .vault-menu .vault-menu__item):is([aria-current='page'], [aria-selected='true'], [aria-checked='true'])::before,
+#root .application-search__row[data-active]::before { inset:-1px auto -1px 0; }
+
+/* Large icon discs carry a hairline so they never float on the gradient. */
+#root .vault-dialog > .vault-dialog__header[data-layout='hero'] > .vault-dialog__icon { border:var(--ds-border-width-control) solid var(--ds-color-border)!important; }
+#root .vault-dialog[data-tone='danger'] > .vault-dialog__header[data-layout='hero'] > .vault-dialog__icon { border-color:color-mix(in srgb, var(--ds-primitive-red-500) 40%, transparent)!important; }
+
+/* Popover footer follows the dialog footer: equal-width buttons, text actions pushed left. */
+#root .vault-popover__footer > .vault-button:not(.vault-button--text) { flex:1 1 0; min-width:0; }
+#root .vault-popover__footer > .vault-button--text { flex:none; margin-right:auto; }
+
+/* Sheet metadata (id, time) sits in badges under the title. */
+#root .vault-sheet > .vault-dialog__header p:has(> .vault-badge) { display:flex; flex-wrap:wrap; gap:var(--ds-space-1); margin-top:var(--ds-space-1); }
+
+/* Empty state: hairline art 160×120, title 16/24, guidance 14/20, optional action. */
+.vault-empty { display:grid; justify-items:center; gap:var(--ds-space-1); padding:var(--ds-space-10, 40px) var(--ds-space-6); color:var(--ds-color-text); text-align:center; }
+.vault-empty__art { display:block; width:160px; height:120px; margin-bottom:var(--ds-space-4); color:var(--ds-color-text-muted); }
+.vault-empty > strong { font-size:var(--ds-font-size-body-lg, 16px); line-height:24px; font-weight:var(--ds-font-weight-semibold); }
+.vault-empty > span { max-width:320px; color:var(--ds-color-text-muted); font-size:var(--ds-font-size-body); line-height:20px; }
+.vault-empty__action { margin-top:var(--ds-space-4); }
+#root .vault-empty > svg.vault-empty__art { width:160px; height:120px; flex:none; }
+
+/* Control geometry, app-wide (was only on the DS page): controls are pills, surfaces stay 2,
+   badges are full-round, checkboxes round, switch/progress square. Pallet keeps its own geometry. */
+#root .vault-app :where(.vault-button:not(.vault-button-group > .vault-button), .vault-button-group, .vault-field__control, .vault-search-control, .vault-dropdown-trigger) { border-radius:var(--ds-radius-full)!important; }
+#root .vault-app .vault-button-group > .vault-button { border-radius:var(--ds-radius-full)!important; }
+#root .vault-app :where(.vault-switch, .vault-progress, .vault-progress > span, .vault-progress i) { border-radius:0!important; }
+#root .vault-app .vault-badge { border-radius:var(--ds-radius-full)!important; }
+#root .vault-app .vault-checkbox > span { border-radius:var(--ds-radius-full)!important; }
+/* VaultCheckbox hideLabel: visually hidden, still announced. */
+.vault-checkbox > strong.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+/* Tabs underline: only the selected tab draws its rule (the flat policy otherwise greys every tab's bottom border). */
+#root .vault-tabs > button { border-bottom-color:transparent!important; }
+#root .vault-tabs > button[aria-selected='true'] { border-bottom-color:var(--ds-color-text)!important; }
+
+/* Slider ------------------------------------------------------------------
+   Head 24 (label + value badge), hit area 24. Plain track 4 filled with text colour up to the value;
+   a colour track (data-track='color') is 8 tall, no stroke. Thumb: 16 round chip, 10% edge, no shadow. */
+.vault-slider { display:grid; min-width:0; gap:var(--ds-space-2); color:var(--ds-color-text); }
+.vault-slider__head { display:flex; min-height:24px; align-items:center; justify-content:space-between; gap:var(--ds-space-2); color:var(--ds-color-text-secondary); font-size:var(--ds-font-size-caption); line-height:16px; font-weight:var(--ds-font-weight-medium); }
+.vault-slider__head > span:first-child { display:inline-flex; min-width:0; align-items:center; gap:var(--ds-space-2); }
+.vault-slider__head svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); }
+#root .vault-slider > input[type='range'] { -webkit-appearance:none; appearance:none; display:block; width:100%; height:24px; margin:0; border:0!important; border-radius:0!important; padding:0; background:transparent!important; box-shadow:none!important; cursor:pointer; }
+.vault-slider > input[type='range']::-webkit-slider-runnable-track { height:4px; border-radius:var(--ds-radius-sm); background:linear-gradient(90deg, var(--ds-color-text) 0 var(--vault-slider-progress), var(--ds-color-surface-raised) var(--vault-slider-progress) 100%); }
+.vault-slider > input[type='range']::-moz-range-track { height:4px; border-radius:var(--ds-radius-sm); background:var(--ds-color-surface-raised); }
+.vault-slider > input[type='range']::-moz-range-progress { height:4px; border-radius:var(--ds-radius-sm); background:var(--ds-color-text); }
+.vault-slider > input[type='range']::-webkit-slider-thumb { -webkit-appearance:none; box-sizing:border-box; width:16px; height:16px; margin-top:-6px; border:var(--ds-border-width-control) solid var(--ds-color-border); border-radius:50%; background:var(--vault-chip); }
+.vault-slider > input[type='range']::-moz-range-thumb { box-sizing:border-box; width:16px; height:16px; border:var(--ds-border-width-control) solid var(--ds-color-border); border-radius:50%; background:var(--vault-chip); }
+.vault-slider[data-track='color'] > input[type='range']::-webkit-slider-runnable-track { height:8px; background:var(--vault-slider-track); }
+.vault-slider[data-track='color'] > input[type='range']::-webkit-slider-thumb { margin-top:-4px; }
+.vault-slider[data-track='color'] > input[type='range']::-moz-range-track { height:8px; background:var(--vault-slider-track); }
+.vault-slider[data-track='color'] > input[type='range']::-moz-range-progress { background:transparent; }
+.vault-slider > input[type='range']:focus-visible { outline:0; }
+.vault-slider > input[type='range']:focus-visible::-webkit-slider-thumb { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
+.vault-slider > input[type='range']:focus-visible::-moz-range-thumb { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
+.vault-slider[data-disabled] { opacity:var(--ds-state-disabled-opacity); }
+#root .vault-slider[data-disabled] > input[type='range'] { cursor:not-allowed; }
+
+/* Colour field -------------------------------------------------------------
+   VaultField pill 40. The 24 swatch sits 8 from the edge on every side (balanced padding),
+   the native picker is invisible on top of it, then '#' and the HEX code in mono. */
+#root .vault-color-field .vault-field__control { padding-left:calc(var(--ds-space-2) - var(--ds-border-width-control)); }
+#root .vault-color-field__swatch { position:relative; display:block; width:24px; height:24px; flex:none; overflow:hidden; border-radius:var(--ds-radius-full)!important; background:var(--vault-swatch); cursor:pointer; }
+#root .vault-color-field__swatch > input[type='color'] { position:absolute; inset:0; width:100%; height:100%; margin:0; border:0!important; padding:0; opacity:0; cursor:pointer; }
+.vault-color-field__swatch:has(input:focus-visible) { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
+.vault-color-field__hash { margin-right:calc(var(--ds-space-2) * -1); color:var(--ds-color-text-muted); font-family:var(--ds-font-family-mono); font-size:var(--ds-font-size-body); }
+#root .vault-color-field .vault-field__control > input { font-family:var(--ds-font-family-mono); letter-spacing:.04em; text-transform:uppercase; }
+/* Specimen fit + disabled colour field */
+.vault-slider { width:100%; }
+.vault-color-field:has(input:disabled) { opacity:var(--ds-state-disabled-opacity); }
+#root .vault-color-field:has(input:disabled) :is(input, .vault-color-field__swatch) { cursor:not-allowed; }
+
+/* Cursor ---------------------------------------------------------------------
+   One anatomy for every tool: the same pointer arrow (tip on the hotspot) and a Badge-geometry label
+   (pill 24, 12/16, padding 8, icon 16) 16 / 16 from the hotspot, both in the person's identity colour
+   with readable ink. The tool shows as an icon inside the label. 1px surface halo, no shadow.
+   Board presence is portaled to <body> (outside #root), so these rules must not depend on #root. */
+.vault-cursor { position:relative; display:block; width:0; height:0; pointer-events:none; font-family:var(--ds-font-family-ui), system-ui, sans-serif; }
+.vault-cursor__glyph { position:absolute; left:0; top:0; width:20px; height:20px; overflow:visible; fill:var(--vault-cursor-color); filter:drop-shadow(0 0 1px var(--ds-color-surface)) drop-shadow(0 0 0.5px var(--ds-color-surface)); }
+.vault-cursor__label, #root .vault-cursor__label { position:absolute; left:var(--ds-space-4); top:var(--ds-space-4); display:inline-flex; height:24px; align-items:center; gap:var(--ds-space-1); border-radius:var(--ds-radius-full)!important; padding:0 var(--ds-space-2); color:var(--vault-cursor-ink); background:var(--vault-cursor-color); font-size:var(--ds-font-size-caption); line-height:16px; font-weight:var(--ds-font-weight-semibold); white-space:nowrap; }
+.vault-cursor__label > svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); flex:none; fill:currentColor; }
+/* Cursor area: hides the system pointer inside and draws VaultCursor at the pointer. */
+.vault-cursor-area { position:relative; overflow:hidden; }
+#root .vault-cursor-area, #root .vault-cursor-area * { cursor:none!important; }
+.vault-cursor-area__cursor { position:absolute; left:0; top:0; z-index:1; will-change:transform; }
+
+/* v65 audit — a button group never clips its options: it scrolls sideways (no scrollbar) when the
+   container is narrower than its content, and keeps the selected option in view. */
+.vault-button-group { overflow-x:auto; overflow-y:hidden; scrollbar-width:none; overscroll-behavior-x:contain; }
+.vault-button-group::-webkit-scrollbar { display:none; }
+#root .vault-button-group:not([data-full-width='true']) > .vault-button { flex:none; }
+
+/* v66 — Panel frames stay visible over hovered / selected rows. Rows are positioned (rail, gradient),
+   so they painted over the panel's inset outline and the left / right edges disappeared. The frame is
+   now an overlay above the rows (pointer-events none), still 1px inside the panel, so sizes stay on grid. */
+:where(.vault-menu, .vault-dropdown-menu) { position:relative; }
+#root :is(.vault-popover__panel, .vault-menu, .vault-dropdown-menu, .application-profile__menu) { outline:0; }
+#root :is(.vault-popover__panel, .vault-menu, .vault-dropdown-menu, .application-profile__menu)::after { position:absolute; z-index:5; inset:0; border:var(--ds-border-width-control) solid var(--vault-edge, var(--ds-color-border-subtle))!important; border-radius:inherit; pointer-events:none; content:''; }
+#root :is(.application-profile__menu, .vault-dialog__body, .vault-popover__panel) .vault-menu::after { content:none; }
+
+/* Dropdown field: a menu passed as children floats under the trigger, at the trigger's width, 4 below it,
+   over the content — it never pushes the layout or grows wider than its field. */
+.vault-dropdown-field { position:relative; }
+#root .vault-dropdown-field > .vault-dropdown-menu { position:absolute; z-index:var(--ds-z-popover); top:calc(100% + var(--ds-space-1)); right:0; left:0; width:auto; margin:0; }
+
+/* Single divider lines fade out from the content they separate (100% → 0). */
+.vault-fade-rule::before { background:linear-gradient(90deg, transparent, var(--ds-color-border-subtle))!important; }
+.vault-fade-rule::after { background:linear-gradient(90deg, var(--ds-color-border-subtle), transparent)!important; }
+/* A theme scope also sets the text colour, so plain text inside it follows the pinned theme. */
+[data-theme-scope] { color:var(--ds-color-text); }
+
+/* ------------------------------------------------------------------ Radial menu (VaultRadialMenu)
+   HUD command menu after VEX: a dial of groups (the chosen one turns to face the list), the group's items fanned on
+   an arc, a connector to the focused item, a control column. Always dark; square cells, hairlines, mono labels. */
+.vault-radial { --vault-radial-ink:var(--ds-color-text); --vault-radial-bg:color-mix(in srgb, var(--vault-app-bg) 64%, #000);
+  position:fixed; inset:0; z-index:90; display:grid; place-items:center; overflow:hidden; color:var(--vault-radial-ink);
+  background:color-mix(in srgb, var(--vault-radial-bg) 94%, transparent); backdrop-filter:blur(8px); outline:none;
+  animation:vault-radial-in 180ms ease-out; }
+.vault-radial.is-inline { position:relative; inset:auto; z-index:auto; width:100%; height:560px; animation:none; backdrop-filter:none; background:var(--vault-radial-bg); }
+.vault-radial__stage { position:relative; width:840px; height:600px; flex:none; transform-origin:50% 50%; }
+.vault-radial__dialwrap { position:absolute; left:0; top:80px; width:440px; height:440px; animation:vault-radial-dial 240ms ease-out; }
+#root .vault-radial__ring, .vault-radial__ring { display:block; width:100%; height:100%; overflow:visible; }
+.vault-radial__rim { fill:none; stroke:var(--ds-color-border); stroke-width:1; }
+.vault-radial__disc { fill:color-mix(in srgb, var(--vault-radial-ink) 3%, transparent); }
+.vault-radial__turn { transition:transform 420ms cubic-bezier(.2, .7, .2, 1); }
+.vault-radial__segment { cursor:pointer; outline:none; }
+.vault-radial__segment > path:first-of-type { fill:color-mix(in srgb, var(--vault-radial-ink) 5%, var(--vault-app-bg)); stroke:var(--ds-color-border-subtle); stroke-width:1; transition:fill var(--ds-duration-fast) linear; }
+.vault-radial__segment:hover > path:first-of-type { fill:color-mix(in srgb, var(--vault-radial-ink) 9%, var(--vault-app-bg)); }
+.vault-radial__segment[data-selected] > path:first-of-type { fill:color-mix(in srgb, var(--vault-radial-ink) 10%, var(--vault-app-bg)); stroke:color-mix(in srgb, var(--vault-radial-ink) 32%, transparent); }
+.vault-radial__segment:focus-visible > path:first-of-type { stroke:var(--ds-color-focus); stroke-width:2; }
+.vault-radial__hatch { stroke:var(--vault-radial-ink); stroke-opacity:.16; stroke-width:1; }
+.vault-radial__hatched { pointer-events:none; }
+.vault-radial__glyph { display:grid; width:28px; height:28px; place-items:center; color:var(--ds-color-text-muted); transition:transform 420ms cubic-bezier(.2, .7, .2, 1), color var(--ds-duration-fast) linear; }
+.vault-radial__segment[data-selected] .vault-radial__glyph { color:var(--vault-radial-ink); }
+#root .vault-radial__glyph svg, .vault-radial__glyph svg { width:18px; height:18px; }
+.vault-radial__hub { fill:var(--vault-radial-bg); stroke:var(--ds-color-border); stroke-width:1; }
+.vault-radial__dial line { stroke:var(--vault-radial-ink); stroke-opacity:.16; stroke-width:1; }
+.vault-radial__dial .vault-radial__needle { stroke-opacity:1; stroke-width:2; }
+.vault-radial__core { fill:none; stroke:var(--ds-color-border); stroke-width:1; }
+.vault-radial__name { fill:var(--ds-color-text-secondary); font-family:'Roboto Mono', var(--ds-font-family-mono); font-size:12px; font-weight:var(--ds-font-weight-semibold); letter-spacing:.12em; text-transform:uppercase; }
+.vault-radial__link { position:absolute; left:436px; top:300px; width:80px; height:1px; background:color-mix(in srgb, var(--vault-radial-ink) 40%, transparent); }
+.vault-radial__link > i { position:absolute; top:-2px; width:5px; height:5px; background:var(--vault-radial-ink); }
+.vault-radial__link > i:first-child { left:-2px; }
+.vault-radial__link > i:last-child { right:-2px; }
+.vault-radial__wheel { position:absolute; left:220px; top:300px; width:0; height:0; }
+.vault-radial__items { margin:0; padding:0; list-style:none; }
+.vault-radial__item { position:absolute; left:0; top:0; width:300px; height:52px; transform-origin:0 0; transition:transform 300ms cubic-bezier(.2, .7, .2, 1), opacity 300ms linear, filter 300ms linear; }
+.vault-radial__item > button { display:flex; width:100%; height:100%; align-items:center; gap:var(--ds-space-3); padding:0 var(--ds-space-4); color:var(--ds-color-text-secondary); background:color-mix(in srgb, var(--vault-radial-ink) 3%, var(--vault-radial-bg)); border:1px solid var(--ds-color-border-subtle); cursor:pointer; text-align:left; transition:background var(--ds-duration-fast) linear, color var(--ds-duration-fast) linear, border-color var(--ds-duration-fast) linear; }
+.vault-radial__item > button:hover { color:var(--vault-radial-ink); }
+.vault-radial__item[data-focused] > button { color:var(--vault-radial-ink); background:color-mix(in srgb, var(--vault-radial-ink) 8%, var(--vault-radial-bg)); border-color:color-mix(in srgb, var(--vault-radial-ink) 44%, transparent); }
+.vault-radial__item > button:disabled { cursor:not-allowed; opacity:.48; }
+.vault-radial__item-icon { display:grid; width:20px; height:20px; flex:none; place-items:center; }
+#root .vault-radial__item-icon svg, .vault-radial__item-icon svg { width:18px; height:18px; }
+.vault-radial__item-label { min-width:0; flex:1; overflow:hidden; font-family:'Roboto Mono', var(--ds-font-family-mono); font-size:13px; line-height:20px; font-weight:var(--ds-font-weight-semibold); letter-spacing:.12em; text-overflow:ellipsis; text-transform:uppercase; white-space:nowrap; }
+.vault-radial__item-hint { flex:none; color:var(--ds-color-text-muted); font-family:'Roboto Mono', var(--ds-font-family-mono); font-size:12px; line-height:16px; letter-spacing:.06em; text-transform:uppercase; }
+.vault-radial__controls { position:absolute; right:var(--ds-space-6); top:50%; display:grid; transform:translateY(-50%); }
+.vault-radial__control { display:grid; width:56px; height:56px; place-items:center; color:var(--ds-color-text-secondary); background:var(--vault-radial-bg); border:0; cursor:pointer; transition:background var(--ds-duration-fast) linear, color var(--ds-duration-fast) linear; }
+#root .vault-radial__control, .vault-radial__control { box-shadow:inset 0 0 0 1px var(--ds-color-border)!important; }
+.vault-radial__control + .vault-radial__control { margin-top:-1px; }
+.vault-radial__control:hover:not(:disabled) { color:var(--vault-radial-ink); background:color-mix(in srgb, var(--vault-radial-ink) 8%, var(--vault-radial-bg)); }
+.vault-radial__control:disabled { cursor:not-allowed; opacity:.4; }
+.vault-radial__control:focus-visible { outline:2px solid var(--ds-color-focus); outline-offset:-2px; }
+#root .vault-radial__control svg, .vault-radial__control svg { width:20px; height:20px; }
+.vault-radial.is-compact { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:var(--ds-space-6) var(--ds-space-4) 96px; }
+.vault-radial.is-compact .vault-radial__stage { width:100%; height:100%; transform:none; }
+.vault-radial.is-compact .vault-radial__dialwrap { position:relative; left:auto; top:auto; width:min(300px, calc(100vw - 64px)); height:min(300px, calc(100vw - 64px)); margin:0 auto; }
+.vault-radial.is-compact .vault-radial__wheel { left:50%; top:calc(min(300px, calc(100vw - 64px)) + 140px); }
+.vault-radial.is-compact .vault-radial__name { font-size:18px; }
+.vault-radial.is-compact .vault-radial__glyph { width:28px; height:28px; }
+#root .vault-radial.is-compact .vault-radial__glyph svg { width:26px; height:26px; }
+.vault-radial.is-compact .vault-radial__item { width:min(360px, calc(100vw - 32px)); transform-origin:50% 50%; }
+.vault-radial.is-compact .vault-radial__controls { position:absolute; left:50%; right:auto; top:auto; bottom:var(--ds-space-4); display:flex; transform:translateX(-50%); }
+.vault-radial.is-compact .vault-radial__control + .vault-radial__control { margin-top:0; margin-left:-1px; }
+@keyframes vault-radial-in { from { opacity:0; } to { opacity:1; } }
+@keyframes vault-radial-dial { from { transform:scale(.96); opacity:0; } to { transform:scale(1); opacity:1; } }
+@media (prefers-reduced-motion: reduce) { .vault-radial, .vault-radial__dialwrap { animation:none; } .vault-radial__turn, .vault-radial__glyph, .vault-radial__item { transition:none; } }

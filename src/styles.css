@@ -1,0 +1,5 @@
+/* Standalone stylesheet for projects that consume the library outside Vault.
+   Vault itself loads these through src/index.css + main.tsx to keep its cascade. */
+@import "./theme.css";
+@import "./tokens.css";
+@import "./base/base.css";

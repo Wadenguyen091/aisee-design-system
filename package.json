@@ -1,0 +1,36 @@
+{
+  "name": "@aisee/design-system",
+  "version": "0.1.0",
+  "description": "Base design knowledge, tokens and React components for AISEE and its Mini Apps.",
+  "type": "module",
+  "sideEffects": ["**/*.css"],
+  "files": ["src", "AISEE_DESIGN_KNOWLEDGE.md", "README.md"],
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css",
+    "./theme.css": "./src/theme.css",
+    "./tokens.css": "./src/tokens.css",
+    "./manifest": "./src/manifest.ts",
+    "./base/*": "./src/base/*",
+    "./application/*": "./src/application/*"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "npm run check"
+  },
+  "peerDependencies": {
+    "@remixicon/react": "^4.9.0",
+    "lucide-react": "^1.61.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@remixicon/react": "^4.9.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "lucide-react": "^1.61.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^7.0.2"
+  }
+}

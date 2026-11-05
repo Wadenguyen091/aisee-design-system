@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "exportedAt": "2026-10-29T00:00:00.000Z",
+  "primitives": [
+    {
+      "id": "vault-primary",
+      "name": "Primary",
+      "hex": "#B30000",
+      "role": "primary"
+    }
+  ],
+  "tone": {},
+  "categoryVariation": 3
+}

@@ -1,0 +1,236 @@
+/*
+ * Vault design-system contract
+ * ----------------------------
+ * Primitive tokens describe fixed design decisions. Semantic tokens below
+ * deliberately point at the Pallet-powered --vault-* runtime variables, so
+ * feature code can migrate without changing the theme engine or page layout.
+ */
+
+:root,
+[data-theme-scope] {
+  /* Brand primitives remain fixed across light and dark modes. */
+  --ds-primitive-red-500: #B30000;
+  --ds-primitive-red-600: color-mix(in srgb, var(--ds-primitive-red-500) 88%, #000);
+  --ds-primitive-on-red: #FFF;
+
+  /* Typography */
+  --ds-font-family-ui: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ds-font-family-editorial: 'Red Rose', Georgia, serif;
+  --ds-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  /* Canonical type scale. No application text may sit below Body / xs. */
+  --ds-text-body-xs-size: 12px;
+  --ds-text-body-xs-line: 16px;
+  --ds-text-body-sm-size: 14px;
+  --ds-text-body-sm-line: 18px;
+  --ds-text-body-md-size: 16px;
+  --ds-text-body-md-line: 20px;
+  --ds-text-body-lg-size: 18px;
+  --ds-text-body-lg-line: 24px;
+  --ds-text-headline-xl-size: 20px;
+  --ds-text-headline-xl-line: 28px;
+  --ds-text-headline-2xl-size: 24px;
+  --ds-text-headline-2xl-line: 32px;
+  --ds-text-headline-3xl-size: 30px;
+  --ds-text-headline-3xl-line: 38px;
+  --ds-text-headline-4xl-size: 36px;
+  --ds-text-headline-4xl-line: 44px;
+  --ds-text-headline-5xl-size: 48px;
+  --ds-text-headline-5xl-line: 56px;
+  --ds-text-headline-6xl-size: 60px;
+  --ds-text-headline-6xl-line: 68px;
+  --ds-text-headline-7xl-size: 72px;
+  --ds-text-headline-7xl-line: 80px;
+
+  /* Compatibility aliases for existing components. */
+  --ds-font-size-micro: var(--ds-text-body-xs-size);
+  --ds-line-height-micro: var(--ds-text-body-xs-line);
+  --ds-font-size-caption: var(--ds-text-body-xs-size);
+  --ds-line-height-caption: var(--ds-text-body-xs-line);
+  --ds-font-size-label: var(--ds-text-body-xs-size);
+  --ds-line-height-label: var(--ds-text-body-xs-line);
+  --ds-font-size-body: var(--ds-text-body-sm-size);
+  --ds-line-height-body: var(--ds-text-body-sm-line);
+  --ds-font-size-body-lg: var(--ds-text-body-md-size);
+  --ds-line-height-body-lg: var(--ds-text-body-md-line);
+  --ds-font-size-title: var(--ds-text-body-lg-size);
+  --ds-line-height-title: var(--ds-text-body-lg-line);
+  --ds-font-size-heading: var(--ds-text-headline-2xl-size);
+  --ds-line-height-heading: var(--ds-text-headline-2xl-line);
+  --ds-font-size-display: var(--ds-text-headline-3xl-size);
+  --ds-line-height-display: var(--ds-text-headline-3xl-line);
+
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+
+  /* Geometry */
+  --ds-space-0: 0;
+  --ds-space-0-5: 2px;
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 20px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-10: 40px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+  --ds-space-32: 128px;
+
+  --ds-weight-xs: 1px;
+  --ds-weight-sm: 1.2px;
+  --ds-weight-md: 1.6px;
+  --ds-weight-lg: 2px;
+  --ds-weight-xl: 4px;
+
+  /* Semantic spacing: use relationship, not arbitrary pixel values. */
+  --ds-spacing-inline: var(--ds-space-2);
+  --ds-spacing-control-gap: var(--ds-space-2);
+  --ds-spacing-control-padding-inline: var(--ds-space-3);
+  --ds-spacing-group: var(--ds-space-3);
+  --ds-spacing-layout: var(--ds-space-4);
+  --ds-spacing-card: var(--ds-space-4);
+  --ds-spacing-section: var(--ds-space-6);
+  --ds-spacing-page-inline: var(--ds-space-6);
+  --ds-spacing-page-block: var(--ds-space-6);
+  --ds-spacing-page-end: var(--ds-space-8);
+
+  --ds-radius-none: 0;
+  --ds-radius-xs: 2px;
+  --ds-radius-sm: 2px;
+  --ds-radius-md: 2px;
+  --ds-radius-lg: 2px;
+  --ds-radius-xl: 2px;
+  --ds-radius-full: 9999px;
+
+  --ds-control-height-xs: 24px;
+  --ds-control-height-sm: 32px;
+  --ds-control-height-toolbar: 36px;
+  --ds-control-height-md: 40px;
+  --ds-control-height-lg: 44px;
+  --ds-control-height-touch: 48px;
+
+  /* Layers for library overlays (match the app scale: menus ≤ 70, dialogs 90). */
+  --ds-z-popover: 70;
+  --ds-z-modal: 90;
+  --ds-control-icon-sm: 14px;
+  --ds-control-icon-md: 16px;
+  --ds-control-icon-lg: 20px;
+  --ds-icon-size-micro: 12px;
+  --ds-icon-size-sm: 14px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 18px;
+  --ds-icon-size-xl: 20px;
+  --ds-icon-size-display: 24px;
+  --ds-icon-stroke-regular: 1.75;
+  --ds-icon-stroke-strong: 2;
+
+  /* Motion and interaction states */
+  --ds-duration-fast: 120ms;
+  --ds-duration-normal: 160ms;
+  --ds-duration-slow: 240ms;
+  --ds-ease-standard: cubic-bezier(.2, .8, .2, 1);
+  --ds-state-hover-opacity: .08;
+  --ds-state-pressed-opacity: .14;
+  --ds-state-disabled-opacity: .48;
+  --ds-focus-ring-width: var(--ds-weight-lg);
+  --ds-focus-ring-offset: 2px;
+
+  /* Stroke and elevation contracts. Components reference these aliases rather
+     than inventing border weights, focus alpha, scrims, or shadow colours. */
+  --ds-border-width-control: var(--ds-weight-xs);
+  --ds-border-width-selected: var(--ds-weight-lg);
+  --ds-focus-outline-width: var(--ds-weight-lg);
+  --ds-color-focus-soft: color-mix(in srgb, var(--ds-color-focus) 16%, transparent);
+  --ds-color-focus-border: var(--ds-color-text-muted);
+  --ds-focus-outline: var(--ds-focus-outline-width) solid var(--ds-color-focus-border);
+  --ds-color-scrim: var(--vault-scrim, color-mix(in srgb, #050505 54%, transparent));
+  --ds-shadow-color-subtle: color-mix(in srgb, var(--ds-color-text) 8%, transparent);
+  --ds-shadow-color-overlay: color-mix(in srgb, var(--ds-color-text) 18%, transparent);
+  --ds-shadow-color-dialog: color-mix(in srgb, var(--ds-color-text) 32%, transparent);
+  --ds-shadow-overlay: 0 16px 36px var(--ds-shadow-color-overlay);
+  --ds-shadow-dialog: 0 30px 80px var(--ds-shadow-color-dialog);
+
+  /* Semantic colors. Pallet remains the source of truth at runtime. */
+  --ds-color-canvas: var(--vault-app-bg);
+  --ds-color-canvas-workspace: var(--vault-canvas-bg);
+  --ds-color-surface: var(--vault-surface);
+  /* Balanced elevation: each layer moves only 4–8% toward foreground. */
+  --ds-color-surface-muted: color-mix(in srgb, var(--vault-surface) 96%, var(--vault-text));
+  --ds-color-surface-raised: color-mix(in srgb, var(--vault-surface) 92%, var(--vault-text));
+  --ds-color-surface-overlay: color-mix(in srgb, var(--vault-surface) 88%, var(--vault-text));
+  --ds-color-surface-hover: color-mix(in srgb, var(--vault-surface) 90%, var(--vault-text));
+  --ds-color-text: var(--vault-text);
+  --ds-color-text-secondary: var(--vault-text-secondary);
+  --ds-color-text-muted: var(--vault-text-muted);
+  --ds-color-text-disabled: var(--vault-text-disabled, var(--vault-text-muted));
+  --ds-color-inverse-surface: var(--ds-color-text);
+  --ds-color-on-inverse-surface: var(--ds-color-canvas);
+  --ds-color-inverse-surface-hover: color-mix(in srgb, var(--ds-color-inverse-surface) 92%, var(--ds-color-on-inverse-surface));
+  /* Border hierarchy is neutral alpha only: subtle 6 / component 10 / divider 12 / strong 18. */
+  --ds-color-border-subtle: var(--vault-border-subtle, color-mix(in srgb, var(--ds-color-text) 6%, transparent));
+  --ds-color-border: var(--vault-border, color-mix(in srgb, var(--ds-color-text) 10%, transparent));
+  --ds-color-border-divider: var(--vault-border-divider, color-mix(in srgb, var(--ds-color-text) 12%, transparent));
+  --ds-color-border-strong: var(--vault-border-strong, color-mix(in srgb, var(--ds-color-text) 18%, transparent));
+  --ds-color-action: var(--vault-primary);
+  --ds-color-action-hover: var(--vault-primary-hover);
+  --ds-color-on-action: var(--vault-on-primary);
+  --ds-color-focus: var(--vault-focus);
+  --ds-color-danger: var(--vault-danger, var(--vault-text));
+  --ds-color-danger-soft: var(--vault-danger-soft, var(--vault-surface-muted));
+  --ds-color-danger-light: var(--vault-danger-light, var(--vault-danger-soft));
+  --ds-color-danger-dark: var(--vault-danger-dark, var(--vault-danger));
+  --ds-color-on-danger-dark: var(--vault-on-danger-dark, var(--vault-on-danger));
+  --ds-color-success: var(--vault-success, var(--vault-text));
+  --ds-color-success-soft: var(--vault-success-soft, var(--vault-surface-muted));
+  --ds-color-success-light: var(--vault-success-light, var(--vault-success-soft));
+  --ds-color-success-dark: var(--vault-success-dark, var(--vault-success));
+  --ds-color-on-success-dark: var(--vault-on-success-dark, var(--vault-on-success));
+  --ds-color-warning: var(--vault-warning, var(--vault-text));
+  --ds-color-warning-soft: var(--vault-warning-soft, var(--vault-surface-muted));
+  --ds-color-warning-light: var(--vault-warning-light, var(--vault-warning-soft));
+  --ds-color-warning-dark: var(--vault-warning-dark, var(--vault-warning));
+  --ds-color-on-warning-dark: var(--vault-on-warning-dark, var(--vault-on-warning));
+  --ds-color-info: var(--vault-info, var(--vault-text));
+  --ds-color-info-soft: var(--vault-info-soft, var(--vault-surface-muted));
+  --ds-color-info-light: var(--vault-info-light, var(--vault-info-soft));
+  --ds-color-info-dark: var(--vault-info-dark, var(--vault-info));
+  --ds-color-on-info-dark: var(--vault-on-info-dark, var(--vault-on-info));
+  --ds-color-category-1: var(--vault-chart-1);
+  --ds-color-category-2: var(--vault-chart-2);
+  --ds-color-category-3: var(--vault-chart-3);
+  --ds-color-category-4: var(--vault-chart-4);
+  --ds-color-category-5: var(--vault-chart-5);
+  --ds-color-category-6: var(--vault-chart-6, var(--vault-chart-2));
+  --ds-color-category-7: var(--vault-chart-7, var(--vault-chart-4));
+  --ds-color-category-1-soft: var(--vault-category-1-soft, var(--ds-color-surface-muted));
+  --ds-color-category-2-soft: var(--vault-category-2-soft, var(--ds-color-surface-muted));
+  --ds-color-category-3-soft: var(--vault-category-3-soft, var(--ds-color-surface-muted));
+  --ds-color-category-4-soft: var(--vault-category-4-soft, var(--ds-color-surface-muted));
+  --ds-color-category-5-soft: var(--vault-category-5-soft, var(--ds-color-surface-muted));
+  --ds-color-category-6-soft: var(--vault-category-6-soft, var(--ds-color-surface-muted));
+  --ds-color-category-7-soft: var(--vault-category-7-soft, var(--ds-color-surface-muted));
+
+  /* Component contracts */
+  --ds-button-height: var(--ds-control-height-md);
+  --ds-button-padding-inline: var(--ds-space-4);
+  --ds-button-gap: var(--ds-space-2);
+  --ds-button-radius: var(--ds-radius-sm);
+  --ds-button-font-size: var(--ds-font-size-label);
+  --ds-button-line-height: var(--ds-line-height-label);
+  --ds-button-font-weight: var(--ds-font-weight-semibold);
+  --ds-control-border: var(--ds-color-border-subtle);
+  --ds-control-border-hover: var(--ds-color-border);
+  --ds-control-background: color-mix(in srgb, var(--ds-color-surface-muted) 84%, transparent);
+  --ds-input-height: var(--ds-control-height-md);
+  --ds-input-radius: var(--ds-radius-sm);
+  --ds-search-height: var(--ds-control-height-md);
+  --ds-dropdown-height: var(--ds-control-height-md);
+  --ds-toolbar-height: var(--ds-control-height-md);
+  --ds-toolbar-control-height: var(--ds-control-height-toolbar);
+  --ds-badge-height: var(--ds-control-height-xs);
+}

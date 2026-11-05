@@ -1,0 +1,56 @@
+/* Application · Cổng AI (ApplicationGateway.tsx).
+   Provider tile and avatar are squares on the 4px grid; codes and IDs are mono; status by tone only. */
+
+/* Provider tile: 32 (sm 24, lg 40), two-letter mark, hairline frame. Down = danger ink, idle = muted. */
+#root .gw-provider { display:inline-grid; width:32px; height:32px; flex:none; place-items:center; border-radius:var(--ds-radius-sm)!important; color:var(--ds-color-text); background:var(--ds-color-surface-muted); outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle); outline-offset:calc(var(--ds-border-width-control) * -1); font-family:'Roboto Mono', var(--ds-font-family-mono); font-size:var(--ds-font-size-caption); line-height:16px; font-weight:var(--ds-font-weight-bold); letter-spacing:.02em; }
+#root .gw-provider[data-size='sm'] { width:24px; height:24px; font-size:10px; line-height:12px; }
+#root .gw-provider[data-size='lg'] { width:40px; height:40px; font-size:var(--ds-font-size-body); }
+#root .gw-provider[data-state='down'] { color:var(--ds-color-danger); background:var(--ds-color-danger-soft); }
+#root .gw-provider[data-state='idle'] { color:var(--ds-color-text-muted); }
+
+/* Agent orrery (v103, user's reference; replaces the glowing orb): square SVG. Inks are illustration, set once here:
+   light (--gw-orrery-a) and steel blue (--gw-orrery-b). Orbits turn on their own speed and direction around the
+   centre; the system leans toward the pointer; states change speed, ink or stillness. */
+#root .gw-orb {
+  --gw-orrery-a:rgba(232, 236, 238, .86); --gw-orrery-b:#7fa3ba; --gw-orrery-speed:1;
+  position:relative; display:block; width:auto; height:100%; max-width:100%; aspect-ratio:1; overflow:visible; cursor:default; touch-action:manipulation; }
+#root .gw-orrery > svg { position:absolute; inset:0; display:block; width:100%!important; height:100%!important; overflow:visible; }
+.gw-orrery__system { transform-box:view-box; transform-origin:50% 50%; transform:rotate(var(--gw-orrery-tilt, 0deg)) translateY(var(--gw-orrery-lean, 0%)); transition:transform 600ms cubic-bezier(.2, .8, .2, 1), opacity 240ms ease-out, filter 240ms ease-out; }
+.gw-orrery__orbit { transform-box:view-box; transform-origin:50% 50%; transform:rotate(var(--tilt)); animation:gw-orrery-turn calc(var(--d) * var(--gw-orrery-speed)) linear infinite; }
+.gw-orrery__orbit > ellipse { fill:none; stroke-width:1px; vector-effect:non-scaling-stroke; }
+.gw-orrery__orbit[data-dim] > ellipse { opacity:.45; }
+.gw-orrery__orbit[data-bold] > ellipse { opacity:.95; }
+.gw-orrery__ticks { fill:none; stroke:var(--gw-orrery-a); stroke-width:7; stroke-dasharray:1.2 9.8; opacity:.7; transform-box:view-box; transform-origin:50% 50%; animation:gw-orrery-spin calc(160s * var(--gw-orrery-speed)) linear infinite; }
+.gw-orrery__ticks.is-inner { stroke-width:5; stroke-dasharray:1 13; opacity:.5; animation-direction:reverse; animation-duration:calc(120s * var(--gw-orrery-speed)); }
+.gw-orrery__dots { fill:none; stroke:var(--gw-orrery-a); stroke-width:1.2; stroke-linecap:round; stroke-dasharray:.1 5; opacity:.55; }
+.gw-orrery__dots.is-wide { stroke:var(--gw-orrery-b); opacity:.4; transform-box:view-box; transform-origin:50% 50%; animation:gw-orrery-spin calc(200s * var(--gw-orrery-speed)) linear infinite reverse; }
+.gw-orrery__axis { stroke-width:1px; vector-effect:non-scaling-stroke; opacity:.4; }
+.gw-orrery__ring > path { fill:none; stroke:var(--gw-orrery-a); stroke-width:1px; vector-effect:non-scaling-stroke; opacity:.9; }
+.gw-orrery__ring > path.is-inner { stroke:var(--gw-orrery-b); opacity:.6; }
+.gw-orrery__ring.is-back > path { opacity:.3; }
+/* Hairline globe (v114): a dark core with a 1px rim, latitudes and four meridians that turn (scaleX) around the tilted axis. */
+.gw-orrery__core { fill:#000; fill-opacity:.88; }
+.gw-orrery__rim { fill:none; stroke:var(--gw-orrery-a); stroke-width:1px; vector-effect:non-scaling-stroke; }
+.gw-orrery__globe { transform-box:view-box; transform-origin:50% 50%; transform:rotate(-18deg); }
+.gw-orrery__lat, .gw-orrery__meridian { fill:none; stroke:var(--gw-orrery-a); stroke-width:1px; vector-effect:non-scaling-stroke; opacity:.42; }
+.gw-orrery__lat:nth-child(3) { stroke:var(--gw-orrery-b); opacity:.7; }
+.gw-orrery__meridian { transform-box:view-box; transform-origin:50% 50%; animation:gw-orrery-meridian calc(24s * var(--gw-orrery-speed)) linear infinite; animation-delay:calc(var(--m) * -6s * var(--gw-orrery-speed)); }
+@keyframes gw-orrery-meridian { 0% { transform:scaleX(1); opacity:.5; } 25% { transform:scaleX(0); opacity:.2; } 50% { transform:scaleX(-1); opacity:.5; } 75% { transform:scaleX(0); opacity:.2; } 100% { transform:scaleX(1); opacity:.5; } }
+.gw-orrery__planet { transform-box:view-box; transform-origin:50% 50%; transition:filter 240ms ease-out; }
+.gw-orrery__progress { fill:none; stroke:#fff; stroke-width:1px; vector-effect:non-scaling-stroke; transition:stroke-dasharray 180ms ease-out; }
+/* States */
+.gw-orb[data-spun] { --gw-orrery-speed:.12; }
+.gw-orb[data-state='checking'] { --gw-orrery-speed:.2; }
+.gw-orb[data-state='speaking'] { --gw-orrery-speed:.5; }
+.gw-orb[data-state='speaking'] .gw-orrery__orbit > ellipse { animation:gw-orrery-breathe 1.4s ease-in-out infinite alternate; }
+.gw-orb[data-state='speaking'] .gw-orrery__planet { filter:brightness(1.25); }
+#root .gw-orb[data-state='blocked'] { --gw-orrery-a:#ff6b6b; --gw-orrery-b:#b30000; }
+.gw-orb[data-state='blocked'] .gw-orrery__system { animation:gw-orrery-shake 360ms ease-in-out 2; }
+.gw-orb[data-state='paused'] .gw-orrery__system { opacity:.45; filter:saturate(0); }
+.gw-orb[data-state='paused'] .gw-orrery__orbit, .gw-orb[data-state='paused'] .gw-orrery__ticks, .gw-orb[data-state='paused'] .gw-orrery__dots, .gw-orb[data-state='paused'] .gw-orrery__meridian { animation-play-state:paused; }
+.gw-orb[data-compact] .gw-orrery__lat:not(:nth-child(3)) { display:none; }
+@keyframes gw-orrery-turn { from { transform:rotate(var(--tilt)); } to { transform:rotate(calc(var(--tilt) + 360deg * var(--dir))); } }
+@keyframes gw-orrery-spin { to { transform:rotate(360deg); } }
+@keyframes gw-orrery-breathe { from { opacity:.55; } to { opacity:1; } }
+@keyframes gw-orrery-shake { 0%, 100% { translate:0 0; } 25% { translate:-2% 0; } 75% { translate:2% 0; } }
+@media (prefers-reduced-motion: reduce) { .gw-orrery__system, .gw-orrery__orbit, .gw-orrery__ticks, .gw-orrery__dots, .gw-orrery__meridian, .gw-orrery__orbit > ellipse { animation:none!important; transition:none!important; } }

@@ -1,0 +1,1276 @@
+{
+ "version": 1,
+ "source": "Pallet",
+ "exportedAt": "2026-10-29T00:00:00.000Z",
+ "primitives": [
+  {
+   "id": "vault-primary",
+   "name": "Primary",
+   "hex": "#B30000",
+   "role": "primary",
+   "scale": [
+    {
+     "step": 50,
+     "hex": "#FDF2F0",
+     "contrastOnWhite": 1.0974289167693079,
+     "contrastOnBlack": 18.57192762136315,
+     "foreground": "#050505"
+    },
+    {
+     "step": 100,
+     "hex": "#F9E1DC",
+     "contrastOnWhite": 1.2476610604823355,
+     "contrastOnBlack": 16.335662831339214,
+     "foreground": "#050505"
+    },
+    {
+     "step": 200,
+     "hex": "#F0BEB6",
+     "contrastOnWhite": 1.6475866873069442,
+     "contrastOnBlack": 12.37043887817814,
+     "foreground": "#050505"
+    },
+    {
+     "step": 300,
+     "hex": "#E39589",
+     "contrastOnWhite": 2.3525759205230754,
+     "contrastOnBlack": 8.663427281572673,
+     "foreground": "#050505"
+    },
+    {
+     "step": 400,
+     "hex": "#CF6051",
+     "contrastOnWhite": 3.8567179715722193,
+     "contrastOnBlack": 5.284641128042334,
+     "foreground": "#050505"
+    },
+    {
+     "step": 500,
+     "hex": "#B30000",
+     "contrastOnWhite": 7.1998161406531525,
+     "contrastOnBlack": 2.83081817836276,
+     "foreground": "#FFFFFF"
+    },
+    {
+     "step": 600,
+     "hex": "#9A0704",
+     "contrastOnWhite": 8.727636715283296,
+     "contrastOnBlack": 2.3352679627624693,
+     "foreground": "#FFFFFF"
+    },
+    {
+     "step": 700,
+     "hex": "#7D0B07",
+     "contrastOnWhite": 10.92082477964151,
+     "contrastOnBlack": 1.8662849027506876,
+     "foreground": "#FFFFFF"
+    },
+    {
+     "step": 800,
+     "hex": "#600D07",
+     "contrastOnWhite": 13.478845971189376,
+     "contrastOnBlack": 1.5121005504028395,
+     "foreground": "#FFFFFF"
+    },
+    {
+     "step": 900,
+     "hex": "#440B07",
+     "contrastOnWhite": 16.194636862734892,
+     "contrastOnBlack": 1.258525929576702,
+     "foreground": "#FFFFFF"
+    },
+    {
+     "step": 950,
+     "hex": "#2C0806",
+     "contrastOnWhite": 18.34930548377643,
+     "contrastOnBlack": 1.11074342458633,
+     "foreground": "#FFFFFF"
+    }
+   ]
+  }
+ ],
+ "modes": {
+  "light": [
+   {
+    "group": "Primitive",
+    "token": "primitive/Primary",
+    "source": "primary/500",
+    "hex": "#B30000",
+    "note": "Brand primary"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/alert-light",
+    "source": "semantic-alert/100",
+    "hex": "#F6E0DC",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/alert-dark",
+    "source": "semantic-alert/900",
+    "hex": "#3D0C07",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/info-light",
+    "source": "semantic-info/100",
+    "hex": "#DAE4F6",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/info-dark",
+    "source": "semantic-info/900",
+    "hex": "#051742",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/warning-light",
+    "source": "semantic-warning/100",
+    "hex": "#F8EBE0",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/warning-dark",
+    "source": "semantic-warning/900",
+    "hex": "#4A2A0C",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/success-light",
+    "source": "semantic-success/100",
+    "hex": "#E4F5E2",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/success-dark",
+    "source": "semantic-success/900",
+    "hex": "#0F430F",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Text",
+    "token": "text/on-brand",
+    "source": "subtle-bg/brand-primary",
+    "hex": "#FFFFFF",
+    "note": "Chữ trên nền brand · ưu tiên trắng, surface tự điều chỉnh khi cần",
+    "contrast": 7.1998161406531525
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-alert-light",
+    "source": "semantic-alert/600",
+    "hex": "#8A0F07",
+    "note": "Chữ alert shade 600 trên nền 100",
+    "contrast": 7.720207028886624
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-alert-dark",
+    "source": "semantic-alert/300",
+    "hex": "#CD9C94",
+    "note": "Chữ alert shade 300 trên nền 900",
+    "contrast": 7.000239455583878
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-info-light",
+    "source": "semantic-info/600",
+    "hex": "#063195",
+    "note": "Chữ info shade 600 trên nền 100",
+    "contrast": 8.723413131686723
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-info-dark",
+    "source": "semantic-info/300",
+    "hex": "#92A5CB",
+    "note": "Chữ info shade 300 trên nền 900",
+    "contrast": 7.010635614965471
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-warning-light",
+    "source": "semantic-warning/700",
+    "hex": "#5C4C3B",
+    "note": "Chữ warning shade 700 trên nền 100",
+    "contrast": 7.034107681266584
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-warning-dark",
+    "source": "semantic-warning/300",
+    "hex": "#D6BAA4",
+    "note": "Chữ warning shade 300 trên nền 900",
+    "contrast": 7.0154891435070565
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-success-light",
+    "source": "semantic-success/700",
+    "hex": "#355935",
+    "note": "Chữ success shade 700 trên nền 100",
+    "contrast": 7.013603597354125
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-success-dark",
+    "source": "semantic-success/200",
+    "hex": "#C9E6C6",
+    "note": "Chữ success shade 200 trên nền 900",
+    "contrast": 8.53391303206303
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-aura-light",
+    "source": "aura/600",
+    "hex": "#3D0986",
+    "note": "Chữ Aura shade 600 trên nền 100",
+    "contrast": 10.147549327214152
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-aura-dark",
+    "source": "aura/300",
+    "hex": "#A39CC7",
+    "note": "Chữ Aura shade 300 trên nền 900",
+    "contrast": 7.0729696673543065
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-brook-light",
+    "source": "brook/600",
+    "hex": "#4B5150",
+    "note": "Chữ Brook shade 600 trên nền 100",
+    "contrast": 7.071912559625003
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-brook-dark",
+    "source": "brook/300",
+    "hex": "#9ED4BE",
+    "note": "Chữ Brook shade 300 trên nền 900",
+    "contrast": 7.200032075736544
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-cloud-light",
+    "source": "cloud/600",
+    "hex": "#8C116A",
+    "note": "Chữ Cloud shade 600 trên nền 100",
+    "contrast": 7.006758086318459
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-cloud-dark",
+    "source": "cloud/300",
+    "hex": "#D49EBD",
+    "note": "Chữ Cloud shade 300 trên nền 900",
+    "contrast": 7.165581631302353
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-dawn-light",
+    "source": "dawn/600",
+    "hex": "#4B5243",
+    "note": "Chữ Dawn shade 600 trên nền 100",
+    "contrast": 7.042245857677517
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-dawn-dark",
+    "source": "dawn/300",
+    "hex": "#B0D198",
+    "note": "Chữ Dawn shade 300 trên nền 900",
+    "contrast": 7.190731451754223
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-elm-light",
+    "source": "elm/600",
+    "hex": "#6B0B8C",
+    "note": "Chữ Elm shade 600 trên nền 100",
+    "contrast": 8.075910822166552
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-elm-dark",
+    "source": "elm/300",
+    "hex": "#BE9ACF",
+    "note": "Chữ Elm shade 300 trên nền 900",
+    "contrast": 7.036012223653171
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-frost-light",
+    "source": "frost/600",
+    "hex": "#8B214A",
+    "note": "Chữ Frost shade 600 trên nền 100",
+    "contrast": 7.027662296868467
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-frost-dark",
+    "source": "frost/300",
+    "hex": "#D7A6B0",
+    "note": "Chữ Frost shade 300 trên nền 900",
+    "contrast": 7.439282664987306
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-grove-light",
+    "source": "grove/600",
+    "hex": "#240989",
+    "note": "Chữ Grove shade 600 trên nền 100",
+    "contrast": 10.759324946804083
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-grove-dark",
+    "source": "grove/300",
+    "hex": "#989EC5",
+    "note": "Chữ Grove shade 300 trên nền 900",
+    "contrast": 7.1248099142750965
+   },
+   {
+    "group": "Text",
+    "token": "text/heading",
+    "source": "neutral/900",
+    "hex": "#242424",
+    "note": "Tiêu đề chính",
+    "contrast": 12.66894583621786
+   },
+   {
+    "group": "Text",
+    "token": "text/title",
+    "source": "neutral/800",
+    "hex": "#383838",
+    "note": "Tiêu đề cấp hai",
+    "contrast": 9.569941773888477
+   },
+   {
+    "group": "Text",
+    "token": "text/body",
+    "source": "neutral/600",
+    "hex": "#636363",
+    "note": "Nội dung chính",
+    "contrast": 4.903263407273287
+   },
+   {
+    "group": "Text",
+    "token": "text/muted",
+    "source": "neutral/600",
+    "hex": "#636363",
+    "note": "Nội dung thứ cấp · đạt AA trên application canvas",
+    "contrast": 4.903263407273287
+   },
+   {
+    "group": "Text",
+    "token": "text/disabled",
+    "source": "neutral/100",
+    "hex": "#F6F6F6",
+    "note": "Trạng thái vô hiệu",
+    "contrast": 1.133764276343485
+   },
+   {
+    "group": "Text",
+    "token": "text/alert",
+    "source": "text/on-semantic-alert-light",
+    "alias": "text/on-semantic-alert-light",
+    "hex": "#8A0F07",
+    "note": "Nội dung cảnh báo",
+    "contrast": 7.964046768691831
+   },
+   {
+    "group": "Text",
+    "token": "text/info",
+    "source": "text/on-semantic-info-light",
+    "alias": "text/on-semantic-info-light",
+    "hex": "#063195",
+    "note": "Nội dung thông tin",
+    "contrast": 9.111405570582136
+   },
+   {
+    "group": "Text",
+    "token": "text/warning",
+    "source": "text/on-semantic-warning-light",
+    "alias": "text/on-semantic-warning-light",
+    "hex": "#5C4C3B",
+    "note": "Nội dung cảnh báo cần chú ý",
+    "contrast": 6.715947394540808
+   },
+   {
+    "group": "Text",
+    "token": "text/success",
+    "source": "text/on-semantic-success-light",
+    "alias": "text/on-semantic-success-light",
+    "hex": "#355935",
+    "note": "Nội dung thành công",
+    "contrast": 6.512447262090579
+   },
+   {
+    "group": "Text",
+    "token": "text/brand-primary",
+    "source": "primitive/Primary",
+    "alias": "primitive/Primary",
+    "hex": "#B30000",
+    "note": "Alias màu brand chính"
+   },
+   {
+    "group": "Category",
+    "token": "category/aura-light",
+    "source": "aura/100",
+    "hex": "#E1DFF3",
+    "note": "Aura · nền shade 100 · chữ shade 600",
+    "contrast": 10.147549327214152
+   },
+   {
+    "group": "Category",
+    "token": "category/aura-dark",
+    "source": "aura/900",
+    "hex": "#1A0A3B",
+    "note": "Aura · nền shade 900 · chữ shade 300",
+    "contrast": 7.0729696673543065
+   },
+   {
+    "group": "Category",
+    "token": "category/brook-light",
+    "source": "brook/100",
+    "hex": "#E4F3EC",
+    "note": "Brook · nền shade 100 · chữ shade 600",
+    "contrast": 7.071912559625003
+   },
+   {
+    "group": "Category",
+    "token": "category/brook-dark",
+    "source": "brook/900",
+    "hex": "#0F3E30",
+    "note": "Brook · nền shade 900 · chữ shade 300",
+    "contrast": 7.200032075736544
+   },
+   {
+    "group": "Category",
+    "token": "category/cloud-light",
+    "source": "cloud/100",
+    "hex": "#F7E0ED",
+    "note": "Cloud · nền shade 100 · chữ shade 600",
+    "contrast": 7.006758086318459
+   },
+   {
+    "group": "Category",
+    "token": "category/cloud-dark",
+    "source": "cloud/900",
+    "hex": "#410B30",
+    "note": "Cloud · nền shade 900 · chữ shade 300",
+    "contrast": 7.165581631302353
+   },
+   {
+    "group": "Category",
+    "token": "category/dawn-light",
+    "source": "dawn/100",
+    "hex": "#E8F2E1",
+    "note": "Dawn · nền shade 100 · chữ shade 600",
+    "contrast": 7.042245857677517
+   },
+   {
+    "group": "Category",
+    "token": "category/dawn-dark",
+    "source": "dawn/900",
+    "hex": "#243C0D",
+    "note": "Dawn · nền shade 900 · chữ shade 300",
+    "contrast": 7.190731451754223
+   },
+   {
+    "group": "Category",
+    "token": "category/elm-light",
+    "source": "elm/100",
+    "hex": "#EDE0F4",
+    "note": "Elm · nền shade 100 · chữ shade 600",
+    "contrast": 8.075910822166552
+   },
+   {
+    "group": "Category",
+    "token": "category/elm-dark",
+    "source": "elm/900",
+    "hex": "#2F0B3E",
+    "note": "Elm · nền shade 900 · chữ shade 300",
+    "contrast": 7.036012223653171
+   },
+   {
+    "group": "Category",
+    "token": "category/frost-light",
+    "source": "frost/100",
+    "hex": "#FAE1E5",
+    "note": "Frost · nền shade 100 · chữ shade 600",
+    "contrast": 7.027662296868467
+   },
+   {
+    "group": "Category",
+    "token": "category/frost-dark",
+    "source": "frost/900",
+    "hex": "#470C1F",
+    "note": "Frost · nền shade 900 · chữ shade 300",
+    "contrast": 7.439282664987306
+   },
+   {
+    "group": "Category",
+    "token": "category/grove-light",
+    "source": "grove/100",
+    "hex": "#DBDFF4",
+    "note": "Grove · nền shade 100 · chữ shade 600",
+    "contrast": 10.759324946804083
+   },
+   {
+    "group": "Category",
+    "token": "category/grove-dark",
+    "source": "grove/900",
+    "hex": "#0E0A3C",
+    "note": "Grove · nền shade 900 · chữ shade 300",
+    "contrast": 7.1248099142750965
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-under",
+    "source": "neutral/300",
+    "hex": "#E8E8E8",
+    "note": "Lớp nền thấp nhất · tối nhất trong hệ nền"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-alpha",
+    "source": "neutral/200",
+    "hex": "#F0F0F0",
+    "note": "Foreground trong suốt",
+    "opacity": 5
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-base",
+    "source": "neutral/200",
+    "hex": "#F0F0F0",
+    "note": "Foreground mặc định"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-alt",
+    "source": "neutral/100",
+    "hex": "#F6F6F6",
+    "note": "Foreground thay thế"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-weak",
+    "source": "neutral/50",
+    "hex": "#FBFBFB",
+    "note": "Foreground yếu · sáng nhất trong hệ nền"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/modal",
+    "source": "neutral/100",
+    "hex": "#F6F6F6",
+    "note": "Nền modal"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/brand-primary",
+    "source": "primary/500",
+    "hex": "#B30000",
+    "note": "Nền brand chính"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-alert",
+    "source": "semantic/alert-light",
+    "alias": "semantic/alert-light",
+    "hex": "#8A0F07",
+    "note": "Nền cảnh báo nhẹ"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-info",
+    "source": "semantic/info-light",
+    "alias": "semantic/info-light",
+    "hex": "#063195",
+    "note": "Nền thông tin nhẹ"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-warning",
+    "source": "semantic/warning-light",
+    "alias": "semantic/warning-light",
+    "hex": "#5C4C3B",
+    "note": "Nền chú ý nhẹ"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-success",
+    "source": "semantic/success-light",
+    "alias": "semantic/success-light",
+    "hex": "#355935",
+    "note": "Nền thành công nhẹ"
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-subtle",
+    "source": "neutral/950",
+    "hex": "#121212",
+    "note": "Phân tách nền gần nhau",
+    "opacity": 6
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-neutral",
+    "source": "neutral/950",
+    "hex": "#121212",
+    "note": "Viền component mặc định",
+    "opacity": 10
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-divider",
+    "source": "neutral/950",
+    "hex": "#121212",
+    "note": "Divider và đường chia bảng",
+    "opacity": 12
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-strong",
+    "source": "neutral/950",
+    "hex": "#121212",
+    "note": "Viền nhấn mạnh có chủ đích",
+    "opacity": 18
+   },
+   {
+    "group": "Border",
+    "token": "border/alert",
+    "source": "semantic/alert-light",
+    "alias": "semantic/alert-light",
+    "hex": "#8A0F07",
+    "note": "Viền cảnh báo"
+   },
+   {
+    "group": "Border",
+    "token": "border/info",
+    "source": "semantic/info-light",
+    "alias": "semantic/info-light",
+    "hex": "#063195",
+    "note": "Viền thông tin"
+   },
+   {
+    "group": "Border",
+    "token": "border/warning",
+    "source": "semantic/warning-light",
+    "alias": "semantic/warning-light",
+    "hex": "#5C4C3B",
+    "note": "Viền cần chú ý"
+   },
+   {
+    "group": "Border",
+    "token": "border/success",
+    "source": "semantic/success-light",
+    "alias": "semantic/success-light",
+    "hex": "#355935",
+    "note": "Viền thành công"
+   }
+  ],
+  "dark": [
+   {
+    "group": "Primitive",
+    "token": "primitive/Primary",
+    "source": "primary/500",
+    "hex": "#B30000",
+    "note": "Brand primary"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/alert-light",
+    "source": "semantic-alert/100",
+    "hex": "#F6E0DC",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/alert-dark",
+    "source": "semantic-alert/900",
+    "hex": "#3D0C07",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/info-light",
+    "source": "semantic-info/100",
+    "hex": "#DAE4F6",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/info-dark",
+    "source": "semantic-info/900",
+    "hex": "#051742",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/warning-light",
+    "source": "semantic-warning/100",
+    "hex": "#F8EBE0",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/warning-dark",
+    "source": "semantic-warning/900",
+    "hex": "#4A2A0C",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/success-light",
+    "source": "semantic-success/100",
+    "hex": "#E4F5E2",
+    "note": "Nền sáng · shade 100"
+   },
+   {
+    "group": "Semantic",
+    "token": "semantic/success-dark",
+    "source": "semantic-success/900",
+    "hex": "#0F430F",
+    "note": "Nền tối · shade 900"
+   },
+   {
+    "group": "Text",
+    "token": "text/on-brand",
+    "source": "subtle-bg/brand-primary",
+    "hex": "#FFFFFF",
+    "note": "Chữ trên nền brand · ưu tiên trắng, surface tự điều chỉnh khi cần",
+    "contrast": 7.1998161406531525
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-alert-light",
+    "source": "semantic-alert/600",
+    "hex": "#8A0F07",
+    "note": "Chữ alert shade 600 trên nền 100",
+    "contrast": 7.720207028886624
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-alert-dark",
+    "source": "semantic-alert/300",
+    "hex": "#CD9C94",
+    "note": "Chữ alert shade 300 trên nền 900",
+    "contrast": 7.000239455583878
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-info-light",
+    "source": "semantic-info/600",
+    "hex": "#063195",
+    "note": "Chữ info shade 600 trên nền 100",
+    "contrast": 8.723413131686723
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-info-dark",
+    "source": "semantic-info/300",
+    "hex": "#92A5CB",
+    "note": "Chữ info shade 300 trên nền 900",
+    "contrast": 7.010635614965471
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-warning-light",
+    "source": "semantic-warning/700",
+    "hex": "#5C4C3B",
+    "note": "Chữ warning shade 700 trên nền 100",
+    "contrast": 7.034107681266584
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-warning-dark",
+    "source": "semantic-warning/300",
+    "hex": "#D6BAA4",
+    "note": "Chữ warning shade 300 trên nền 900",
+    "contrast": 7.0154891435070565
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-success-light",
+    "source": "semantic-success/700",
+    "hex": "#355935",
+    "note": "Chữ success shade 700 trên nền 100",
+    "contrast": 7.013603597354125
+   },
+   {
+    "group": "Text",
+    "token": "text/on-semantic-success-dark",
+    "source": "semantic-success/200",
+    "hex": "#C9E6C6",
+    "note": "Chữ success shade 200 trên nền 900",
+    "contrast": 8.53391303206303
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-aura-light",
+    "source": "aura/600",
+    "hex": "#3D0986",
+    "note": "Chữ Aura shade 600 trên nền 100",
+    "contrast": 10.147549327214152
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-aura-dark",
+    "source": "aura/300",
+    "hex": "#A39CC7",
+    "note": "Chữ Aura shade 300 trên nền 900",
+    "contrast": 7.0729696673543065
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-brook-light",
+    "source": "brook/600",
+    "hex": "#4B5150",
+    "note": "Chữ Brook shade 600 trên nền 100",
+    "contrast": 7.071912559625003
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-brook-dark",
+    "source": "brook/300",
+    "hex": "#9ED4BE",
+    "note": "Chữ Brook shade 300 trên nền 900",
+    "contrast": 7.200032075736544
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-cloud-light",
+    "source": "cloud/600",
+    "hex": "#8C116A",
+    "note": "Chữ Cloud shade 600 trên nền 100",
+    "contrast": 7.006758086318459
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-cloud-dark",
+    "source": "cloud/300",
+    "hex": "#D49EBD",
+    "note": "Chữ Cloud shade 300 trên nền 900",
+    "contrast": 7.165581631302353
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-dawn-light",
+    "source": "dawn/600",
+    "hex": "#4B5243",
+    "note": "Chữ Dawn shade 600 trên nền 100",
+    "contrast": 7.042245857677517
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-dawn-dark",
+    "source": "dawn/300",
+    "hex": "#B0D198",
+    "note": "Chữ Dawn shade 300 trên nền 900",
+    "contrast": 7.190731451754223
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-elm-light",
+    "source": "elm/600",
+    "hex": "#6B0B8C",
+    "note": "Chữ Elm shade 600 trên nền 100",
+    "contrast": 8.075910822166552
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-elm-dark",
+    "source": "elm/300",
+    "hex": "#BE9ACF",
+    "note": "Chữ Elm shade 300 trên nền 900",
+    "contrast": 7.036012223653171
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-frost-light",
+    "source": "frost/600",
+    "hex": "#8B214A",
+    "note": "Chữ Frost shade 600 trên nền 100",
+    "contrast": 7.027662296868467
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-frost-dark",
+    "source": "frost/300",
+    "hex": "#D7A6B0",
+    "note": "Chữ Frost shade 300 trên nền 900",
+    "contrast": 7.439282664987306
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-grove-light",
+    "source": "grove/600",
+    "hex": "#240989",
+    "note": "Chữ Grove shade 600 trên nền 100",
+    "contrast": 10.759324946804083
+   },
+   {
+    "group": "Text",
+    "token": "text/on-category-grove-dark",
+    "source": "grove/300",
+    "hex": "#989EC5",
+    "note": "Chữ Grove shade 300 trên nền 900",
+    "contrast": 7.1248099142750965
+   },
+   {
+    "group": "Text",
+    "token": "text/heading",
+    "source": "neutral/50",
+    "hex": "#F0F0F0",
+    "note": "Tiêu đề chính",
+    "contrast": 16.303893667291746
+   },
+   {
+    "group": "Text",
+    "token": "text/title",
+    "source": "neutral/100",
+    "hex": "#DBDBDB",
+    "note": "Tiêu đề cấp hai",
+    "contrast": 13.41970840673739
+   },
+   {
+    "group": "Text",
+    "token": "text/body",
+    "source": "neutral/200",
+    "hex": "#BDBDBD",
+    "note": "Nội dung chính",
+    "contrast": 9.889588458266198
+   },
+   {
+    "group": "Text",
+    "token": "text/muted",
+    "source": "neutral/300",
+    "hex": "#9E9E9E",
+    "note": "Nội dung thứ cấp · đạt AA trên application canvas",
+    "contrast": 6.935054417771048
+   },
+   {
+    "group": "Text",
+    "token": "text/disabled",
+    "source": "neutral/700",
+    "hex": "#333333",
+    "note": "Trạng thái vô hiệu",
+    "contrast": 1.4705661285102438
+   },
+   {
+    "group": "Text",
+    "token": "text/alert",
+    "source": "text/on-semantic-alert-dark",
+    "alias": "text/on-semantic-alert-dark",
+    "hex": "#CD9C94",
+    "note": "Nội dung cảnh báo",
+    "contrast": 7.767220680458324
+   },
+   {
+    "group": "Text",
+    "token": "text/info",
+    "source": "text/on-semantic-info-dark",
+    "alias": "text/on-semantic-info-dark",
+    "hex": "#92A5CB",
+    "note": "Nội dung thông tin",
+    "contrast": 7.490973270434673
+   },
+   {
+    "group": "Text",
+    "token": "text/warning",
+    "source": "text/on-semantic-warning-dark",
+    "alias": "text/on-semantic-warning-dark",
+    "hex": "#D6BAA4",
+    "note": "Nội dung cảnh báo cần chú ý",
+    "contrast": 10.103021840158641
+   },
+   {
+    "group": "Text",
+    "token": "text/success",
+    "source": "text/on-semantic-success-dark",
+    "alias": "text/on-semantic-success-dark",
+    "hex": "#C9E6C6",
+    "note": "Nội dung thành công",
+    "contrast": 13.81799042168484
+   },
+   {
+    "group": "Text",
+    "token": "text/brand-primary",
+    "source": "primitive/Primary",
+    "alias": "primitive/Primary",
+    "hex": "#B30000",
+    "note": "Alias màu brand chính"
+   },
+   {
+    "group": "Category",
+    "token": "category/aura-light",
+    "source": "aura/100",
+    "hex": "#E1DFF3",
+    "note": "Aura · nền shade 100 · chữ shade 600",
+    "contrast": 10.147549327214152
+   },
+   {
+    "group": "Category",
+    "token": "category/aura-dark",
+    "source": "aura/900",
+    "hex": "#1A0A3B",
+    "note": "Aura · nền shade 900 · chữ shade 300",
+    "contrast": 7.0729696673543065
+   },
+   {
+    "group": "Category",
+    "token": "category/brook-light",
+    "source": "brook/100",
+    "hex": "#E4F3EC",
+    "note": "Brook · nền shade 100 · chữ shade 600",
+    "contrast": 7.071912559625003
+   },
+   {
+    "group": "Category",
+    "token": "category/brook-dark",
+    "source": "brook/900",
+    "hex": "#0F3E30",
+    "note": "Brook · nền shade 900 · chữ shade 300",
+    "contrast": 7.200032075736544
+   },
+   {
+    "group": "Category",
+    "token": "category/cloud-light",
+    "source": "cloud/100",
+    "hex": "#F7E0ED",
+    "note": "Cloud · nền shade 100 · chữ shade 600",
+    "contrast": 7.006758086318459
+   },
+   {
+    "group": "Category",
+    "token": "category/cloud-dark",
+    "source": "cloud/900",
+    "hex": "#410B30",
+    "note": "Cloud · nền shade 900 · chữ shade 300",
+    "contrast": 7.165581631302353
+   },
+   {
+    "group": "Category",
+    "token": "category/dawn-light",
+    "source": "dawn/100",
+    "hex": "#E8F2E1",
+    "note": "Dawn · nền shade 100 · chữ shade 600",
+    "contrast": 7.042245857677517
+   },
+   {
+    "group": "Category",
+    "token": "category/dawn-dark",
+    "source": "dawn/900",
+    "hex": "#243C0D",
+    "note": "Dawn · nền shade 900 · chữ shade 300",
+    "contrast": 7.190731451754223
+   },
+   {
+    "group": "Category",
+    "token": "category/elm-light",
+    "source": "elm/100",
+    "hex": "#EDE0F4",
+    "note": "Elm · nền shade 100 · chữ shade 600",
+    "contrast": 8.075910822166552
+   },
+   {
+    "group": "Category",
+    "token": "category/elm-dark",
+    "source": "elm/900",
+    "hex": "#2F0B3E",
+    "note": "Elm · nền shade 900 · chữ shade 300",
+    "contrast": 7.036012223653171
+   },
+   {
+    "group": "Category",
+    "token": "category/frost-light",
+    "source": "frost/100",
+    "hex": "#FAE1E5",
+    "note": "Frost · nền shade 100 · chữ shade 600",
+    "contrast": 7.027662296868467
+   },
+   {
+    "group": "Category",
+    "token": "category/frost-dark",
+    "source": "frost/900",
+    "hex": "#470C1F",
+    "note": "Frost · nền shade 900 · chữ shade 300",
+    "contrast": 7.439282664987306
+   },
+   {
+    "group": "Category",
+    "token": "category/grove-light",
+    "source": "grove/100",
+    "hex": "#DBDFF4",
+    "note": "Grove · nền shade 100 · chữ shade 600",
+    "contrast": 10.759324946804083
+   },
+   {
+    "group": "Category",
+    "token": "category/grove-dark",
+    "source": "grove/900",
+    "hex": "#0E0A3C",
+    "note": "Grove · nền shade 900 · chữ shade 300",
+    "contrast": 7.1248099142750965
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-under",
+    "source": "neutral/950",
+    "hex": "#131313",
+    "note": "Lớp nền thấp nhất · tối nhất trong hệ nền"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-alpha",
+    "source": "neutral/900",
+    "hex": "#1C1C1C",
+    "note": "Foreground trong suốt",
+    "opacity": 5
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-base",
+    "source": "neutral/900",
+    "hex": "#1C1C1C",
+    "note": "Foreground mặc định"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-alt",
+    "source": "neutral/800",
+    "hex": "#262626",
+    "note": "Foreground thay thế"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/fg-weak",
+    "source": "neutral/700",
+    "hex": "#333333",
+    "note": "Foreground yếu · sáng nhất trong hệ nền"
+   },
+   {
+    "group": "System BG",
+    "token": "system-bg/modal",
+    "source": "neutral/800",
+    "hex": "#262626",
+    "note": "Nền modal"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/brand-primary",
+    "source": "primary/500",
+    "hex": "#B30000",
+    "note": "Nền brand chính"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-alert",
+    "source": "semantic/alert-dark",
+    "alias": "semantic/alert-dark",
+    "hex": "#CD9C94",
+    "note": "Nền cảnh báo nhẹ"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-info",
+    "source": "semantic/info-dark",
+    "alias": "semantic/info-dark",
+    "hex": "#92A5CB",
+    "note": "Nền thông tin nhẹ"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-warning",
+    "source": "semantic/warning-dark",
+    "alias": "semantic/warning-dark",
+    "hex": "#D6BAA4",
+    "note": "Nền chú ý nhẹ"
+   },
+   {
+    "group": "Subtle BG",
+    "token": "subtle-bg/alpha-success",
+    "source": "semantic/success-dark",
+    "alias": "semantic/success-dark",
+    "hex": "#C9E6C6",
+    "note": "Nền thành công nhẹ"
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-subtle",
+    "source": "neutral/50",
+    "hex": "#F0F0F0",
+    "note": "Phân tách nền gần nhau",
+    "opacity": 6
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-neutral",
+    "source": "neutral/50",
+    "hex": "#F0F0F0",
+    "note": "Viền component mặc định",
+    "opacity": 10
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-divider",
+    "source": "neutral/50",
+    "hex": "#F0F0F0",
+    "note": "Divider và đường chia bảng",
+    "opacity": 12
+   },
+   {
+    "group": "Border",
+    "token": "border/alpha-strong",
+    "source": "neutral/50",
+    "hex": "#F0F0F0",
+    "note": "Viền nhấn mạnh có chủ đích",
+    "opacity": 18
+   },
+   {
+    "group": "Border",
+    "token": "border/alert",
+    "source": "semantic/alert-dark",
+    "alias": "semantic/alert-dark",
+    "hex": "#CD9C94",
+    "note": "Viền cảnh báo"
+   },
+   {
+    "group": "Border",
+    "token": "border/info",
+    "source": "semantic/info-dark",
+    "alias": "semantic/info-dark",
+    "hex": "#92A5CB",
+    "note": "Viền thông tin"
+   },
+   {
+    "group": "Border",
+    "token": "border/warning",
+    "source": "semantic/warning-dark",
+    "alias": "semantic/warning-dark",
+    "hex": "#D6BAA4",
+    "note": "Viền cần chú ý"
+   },
+   {
+    "group": "Border",
+    "token": "border/success",
+    "source": "semantic/success-dark",
+    "alias": "semantic/success-dark",
+    "hex": "#C9E6C6",
+    "note": "Viền thành công"
+   }
+  ]
+ }
+}

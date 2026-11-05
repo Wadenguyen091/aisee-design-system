@@ -1,0 +1,53 @@
+/* Application · Folder (ApplicationFolder.tsx) — moved from BoardChrome.css in v69 so the Board and the
+   Design System render the same object. */
+/* Neutral folder ------------------------------------------------------------
+   One monochrome folder for every item (no per-folder hue). Shell 208×162 inside the 240 wrapper
+   (drop zones in spatialLayout depend on it). Back panel with a right tab, a paper sheet that rises
+   on hover / drop, a front face with a 32 monogram chip, title 14/20 and count 12/16, padding 16. */
+.vault-folder {
+  position:relative;
+  width:240px;
+  cursor:grab;
+  user-select:none;
+  --folder-back: color-mix(in srgb, var(--ds-color-text) 12%, var(--ds-color-surface));
+  --folder-paper: var(--vault-chip);
+  --folder-face-top: var(--vault-chip);
+  --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 4%, var(--ds-color-surface));
+  --folder-edge: color-mix(in srgb, var(--ds-color-text) 10%, transparent);
+  --folder-mark: var(--ds-color-inverse-surface);
+  --folder-mark-ink: var(--ds-color-on-inverse-surface);
+}
+:root[data-theme='dark'] .vault-folder,
+[data-theme-scope='dark'] .vault-folder {
+  --folder-back: color-mix(in srgb, var(--ds-color-text) 6%, var(--ds-color-surface));
+  --folder-paper: color-mix(in srgb, var(--ds-color-text) 80%, var(--ds-color-surface));
+  --folder-face-top: color-mix(in srgb, var(--ds-color-text) 14%, var(--ds-color-surface));
+  --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 9%, var(--ds-color-surface));
+  --folder-mark: var(--ds-color-surface);
+  --folder-mark-ink: var(--ds-color-text);
+}
+.vault-folder:active { cursor:grabbing; }
+.vault-folder__shell { position:relative; margin:0 auto; transform-origin:center; width:208px; height:162px; transition:transform var(--ds-duration-normal) var(--ds-ease-standard); }
+#root .vault-folder__back { position:absolute; inset:16px 0 0; border:0!important; border-radius:12px!important; background:var(--folder-back); }
+#root .vault-folder__tab { position:absolute; top:4px; right:0; width:88px; height:24px; border:0!important; border-radius:12px 12px 0 0!important; background:var(--folder-back); }
+#root .vault-folder__paper { position:absolute; top:28px; right:12px; left:12px; height:48px; border:0!important; border-radius:8px!important; background:var(--folder-paper); transition:transform var(--ds-duration-normal) var(--ds-ease-standard); }
+#root .vault-folder__face { position:absolute; right:0; bottom:0; left:0; display:flex; height:116px; align-items:flex-end; gap:var(--ds-space-3); border:0!important; border-top:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:12px!important; padding:var(--ds-space-4); background:linear-gradient(180deg, var(--folder-face-top), var(--folder-face-bottom)); color:var(--ds-color-text); transition:background-color var(--ds-duration-normal) var(--ds-ease-standard); }
+#root .vault-folder__mark { display:grid; width:32px; height:32px; flex:none; place-items:center; border-radius:8px!important; color:var(--folder-mark-ink); background:var(--folder-mark); font-size:var(--ds-font-size-body); line-height:20px; font-weight:var(--ds-font-weight-semibold); }
+.vault-folder__copy { display:grid; min-width:0; }
+.vault-folder__copy > h3 { overflow:hidden; margin:0; font-size:var(--ds-font-size-body); line-height:20px; font-weight:var(--ds-font-weight-semibold); letter-spacing:-.01em; text-overflow:ellipsis; white-space:nowrap; }
+.vault-folder__copy > small { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:16px; }
+.vault-folder:is([data-interaction-state='hover'], [data-interaction-state='dragOver']) .vault-folder__paper { transform:translateY(-8px); }
+.vault-folder[data-interaction-state='selected'] { --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 9%, var(--ds-color-surface)); }
+:is(:root[data-theme='dark'], [data-theme-scope='dark']) .vault-folder[data-interaction-state='selected'] { --folder-face-top: color-mix(in srgb, var(--ds-color-text) 18%, var(--ds-color-surface)); }
+.vault-folder[data-interaction-state='dragOver'] { --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 12%, var(--ds-color-surface)); }
+:is(:root[data-theme='dark'], [data-theme-scope='dark']) .vault-folder[data-interaction-state='dragOver'] { --folder-face-top: color-mix(in srgb, var(--ds-color-text) 20%, var(--ds-color-surface)); }
+@media (prefers-reduced-motion: reduce) { .vault-folder__shell, .vault-folder__paper { transition:none; } .vault-folder__recap { animation:none; } }
+
+/* Folder recap (hover preview): floating panel on the surface grammar — one 6% edge, padding 8. */
+.vault-folder__recap { position:absolute; bottom:calc(100% + 12px); left:50%; z-index:40; width:200px; pointer-events:none; transform:translateX(-50%); animation:vault-folder-recap-in var(--ds-duration-fast) var(--ds-ease-standard) both; }
+@keyframes vault-folder-recap-in { from { opacity:0; transform:translate(-50%, 4px); } }
+.vault-folder__recap[data-placement='below'] { top:calc(100% + 12px); bottom:auto; }
+#root .vault-folder__recap-panel { position:relative; border:0!important; padding:var(--ds-space-2); color:var(--ds-color-text); background:var(--ds-color-surface); outline:var(--ds-border-width-control) solid var(--vault-edge); outline-offset:calc(var(--ds-border-width-control) * -1); }
+.vault-folder__recap-thumbs { display:flex; gap:var(--ds-space-1); }
+#root .vault-folder__recap-thumb { display:flex; height:40px; min-width:0; flex:1; align-items:center; justify-content:center; overflow:hidden; border-radius:var(--ds-radius-sm)!important; color:var(--ds-color-text-muted); background:var(--ds-color-surface-muted); }
+.vault-folder__recap-panel > p { overflow:hidden; margin:var(--ds-space-2) 0 0; color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:16px; text-overflow:ellipsis; white-space:nowrap; }
