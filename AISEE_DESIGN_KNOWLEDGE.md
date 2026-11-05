@@ -30,6 +30,8 @@ Design System chỉ có ba phần điều hướng:
 
 Không duy trì Archive trong giao diện Design System. Component không còn thuộc contract phải được loại khỏi catalog thay vì tiếp tục trình bày như một thư viện dùng được.
 
+Trang Design Principles phải đọc như một system specification, không phải landing page marketing: có manifesto ngắn, chuỗi contract `Principles → Tokens → Components → Screens`, rule áp dụng/tránh, inheritance matrix và governance.
+
 ## 2. Nguyên tắc nền
 
 1. **Rõ hơn trang trí.** Mọi màu, đường viền, khoảng cách và chuyển động phải giải thích được chức năng.
