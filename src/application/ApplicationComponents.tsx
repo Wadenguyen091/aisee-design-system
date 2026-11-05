@@ -70,7 +70,7 @@ export function ApplicationTopbar({ title, leading, center, actions, profile, br
   return <header className={`application-topbar ${className}`.trim()} data-layout={center ? 'three' : 'two'}>
     <a className="application-topbar__brand" href={brandHref} aria-label="Về Draft"><img src={publicAsset('/aisee-mark.svg')} alt="" /></a>
     <div className="application-topbar__lead">{leading ?? (typeof title === 'string'
-      ? <VaultBreadcrumb label="Vị trí hiện tại" items={[{ label: title }]} />
+      ? <VaultBreadcrumb label="Vị trí hiện tại" items={[{ label: 'AISEE', href: brandHref }, { label: title }]} />
       : title && <strong>{title}</strong>)}</div>
     {center && <div className="application-topbar__center">{center}</div>}
     <div className="application-topbar__end">{actions}{profile}</div>
