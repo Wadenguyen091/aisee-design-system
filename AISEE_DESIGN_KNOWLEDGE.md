@@ -26,7 +26,7 @@ Design System chỉ có ba phần điều hướng:
 
 1. **Design Principles** — nguyên tắc và governance của engine.
 2. **Tokens** — màu, type, spacing, geometry và motion. Tool pha màu là công cụ tạo token được mở từ phần này.
-3. **Components** — một trang component duy nhất, chuyển qua lại giữa **Base**, **Application** và **Màn hình**. Màn hình là gallery các screen thật đã ráp từ token và component của AISEE.
+3. **Components** — một trang component duy nhất, chuyển qua lại giữa **Base**, **Application** và **Màn hình**. Màn hình là artboard tĩnh đã ráp từ token và component của AISEE, không có tương tác; chuẩn review là desktop 1440×810 và mobile 430×932.
 
 Không duy trì Archive trong giao diện Design System. Component không còn thuộc contract phải được loại khỏi catalog thay vì tiếp tục trình bày như một thư viện dùng được.
 
