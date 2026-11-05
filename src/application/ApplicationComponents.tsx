@@ -55,18 +55,20 @@ export function ApplicationToolbar() {
  * App top bar — the one header every module page uses. Full-bleed, 56 tall, hairline below.
  * Left: full-bleed AISEE mark, then title (or breadcrumb / any node). Centre: optional tabs. Right: actions, then the profile control.
  */
-export function ApplicationTopbar({ title, leading, center, actions, profile, className = '' }: {
+export function ApplicationTopbar({ title, leading, center, actions, profile, brandHref = '/board', className = '' }: {
   title?: ReactNode;
   /** Replaces the title, e.g. a breadcrumb. */
   leading?: ReactNode;
   center?: ReactNode;
   actions?: ReactNode;
   profile?: ReactNode;
+  /** Logo destination. Defaults to the AISEE Draft home. */
+  brandHref?: string;
   className?: string;
 }) {
   // Without a centre the actions take the width they need instead of half the bar (Map topbar was squeezed).
   return <header className={`application-topbar ${className}`.trim()} data-layout={center ? 'three' : 'two'}>
-    <span className="application-topbar__brand" aria-hidden="true"><img src={publicAsset('/aisee-mark.svg')} alt="" /></span>
+    <a className="application-topbar__brand" href={brandHref} aria-label="Về Draft"><img src={publicAsset('/aisee-mark.svg')} alt="" /></a>
     <div className="application-topbar__lead">{leading ?? (typeof title === 'string'
       ? <VaultBreadcrumb label="Vị trí hiện tại" items={[{ label: title }]} />
       : title && <strong>{title}</strong>)}</div>
