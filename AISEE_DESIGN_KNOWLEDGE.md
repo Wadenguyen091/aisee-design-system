@@ -156,6 +156,29 @@ Yêu cầu
 
 Một thay đổi UI chưa hoàn tất nếu còn hardcode màu không có lý do, tạo component trùng trách nhiệm, thiếu trạng thái lỗi hoặc chưa kiểm tra keyboard/focus.
 
+### Starter contract cho app mới
+
+App mới không dựng lại foundation. Nó phải bắt đầu bằng package AISEE, sau đó khai báo profile:
+
+```bash
+npm install @aisee/design-system
+```
+
+```tsx
+import { VaultButton } from '@aisee/design-system';
+import '@aisee/design-system/styles.css';
+```
+
+```ts
+export const designProfile = {
+  extends: 'aisee',
+  profile: 'modern',
+  overrides: ['brand', 'typography', 'radius', 'density', 'motion'],
+};
+```
+
+Mục tiêu là để AI hoặc developer dành thời gian cho business feature. Token, theme, component states, accessibility và interaction đã có sẵn từ engine nền.
+
 ## 8. Quy tắc dành cho AI agent
 
 Khi nhận một repository để áp Design System, agent phải:
