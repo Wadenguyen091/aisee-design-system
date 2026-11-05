@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type Rea
 
 /**
  * Folder — the Board's one container object. Neutral (no per-folder hue): back panel with a right tab,
- * a paper sheet that rises on hover / drop, and a front face with a 32 monogram chip, title and count.
+ * a paper sheet that rises on hover / drop, and a front face with title and count.
  * Shell 208×162 inside a 240 wrapper (Board drop zones depend on it). Hovering for 150ms opens a recap
  * of the first items above the folder. Composed only from tokens; the Board passes its own thumbnails.
  */
@@ -20,7 +20,7 @@ export type ApplicationFolderProps = {
   count: number;
   /** Replaces the default “n mục” line when the folder is used as a feature illustration. */
   meta?: string;
-  /** Replaces the title monogram while preserving the approved folder mark. */
+  /** Optional product mark. Ordinary folders intentionally render without a monogram. */
   mark?: ReactNode;
   selected?: boolean;
   /** An item is being dragged over the folder: paper rises, the chip turns into +. */
@@ -52,7 +52,6 @@ export function ApplicationFolder({ title, count, meta, mark, selected = false, 
   const state: ApplicationFolderState = previewState ?? (dropTarget ? 'dragOver' : selected ? 'selected' : hovered ? 'hover' : 'default');
   const isDrop = state === 'dragOver';
   const showRecap = (previewRecap || recapOpen) && !isDrop && !!recap && recap.thumbs.length > 0;
-  const monogram = (title.trim()[0] || 'V').toUpperCase();
 
   // The recap opens above the folder; if the page chrome (topbar, canvas docks) would cover it there, it opens below.
   useLayoutEffect(() => {
@@ -88,7 +87,7 @@ export function ApplicationFolder({ title, count, meta, mark, selected = false, 
       <div data-folder-tab className="vault-folder__tab" />
       <div data-folder-paper className="vault-folder__paper" />
       <div data-folder-face data-selection-shadow={state === 'selected' ? 'true' : undefined} className="vault-folder__face">
-        <span className="vault-folder__mark" aria-hidden="true">{isDrop ? '+' : mark ?? monogram}</span>
+        {(isDrop || mark) && <span className="vault-folder__mark" aria-hidden="true">{isDrop ? '+' : mark}</span>}
         <span className="vault-folder__copy">
           <h3>{title}</h3>
           <small>{isDrop ? 'Thả vào đây' : meta ?? `${count.toLocaleString('vi-VN')} mục`}</small>

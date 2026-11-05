@@ -3,7 +3,7 @@
 /* Neutral folder ------------------------------------------------------------
    One monochrome folder for every item (no per-folder hue). Shell 208×162 inside the 240 wrapper
    (drop zones in spatialLayout depend on it). Back panel with a right tab, a paper sheet that rises
-   on hover / drop, a front face with a 32 monogram chip, title 14/20 and count 12/16, padding 16. */
+   on hover / drop, a front face with title 14/20 and count 12/16, padding 16. */
 .vault-folder {
   position:relative;
   width:240px;
