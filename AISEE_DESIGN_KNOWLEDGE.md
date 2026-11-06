@@ -202,11 +202,33 @@ Khi nhận một repository để áp Design System, agent phải:
 5. báo rõ phần kế thừa, phần override và component mới;
 6. không báo hoàn tất khi typecheck, boundary check hoặc build thất bại.
 
-## 9. Source of truth
+## 9. Vòng lặp component hai chiều
+
+AISEE không chỉ tiêu thụ Design System. Component phát sinh trong quá trình build AISEE phải quay lại hàng đợi governance của Design System:
+
+```text
+Design Principles + Tokens + Components
+  → build AISEE
+  → phát sinh component cục bộ
+  → component-intake manifest
+  → review: composition / candidate / replace
+  → duyệt và nâng package Design System
+  → AISEE cập nhật package đã pin
+```
+
+- Mọi file component trong AISEE Core phải có `origin` trong `src/component-intake.manifest.json`.
+- Component chỉ compose component đã có dùng quan hệ `composition`.
+- Component có khả năng tái sử dụng dùng quan hệ `candidate` và phải được review để đưa vào Base hoặc Application.
+- Component trùng trách nhiệm với thư viện dùng quan hệ `replace`; AISEE phải thay dần bằng component chuẩn.
+- Component domain đặc thù vẫn được map về `feature/*`; mapping không đồng nghĩa phải đưa toàn bộ code vào thư viện.
+- CI của AISEE phải thất bại nếu có file component mới chưa được khai báo trong manifest.
+
+## 10. Source of truth
 
 - `src/tokens.css`: contract token nền.
 - `src/theme.css`: giá trị theme được sinh từ Pallet.
 - `src/tokens.manifest.json`: manifest để UI và agent đọc bằng máy.
+- `src/component-intake.manifest.json`: mapping ngược từ component AISEE Core vào governance Design System.
 - `src/base`: component nền.
 - `src/application`: pattern cấp ứng dụng.
 - File này: kiến thức và luật sử dụng cho con người/AI.
