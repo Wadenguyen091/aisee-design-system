@@ -8,3 +8,4 @@ export * from './ApplicationAICode';
 export * from './aiChatEngine';
 export * from './ApplicationColor';
 export * from './ApplicationUpload';
+export * from './ApplicationVex';

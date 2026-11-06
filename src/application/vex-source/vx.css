@@ -1,0 +1,561 @@
+/* VEX component library v100: tokens scoped to .vl so they never touch the page, then the components. */
+.vl {
+  --radius-base: 0px;
+  --page: oklch(9% 0.012 264);
+  --header: oklch(7% 0.01 264 / 0.82);
+  --panel: oklch(8.5% 0.008 264);
+  --rail: oklch(6% 0.006 264);
+  --dial: oklch(5.5% 0.006 264);
+  --card: oklch(10.5% 0.006 264);
+  --cell: oklch(11% 0.006 264);
+  --cell-raised: oklch(13% 0.004 264);
+  --lift: oklch(20% 0.004 264);
+  --ink: oklch(97% 0.005 264);
+  --ink-2: oklch(80% 0.012 264);
+  --muted: oklch(62% 0.02 264);
+  --faint: oklch(100% 0 0 / 0.55);
+  --rule: oklch(100% 0 0 / 0.07);
+  --rule-chosen: oklch(100% 0 0 / 0.24);
+  --rule-guide: oklch(100% 0 0 / 0.1);
+  --bubble: oklch(100% 0 0 / 0.06);
+  --bubble-you: oklch(100% 0 0 / 0.13);
+  --scan-fill: oklch(100% 0 0 / 0.055);
+  --hatch: oklch(80% 0.012 264 / 0.7);
+  --blue: oklch(45.2% 0.313 264.1);
+  --blue-hover: oklch(52% 0.3 264);
+  --blue-edge: oklch(70% 0.2 264);
+  --blue-light: oklch(80% 0.12 264);
+  --on-blue: oklch(100% 0 0);
+  --live: oklch(52% 0.13 150);
+  --live-text: oklch(78% 0.13 150);
+  --live-tint: oklch(52% 0.13 150 / 0.16);
+  --err: oklch(54% 0.2 27);
+  --err-text: oklch(74% 0.17 27);
+  --err-tint: oklch(54% 0.2 27 / 0.16);
+  --dev: oklch(52% 0.11 75);
+  --dev-text: oklch(78% 0.11 75);
+  --dev-tint: oklch(52% 0.11 75 / 0.16);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+  --space-7: 40px;
+  --cell-composer: 72px;
+  --cell-header: 76px;
+  --radius-none: 0;
+  --radius-tail: 4px;
+  --radius-bubble: 18px;
+  --radius-round: 50%;
+  --stroke-hair: 1px;
+  --ease-std: cubic-bezier(0.625, 0.05, 0, 1);
+  --ease-push: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-scan: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --dur-std: 300ms;
+  --dur-fold: 420ms;
+  --dur-scan: 480ms;
+  --dur-push: 720ms;
+  --dur-wave: 1100ms;
+  --z-reel: 2500;
+  --z-overlay: 9600;
+  --z-cursor: 10000;
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+/* VEX components. Every value comes from tokens.css; this file only composes them.
+   Square cells, 1px rules, filled glyphs, no glow, no shadow, no blur (except the header). */
+
+.vl, .vl * { box-sizing: border-box; }
+.vl { font-family: var(--font-sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+.vl button, .vl input { font: inherit; color: inherit; margin: 0; }
+.vl :focus-visible { outline: var(--stroke-hair) solid var(--ink); outline-offset: -5px; }
+.vl svg { display: block; }
+.vl-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.vl-up { text-transform: uppercase; }
+
+/* Labels shared by every data panel */
+.vl-field { font: 400 12px/1.3 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.vl-micro { font: 400 10.5px/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.vl-hatch { background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 5px); }
+
+/* ---------- Key ---------- */
+.vl-key { display: inline-flex; align-items: center; justify-content: center; gap: 14px; height: var(--cell-composer); padding: 0 30px; border: 0; border-radius: var(--radius-base); background: var(--cell); color: var(--ink-2); font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; cursor: pointer; transition: background-color var(--dur-std) var(--ease-std), color var(--dur-std) var(--ease-std); }
+.vl-key svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+.vl-key:hover { background: var(--cell-raised); color: var(--ink); }
+.vl-key:active { background: var(--lift); }
+.vl-key--blue { background: var(--blue); color: var(--on-blue); }
+.vl-key--blue:hover { background: var(--blue-hover); color: var(--on-blue); }
+.vl-key--blue:active { background: var(--blue); }
+.vl-key--blue:focus-visible { outline-color: var(--on-blue); }
+.vl-key--line { background: transparent; box-shadow: inset 0 0 0 1px var(--rule); }
+.vl-key--line:hover { background: var(--cell); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-key--cell { height: var(--cell-header); padding: 0 28px; }
+.vl-key--compact { height: 40px; padding: 0 16px; gap: 10px; font-size: 12px; }
+.vl-key--compact svg { width: 16px; height: 16px; }
+.vl-key--square { width: var(--cell-header); padding: 0; }
+.vl-key[disabled] { color: var(--muted); background: var(--cell); cursor: not-allowed; }
+.vl-key--blue[disabled] { background: var(--cell-raised); color: var(--muted); }
+
+/* ---------- Tag ---------- */
+.vl-tag { display: inline-flex; align-items: center; gap: var(--space-1); height: 24px; padding: 0 8px; font: 600 12px/1 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; color: var(--ink-2); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-tag i { width: 6px; height: 6px; background: currentColor; flex: none; }
+.vl-tag--blue { background: var(--blue); color: var(--on-blue); box-shadow: none; }
+.vl-tag--ink { background: var(--ink); color: var(--page); box-shadow: none; }
+.vl-tag--live { background: var(--live-tint); color: var(--live-text); box-shadow: none; }
+.vl-tag--err { background: var(--err-tint); color: var(--err-text); box-shadow: none; }
+.vl-tag--dev { background: var(--dev-tint); color: var(--dev-text); box-shadow: none; }
+
+/* ---------- Tabs ---------- */
+.vl-tabs { display: flex; border: 1px solid var(--rule); background: var(--panel); }
+.vl-tab { position: relative; flex: 1 1 0; height: 48px; padding: 0 20px; border: 0; border-right: 1px solid var(--rule); background: transparent; color: var(--muted); font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color var(--dur-std) var(--ease-std); }
+.vl-tab:last-child { border-right: 0; }
+.vl-tab:hover { color: var(--ink); }
+.vl-tab[aria-selected="true"] { color: var(--ink); background: linear-gradient(180deg, var(--lift), transparent); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-tab b { margin-left: 8px; font: 400 11px/1 var(--font-mono); color: var(--muted); letter-spacing: 0.04em; }
+
+/* ---------- Chips ---------- */
+.vl-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.vl-chip { display: inline-flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; border: 0; background: var(--cell); color: var(--ink-2); box-shadow: inset 0 0 0 1px var(--rule); font: 400 14px/1 var(--font-sans); cursor: pointer; transition: box-shadow var(--dur-std) var(--ease-std), color var(--dur-std) var(--ease-std); }
+.vl-chip svg { width: 16px; height: 16px; fill: var(--muted); transition: fill var(--dur-std) var(--ease-std); }
+.vl-chip:hover { color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-chip:hover svg { fill: var(--ink); }
+
+/* ---------- Bubble ---------- */
+.vl-thread { display: flex; flex-direction: column; gap: var(--space-4); list-style: none; margin: 0; padding: 0; }
+.vl-msg { display: flex; align-items: flex-start; gap: 12px; max-width: 86%; }
+.vl-msg--you { align-self: flex-end; }
+.vl-msg p { margin: 0; padding: 12px 16px; font: 400 16px/23.2px var(--font-sans); letter-spacing: -0.005em; color: var(--ink); }
+.vl-msg--vex p { background: var(--bubble); border-radius: var(--radius-tail) var(--radius-bubble) var(--radius-bubble) var(--radius-bubble); }
+.vl-msg--you p { background: var(--bubble-you); border-radius: var(--radius-bubble) var(--radius-tail) var(--radius-bubble) var(--radius-bubble); }
+.vl-msg--sys { align-self: center; max-width: none; }
+.vl-msg--sys p { padding: 0; font: 400 10.5px/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-av { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--radius-round); background: var(--lift); color: var(--ink-2); box-shadow: inset 0 0 0 1px var(--rule-chosen); font: 600 12px/1 var(--font-mono); flex: none; }
+.vl-wave { background: linear-gradient(90deg, var(--ink) 0 40%, var(--blue-light) 50%, var(--ink) 60% 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent !important; animation: vl-wave var(--dur-wave) var(--ease-std) 1 both; }
+@keyframes vl-wave { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+/* ---------- Composer ---------- */
+.vl-composer { display: flex; align-items: stretch; height: var(--cell-composer); border-top: 1px solid var(--rule); background: var(--panel); }
+.vl-composer .vl-key { flex: none; }
+.vl-composer .vl-key:first-child { border-right: 1px solid var(--rule); }
+.vl-composer input { flex: 1 1 0; min-width: 0; height: 100%; padding: 0 24px; border: 0; background: transparent; color: var(--ink); font: 400 16px/1 var(--font-sans); outline: none; }
+.vl-composer input::placeholder { color: var(--muted); }
+.vl-composer input:focus-visible { box-shadow: inset 0 -1px 0 var(--rule-chosen); }
+.vl-composer.is-busy input::placeholder { color: var(--ink-2); }
+
+/* ---------- Reasoning ---------- */
+.vl-rz { border: 1px solid var(--rule); background: var(--card); }
+.vl-rz-head { display: flex; align-items: center; gap: 12px; width: 100%; height: 44px; padding: 0 16px; border: 0; background: transparent; color: var(--ink-2); font: 400 14px/1 var(--font-sans); text-align: left; cursor: pointer; }
+.vl-rz-head svg { width: 16px; height: 16px; fill: var(--muted); transition: transform var(--dur-fold) var(--ease-std); }
+.vl-rz.is-open .vl-rz-head svg { transform: rotate(90deg); }
+.vl-rz-head .vl-rz-sec { color: var(--ink); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.vl-rz-head .vl-rz-spin { margin-left: auto; font: 400 12px/1 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.vl-rz-body { overflow: hidden; }
+.vl-rz-list { position: relative; margin: 0; padding: 4px 16px 16px 16px; list-style: none; }
+.vl-rz-list::before { content: ""; position: absolute; left: 22px; top: 8px; bottom: 22px; width: 1px; background: linear-gradient(180deg, transparent, var(--rule-guide) 12%, var(--rule-guide) 88%, transparent); }
+.vl-rz-s { position: relative; display: grid; grid-template-columns: 13px 74px minmax(0, 1fr); gap: 0 12px; align-items: baseline; padding: 6px 0; font: 400 14px/1.45 var(--font-sans); color: var(--ink-2); }
+.vl-rz-s::before { content: ""; width: 5px; height: 5px; margin-left: 4px; background: var(--muted); transform: translateY(-2px); }
+.vl-rz-s.is-now::before { background: var(--ink); }
+.vl-rz-k { font: 400 11.5px/1.5 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.vl-rz-s.vl-k-t .vl-rz-x { font: 400 11.5px/1.75 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.vl-rz-s.vl-k-r .vl-rz-x { color: var(--ink); }
+.vl-rz-s.is-wait { visibility: hidden; }
+
+/* ---------- Order card ---------- */
+.vl-card { position: relative; border: 1px solid var(--rule); background: var(--card); color: var(--ink); overflow: hidden; }
+.vl-card-top { display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 0 16px; font: 500 11px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-card-title { margin: 0; padding: 0 16px 16px; font: 500 18px/1.3 var(--font-sans); letter-spacing: -0.01em; }
+.vl-card dl { margin: 0; border-top: 1px solid var(--rule); }
+.vl-row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); height: 34px; padding: 0 16px; border-bottom: 1px solid var(--rule); font: 400 12px/1 var(--font-mono); }
+.vl-row dt { color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.vl-row dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.vl-row dd s { color: var(--faint); text-decoration: none; }
+.vl-checks { margin: 0; padding: 8px 16px 14px; list-style: none; display: grid; gap: 2px; }
+.vl-check { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 10px; height: 28px; font: 400 12px/1 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); }
+.vl-check svg { width: 14px; height: 14px; fill: var(--live-text); }
+.vl-check b { font-weight: 600; color: var(--live-text); }
+.vl-check.is-fail svg { fill: var(--err-text); }
+.vl-check.is-fail b { color: var(--err-text); }
+.vl-card-note { margin: 0; padding: 12px 16px 16px; border-top: 1px solid var(--rule); font: 400 14px/1.5 var(--font-sans); color: var(--err-text); }
+/* the scan: each row waits under a cover painted the card's own ground, then a 1px head wipes it away */
+.vl-scan { position: relative; overflow: hidden; }
+.vl-scan::before { content: ""; position: absolute; inset: 0; background: var(--scan-fill); opacity: 0; pointer-events: none; }
+.vl-scan::after { content: ""; position: absolute; inset: 0; background: var(--sc-bg, var(--card)); box-shadow: inset 1px 0 0 var(--rule-chosen); pointer-events: none; }
+.vl-scan.sc-go::before { animation: vl-scan-lit calc(var(--dur-scan) * 2) var(--ease-scan) forwards; }
+.vl-scan.sc-go::after { animation: vl-scan var(--dur-scan) var(--ease-scan) forwards; }
+.vl-scan.sc-done::after { display: none; }
+@keyframes vl-scan { from { transform: translateX(0); } to { transform: translateX(101%); } }
+@keyframes vl-scan-lit { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ---------- History row ---------- */
+.vl-hist { display: flex; flex-direction: column; background: var(--rail); width: 100%; }
+.vl-hrow { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 14px; height: 56px; padding: 0 20px; border: 0; border-bottom: 1px solid var(--rule); background: transparent; color: var(--ink-2); text-align: left; cursor: pointer; transition: color var(--dur-std) var(--ease-std); }
+.vl-hrow svg { width: 18px; height: 18px; fill: var(--muted); }
+.vl-hrow span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 14px/1.2 var(--font-sans); }
+.vl-hrow time { font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-hrow:hover { color: var(--ink); }
+.vl-hrow[aria-current="true"] { color: var(--ink); background: linear-gradient(90deg, var(--lift), transparent); }
+.vl-hrow[aria-current="true"] svg { fill: var(--ink); }
+.vl-hgroup { padding: 18px 20px 8px; font: 400 10.5px/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Risk arc ---------- */
+.vl-risk { display: inline-flex; flex-direction: column; align-items: center; }
+.vl-risk svg { overflow: visible; }
+.vl-risk .rk-tick { stroke: var(--rule-guide); stroke-width: 1; }
+.vl-risk .rk-tick.maj { stroke: var(--rule-chosen); }
+.vl-risk .rk-orb { fill: none; stroke-width: 1; }
+.vl-risk .rk-seg { cursor: pointer; outline: none; }
+.vl-risk .rk-body { fill: var(--card); stroke: var(--rule-guide); stroke-width: 1; transition: fill var(--dur-std) var(--ease-std), stroke var(--dur-std) var(--ease-std); }
+.vl-risk .rk-seg:hover .rk-body { fill: var(--cell-raised); }
+.vl-risk .rk-edge { fill: none; stroke: var(--rule-chosen); stroke-width: 1; transition: stroke var(--dur-std) var(--ease-std); }
+.vl-risk .rk-ic { fill: var(--ink-2); transition: fill var(--dur-std) var(--ease-std); }
+.vl-risk .rk-seg:hover .rk-ic { fill: var(--ink); }
+.vl-risk .rk-seg.on .rk-body { fill: var(--blue); stroke: var(--blue-edge); }
+.vl-risk .rk-seg.on:hover .rk-body { fill: var(--blue-hover); }
+.vl-risk .rk-seg.on .rk-edge { stroke: var(--blue-light); }
+.vl-risk .rk-seg.on .rk-ic { fill: var(--on-blue); }
+.vl-risk .rk-seg:focus-visible .rk-body { stroke: var(--ink); }
+.vl-risk-val { position: relative; display: grid; place-items: center; margin-top: 14px; height: 30px; padding: 0 14px; background: var(--blue); color: var(--on-blue); font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; }
+.vl-risk-val::before { content: ""; position: absolute; left: 50%; top: -5px; width: 10px; height: 10px; background: var(--blue); transform: translateX(-50%) rotate(45deg); }
+.vl-risk-val b { position: relative; font-weight: 500; }
+
+/* ---------- Panel header (data) ---------- */
+.vl-panel { border: 1px solid var(--rule); background: var(--card); }
+.vl-ph { display: flex; align-items: stretch; height: 32px; border-bottom: 1px solid var(--rule); background: var(--cell-raised); }
+.vl-ph-code { display: flex; align-items: center; padding: 0 10px; background: var(--ink); color: var(--page); font: 600 12px/1 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; }
+.vl-ph-title { display: flex; align-items: center; padding: 0 12px; font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+.vl-ph-meta { display: flex; margin-left: auto; }
+.vl-ph-meta span { display: flex; align-items: center; padding: 0 10px; border-left: 1px solid var(--rule); font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-ph-ruler { height: 8px; border-bottom: 1px solid var(--rule); background: repeating-linear-gradient(90deg, var(--rule-guide) 0 1px, transparent 1px 8px) left bottom / 100% 4px no-repeat, repeating-linear-gradient(90deg, var(--rule-chosen) 0 1px, transparent 1px 40px) left bottom / 100% 8px no-repeat; }
+.vl-pb { padding: var(--space-4); }
+
+/* ---------- Index tile ---------- */
+.vl-tiles { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+.vl-tile { position: relative; display: grid; grid-template-rows: auto 1fr auto; min-height: 132px; padding: 12px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--cell); color: var(--ink); text-align: left; }
+button.vl-tile { border-top: 0; border-left: 0; cursor: pointer; font: inherit; transition: background-color var(--dur-std) var(--ease-std); }
+button.vl-tile:hover { background: var(--cell-raised); }
+.vl-tile[aria-pressed="true"] { background: linear-gradient(180deg, var(--lift), var(--cell)); }
+.vl-tile-top { display: flex; justify-content: space-between; font: 400 10.5px/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-tile-code { align-self: end; font: 300 40px/1 var(--font-sans); letter-spacing: -0.02em; }
+.vl-tile-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font: 400 12px/1 var(--font-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.vl-tile-dot { width: 6px; height: 6px; background: var(--muted); }
+.vl-tile-dot.live { background: var(--live); }
+.vl-tile-dot.err { background: var(--err); }
+.vl-tile-dot.dev { background: var(--dev); }
+
+/* ---------- Stat block ---------- */
+.vl-stat { display: grid; grid-template-columns: auto minmax(0, 1fr); border: 1px solid var(--rule); background: var(--card); }
+.vl-stat-code { display: grid; align-content: space-between; width: 88px; padding: 12px; border-right: 1px solid var(--rule); background: var(--cell-raised); }
+.vl-stat-code b { font: 300 32px/1 var(--font-sans); letter-spacing: -0.02em; color: var(--ink); }
+.vl-stat-main { display: grid; gap: 10px; padding: 12px 14px; min-width: 0; }
+.vl-stat-v { display: flex; align-items: baseline; gap: 6px; font: 300 40px/1 var(--font-sans); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.vl-stat-v small { font: 400 12px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.vl-stat-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.vl-stat-d { font: 400 12px/1 var(--font-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.vl-stat-d.up { color: var(--live-text); }
+.vl-stat-d.down { color: var(--err-text); }
+.vl-spark { width: 120px; height: 28px; }
+.vl-spark path { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+
+/* ---------- Hatch progress ---------- */
+.vl-prog { display: grid; gap: 8px; }
+.vl-prog-top { display: flex; justify-content: space-between; align-items: baseline; }
+.vl-prog-v { font: 400 12px/1 var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+.vl-prog-v s { color: var(--faint); text-decoration: none; }
+.vl-prog-bar { position: relative; height: 14px; box-shadow: inset 0 0 0 1px var(--rule); }
+.vl-prog-fill { position: absolute; inset: 0 auto 0 0; background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 5px); box-shadow: inset 0 0 0 1px var(--ink-2); transition: width var(--dur-push) var(--ease-std); }
+.vl-prog-fill::after { content: ""; position: absolute; right: -1px; top: -4px; bottom: -4px; width: 1px; background: var(--ink); }
+.vl-prog.is-near .vl-prog-fill { box-shadow: inset 0 0 0 1px var(--dev); background-image: repeating-linear-gradient(135deg, var(--dev) 0 1px, transparent 1px 5px); }
+.vl-prog.is-over .vl-prog-fill { box-shadow: inset 0 0 0 1px var(--err); background-image: repeating-linear-gradient(135deg, var(--err) 0 1px, transparent 1px 5px); }
+.vl-prog-ruler { display: flex; justify-content: space-between; height: 6px; background: repeating-linear-gradient(90deg, var(--rule-guide) 0 1px, transparent 1px 10%) left top / calc(100% + 1px) 100% no-repeat; }
+.vl-prog-scale { display: flex; justify-content: space-between; font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- Meter bars ---------- */
+.vl-meters { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 0 10px; }
+.vl-meters-axis { display: flex; flex-direction: column; justify-content: space-between; height: var(--h, 160px); font: 400 10.5px/1 var(--font-mono); color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; transform: translateY(5px); }
+.vl-meters-plot { position: relative; display: flex; align-items: flex-end; gap: 6px; height: var(--h, 160px); border-bottom: 1px solid var(--rule-chosen); background: repeating-linear-gradient(180deg, var(--rule) 0 1px, transparent 1px 25%) left top / 100% calc(100% + 1px) no-repeat; }
+.vl-meter { position: relative; flex: 1 1 0; height: var(--v); background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 5px); box-shadow: inset 0 1px 0 var(--ink-2), inset 1px 0 0 var(--rule-guide), inset -1px 0 0 var(--rule-guide); transition: height var(--dur-push) var(--ease-std); }
+.vl-meter.is-now { background-image: none; background: var(--ink-2); box-shadow: none; }
+.vl-meter.is-over { background-image: repeating-linear-gradient(135deg, var(--err) 0 1px, transparent 1px 5px); box-shadow: inset 0 1px 0 var(--err-text); }
+.vl-meters-cap { position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--err) 6%, var(--err) 94%, transparent); }
+.vl-meters-cap span { position: absolute; right: 0; bottom: 4px; font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--err-text); background: var(--card); padding-left: 6px; }
+.vl-meters-x { grid-column: 2; display: flex; gap: 6px; padding-top: 8px; }
+.vl-meters-x span { flex: 1 1 0; text-align: center; font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Area chart ---------- */
+.vl-area { width: 100%; }
+.vl-area svg { width: 100%; height: auto; overflow: visible; }
+.vl-area .ax { font: 400 10.5px/1 var(--font-mono); fill: var(--muted); font-variant-numeric: tabular-nums; }
+.vl-area .line { fill: none; stroke: var(--ink); stroke-width: 1; }
+.vl-area .line2 { fill: none; stroke: var(--live-text); stroke-width: 1; }
+.vl-area .lim { stroke: var(--err); stroke-width: 1; }
+.vl-area .lim-t { font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.08em; fill: var(--err-text); }
+.vl-area .vl-cur { stroke: var(--rule-chosen); stroke-width: 1; }
+.vl-area .dot { fill: var(--ink); }
+.vl-area .tip { fill: var(--cell-raised); stroke: var(--rule-chosen); stroke-width: 1; }
+.vl-area .tip-t { font: 400 11px/1 var(--font-mono); fill: var(--ink); font-variant-numeric: tabular-nums; }
+.vl-legend { display: flex; gap: var(--space-4); margin-top: 10px; font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.vl-legend i { width: 14px; height: 1px; background: var(--ink); }
+.vl-legend i.l2 { background: var(--live-text); }
+.vl-legend i.lim { background: var(--err); }
+.vl-legend i.h { height: 8px; background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 4px); background-color: transparent; box-shadow: inset 0 0 0 1px var(--rule-guide); }
+
+/* ---------- Status table ---------- */
+.vl-table { width: 100%; border-collapse: collapse; font: 400 12px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+.vl-table th { height: 32px; padding: 0 12px; border-bottom: 1px solid var(--rule-chosen); text-align: left; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.vl-table td { height: 40px; padding: 0 12px; border-bottom: 1px solid var(--rule); color: var(--ink); white-space: nowrap; }
+.vl-table td.n, .vl-table th.n { text-align: right; }
+.vl-table td.m { color: var(--muted); }
+.vl-table tbody tr { transition: background-color var(--dur-std) var(--ease-std); }
+.vl-table tbody tr:hover { background: var(--scan-fill); }
+.vl-table tr.is-fail td { background: var(--err-tint); }
+.vl-pill { display: inline-flex; align-items: center; gap: 6px; height: 20px; padding: 0 7px; font: 600 11px/1 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+.vl-pill i { width: 5px; height: 5px; background: currentColor; }
+.vl-pill.live { background: var(--live-tint); color: var(--live-text); }
+.vl-pill.err { background: var(--err-tint); color: var(--err-text); }
+.vl-pill.dev { background: var(--dev-tint); color: var(--dev-text); }
+.vl-pill.quiet { color: var(--ink-2); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+
+/* ---------- Ledger ---------- */
+.vl-ledger { margin: 0; padding: 0; list-style: none; }
+.vl-lrow { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto auto; align-items: center; gap: 14px; height: 52px; padding: 0 14px; border-bottom: 1px solid var(--rule); }
+.vl-lrow:first-child { border-top: 1px solid var(--rule); }
+.vl-lrow-ic { display: grid; place-items: center; width: 28px; height: 28px; background: var(--cell-raised); box-shadow: inset 0 0 0 1px var(--rule); }
+.vl-lrow-ic svg { width: 14px; height: 14px; fill: var(--ink-2); }
+.vl-lrow-name { display: grid; gap: 5px; min-width: 0; }
+.vl-lrow-name b { font: 500 14px/1 var(--font-sans); color: var(--ink); }
+.vl-lrow-name code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 11.5px/1 var(--font-mono); letter-spacing: 0.02em; color: var(--muted); }
+.vl-lrow-amt { font: 400 12px/1 var(--font-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; text-align: right; }
+
+/* ---------- Hex grid ---------- */
+.vl-hexes svg { width: 100%; height: auto; overflow: visible; }
+.vl-hexes .hx { fill: var(--cell); stroke: var(--rule-guide); stroke-width: 1; transition: fill var(--dur-std) var(--ease-std); }
+.vl-hexes .hx.on { fill: var(--cell-raised); stroke: var(--ink-2); }
+.vl-hexes .hx.live { fill: var(--live-tint); stroke: var(--live); }
+.vl-hexes .hx.err { fill: var(--err-tint); stroke: var(--err); }
+.vl-hexes .hx-t { font: 600 10.5px/1 var(--font-mono); letter-spacing: 0.04em; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+.vl-hexes .hx-t.off { fill: var(--muted); font-weight: 400; }
+
+/* ---------- Scope ---------- */
+.vl-scope svg { width: 100%; height: auto; overflow: visible; }
+.vl-scope .ring { fill: none; stroke: var(--rule-guide); stroke-width: 1; }
+.vl-scope .ring.lim { stroke: var(--err); }
+.vl-scope .ring.out { stroke: var(--rule-chosen); }
+.vl-scope .cross { stroke: var(--rule); stroke-width: 1; }
+.vl-scope .deg { stroke: var(--rule-guide); stroke-width: 1; }
+.vl-scope .deg.maj { stroke: var(--rule-chosen); }
+.vl-scope .lab { font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.06em; fill: var(--muted); }
+.vl-scope .blip { fill: var(--ink); }
+.vl-scope .blip.live { fill: var(--live-text); }
+.vl-scope .blip.err { fill: var(--err-text); }
+.vl-scope .blip-t { font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.04em; fill: var(--ink-2); }
+.vl-scope .sweep { stroke-width: 1; transform-origin: 0 0; animation: vl-sweep 8s linear infinite; }
+@keyframes vl-sweep { to { transform: rotate(360deg); } }
+
+/* ---------- Knob ---------- */
+.vl-knob { display: inline-grid; justify-items: center; gap: 10px; outline: none; touch-action: none; cursor: ns-resize; user-select: none; }
+.vl-knob svg { width: var(--size, 132px); height: var(--size, 132px); overflow: visible; }
+.vl-knob .k-tick { stroke: var(--rule-guide); stroke-width: 1; }
+.vl-knob .k-tick.on { stroke: var(--ink-2); }
+.vl-knob .k-tick.maj { stroke: var(--rule-chosen); }
+.vl-knob .k-tick.maj.on { stroke: var(--ink); }
+.vl-knob .k-face { fill: var(--cell-raised); stroke: var(--rule-chosen); stroke-width: 1; }
+.vl-knob .k-ptr { stroke: var(--ink); stroke-width: 1; }
+.vl-knob .k-ptr-d { fill: var(--ink); }
+.vl-knob .k-v { font: 300 24px/1 var(--font-sans); letter-spacing: -0.02em; fill: var(--ink); text-anchor: middle; font-variant-numeric: tabular-nums; }
+.vl-knob .k-u { font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.08em; fill: var(--muted); text-anchor: middle; }
+.vl-knob:focus-visible .k-face { stroke: var(--ink); }
+.vl-knob-l { font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+
+/* ---------- Limit slider ---------- */
+.vl-slider { display: grid; gap: 10px; }
+.vl-slider-top { display: flex; justify-content: space-between; align-items: baseline; }
+.vl-slider-l { font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.vl-slider-v { font: 400 14px/1 var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+.vl-slider-v s { color: var(--faint); text-decoration: none; }
+.vl-slider-track { position: relative; height: 32px; touch-action: none; cursor: ew-resize; outline: none; }
+.vl-slider-rail { position: absolute; left: 0; right: 0; top: 13px; height: 6px; box-shadow: inset 0 0 0 1px var(--rule-guide); }
+.vl-slider-fill { position: absolute; left: 0; top: 13px; height: 6px; background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 4px); box-shadow: inset 0 0 0 1px var(--ink-2); }
+.vl-slider-thumb { position: absolute; top: 4px; width: 12px; height: 24px; margin-left: -6px; background: var(--ink); }
+.vl-slider-track:focus-visible .vl-slider-thumb { outline: 1px solid var(--ink); outline-offset: 3px; }
+.vl-slider-ticks { position: absolute; left: 0; right: 0; bottom: -2px; height: 5px; background: repeating-linear-gradient(90deg, var(--rule-guide) 0 1px, transparent 1px 5%) left top / calc(100% + 1px) 100% no-repeat; }
+.vl-slider-scale { display: flex; justify-content: space-between; font: 400 10.5px/1 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- Toggle ---------- */
+.vl-toggle { display: inline-flex; align-items: center; gap: 14px; padding: 0; border: 0; background: transparent; color: var(--ink-2); font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.vl-toggle-box { display: grid; grid-template-columns: 1fr 1fr; width: 76px; height: 28px; box-shadow: inset 0 0 0 1px var(--rule-chosen); font: 600 10.5px/1 var(--font-mono); letter-spacing: 0.04em; }
+.vl-toggle-box span { display: grid; place-items: center; color: var(--muted); transition: background-color var(--dur-std) var(--ease-std), color var(--dur-std) var(--ease-std); }
+.vl-toggle[aria-checked="false"] .vl-toggle-box span:first-child { background: var(--lift); color: var(--ink); }
+.vl-toggle[aria-checked="true"] .vl-toggle-box span:last-child { background: var(--ink); color: var(--page); }
+.vl-toggle:hover { color: var(--ink); }
+.vl-toggle:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+
+/* ---------- Curve editor ---------- */
+.vl-curve svg { width: 100%; height: auto; overflow: visible; touch-action: none; }
+.vl-curve .g { stroke: var(--rule); stroke-width: 1; }
+.vl-curve .g.maj { stroke: var(--rule-guide); }
+.vl-curve .ax { font: 400 10.5px/1 var(--font-mono); fill: var(--muted); font-variant-numeric: tabular-nums; }
+.vl-curve .c { fill: none; stroke: var(--ink); stroke-width: 1; }
+.vl-curve .under { fill: url(#vxHatch); }
+.vl-curve .h { fill: var(--page); stroke: var(--ink); stroke-width: 1; cursor: grab; }
+.vl-curve .h:hover, .vl-curve .h.is-drag { fill: var(--ink); }
+.vl-curve .h:focus-visible { outline: none; stroke: var(--ink); fill: var(--ink-2); }
+.vl-curve .stem { stroke: var(--rule-guide); stroke-width: 1; }
+.vl-curve .read { font: 400 11px/1 var(--font-mono); fill: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* ---------- Mark and icons ---------- */
+.vl-mark { display: block; width: var(--w, 88px); height: auto; }
+.vl-mark path { fill: currentColor; }
+.vl-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+.vl-icon-cell { display: grid; justify-items: center; align-content: center; gap: 10px; height: 92px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--cell); color: var(--ink); }
+.vl-icon-cell svg { width: 24px; height: 24px; fill: currentColor; }
+.vl-icon-cell span { font: 400 10.5px/1 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vl *, .vl *::after { animation: none !important; transition: none !important; }
+  .vl-scan::after, .vl-scan::before { display: none; }
+  .vl-wave { color: var(--ink) !important; background: none; }
+}
+
+/* the page squares every corner with !important; the library's bubbles and avatars keep theirs */
+body.one .vl .vl-msg--vex p { border-radius: 4px 18px 18px 18px !important; }
+body.one .vl .vl-msg--you p { border-radius: 18px 4px 18px 18px !important; }
+body.one .vl .vl-av { border-radius: 50% !important; }
+/* on the page, data faces follow the page's own --mono, as every frozen component does */
+.vl { --font-mono: var(--mono); }
+.ds-vx-bar--c { width: 613px; max-width: 100%; margin: 16px auto 0; }
+/* inside the design system */
+.ds-stage--vx .ds-ground { display: block; padding: 28px; }
+.ds-vx { width: 100%; }
+.ds-vx-bar { display: flex; justify-content: flex-end; margin-top: 16px; }
+.ds-vx-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+.ds-vx[data-vx="Scope"] > div, .ds-vx[data-vx="HexGrid"] > div { max-width: 420px; margin: 0 auto; }
+@media (max-width: 700px) {
+  .ds-stage--vx .ds-ground { padding: 16px; }
+  .ds-vx .vl-tiles { --cols: 2 !important; }
+  .ds-vx .vl-table { font-size: 11px; } .ds-vx .vl-table td, .ds-vx .vl-table th { padding: 0 6px; }
+  .ds-vx-row { gap: 20px; }
+  .ds-vx .vl-tab { padding: 0 10px; font-size: 12px; letter-spacing: 0.04em; }
+  .ds-vx[data-vx="StatusTable"] { overflow-x: auto; }
+}
+.vl-toggle { text-align: left; }
+
+/* ================= Base controls and the radius switch =================
+   One token, --radius-base, rounds the base controls only: Key, Field, Search, Dropdown, Chips, Tabs, Toggle.
+   Frames, header and rail cells, cards, panels, tables and every data instrument stay square in every product.
+   A key that sits flush in a row of cells (composer, header) stays square too: a shared 1px edge cannot bend. */
+html[data-radius="sm"] .vl, .vl[data-radius="sm"] { --radius-base: 4px; }
+html[data-radius="md"] .vl, .vl[data-radius="md"] { --radius-base: 8px; }
+html[data-radius="pill"] .vl, .vl[data-radius="pill"] { --radius-base: 999px; }
+html[data-radius="square"] .vl, .vl[data-radius="square"] { --radius-base: 0px; }
+.vl { --radius-menu: min(var(--radius-base), 10px); }
+.vl-composer .vl-key, .vl-key--cell, .vl-key--square { border-radius: 0; }
+.vl-chip { border-radius: var(--radius-base); }
+.vl-tabs { border-radius: var(--radius-menu); overflow: hidden; }
+.vl-toggle-box { border-radius: var(--radius-base); overflow: hidden; }
+.vl-toggle-box span { border-radius: var(--radius-base); }
+
+/* Field */
+.vl-fld { display: grid; gap: 8px; min-width: 0; }
+.vl-flabel { font: 500 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.vl-fbox { position: relative; display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 16px; border-radius: var(--radius-base); background: var(--cell); box-shadow: inset 0 0 0 1px var(--rule); transition: box-shadow var(--dur-std) var(--ease-std), background-color var(--dur-std) var(--ease-std); }
+.vl-fbox:hover { box-shadow: inset 0 0 0 1px var(--rule-guide); }
+.vl-fbox:focus-within { background: var(--cell-raised); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-fbox > svg { width: 18px; height: 18px; fill: var(--muted); flex: none; }
+.vl-field-in { flex: 1 1 0; min-width: 0; height: 100%; padding: 0; border: 0; background: transparent; color: var(--ink); font: 400 15px/1 var(--font-sans); outline: none; }
+.vl-field-in::placeholder { color: var(--muted); }
+.vl-field-in::-webkit-search-cancel-button { display: none; }
+.vl-fsuf { font: 400 12px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.vl-fhint { font: 400 12px/1.4 var(--font-sans); color: var(--muted); }
+.vl-fld.is-err .vl-fbox { box-shadow: inset 0 0 0 1px var(--err); }
+.vl-fld.is-err .vl-fhint { color: var(--err-text); }
+.vl-fld .vl-field-in:disabled { color: var(--muted); cursor: not-allowed; }
+
+/* Search */
+.vl-search { position: relative; min-width: 0; }
+.vl-kbd { display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: var(--radius-menu); box-shadow: inset 0 0 0 1px var(--rule-chosen); font: 400 11px/1 var(--font-mono); color: var(--muted); }
+.vl-sclear { display: grid; place-items: center; width: 28px; height: 28px; margin-right: -6px; padding: 0; border: 0; border-radius: var(--radius-menu); background: transparent; color: var(--muted); cursor: pointer; }
+.vl-sclear svg { width: 16px; height: 16px; fill: currentColor; }
+.vl-sclear:hover { color: var(--ink); background: var(--lift); }
+.vl-sclear[hidden], .vl-kbd[hidden] { display: none; }
+
+/* Menu (Search results, Dropdown list) */
+.vl-menu { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 30; margin: 0; padding: 4px; list-style: none; border-radius: var(--radius-menu); background: var(--cell-raised); box-shadow: inset 0 0 0 1px var(--rule-chosen); outline: none; max-height: 280px; overflow: auto; }
+.vl-menu[hidden] { display: none; }
+.vl-mitem { display: flex; align-items: center; gap: 12px; min-height: 40px; padding: 0 12px; border-radius: calc(var(--radius-menu) - 3px); color: var(--ink-2); font: 400 14px/1.2 var(--font-sans); cursor: pointer; }
+.vl-mitem > span { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vl-mitem > svg, .vl-mitem small, .vl-mcheck { flex: none; }
+.vl-mitem > svg { width: 16px; height: 16px; fill: var(--muted); }
+.vl-mitem small { font: 400 11px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.vl-mitem:hover, .vl-mitem[aria-selected="true"]:not([data-act]):hover, .vl-mitem[data-act], .vl-sres .vl-mitem[aria-selected="true"] { background: var(--lift); color: var(--ink); }
+.vl-dd .vl-mitem[aria-selected="true"] { color: var(--ink); }
+.vl-mcheck { display: grid; }
+.vl-mcheck svg { width: 16px; height: 16px; fill: var(--ink); }
+.vl-mempty { padding: 12px; font: 400 14px/1.4 var(--font-sans); color: var(--muted); }
+
+/* Dropdown */
+.vl-dd { position: relative; display: inline-block; min-width: 220px; }
+.vl-dd.is-block { display: block; }
+.vl-ddbtn { display: flex; align-items: center; gap: 12px; width: 100%; height: 48px; padding: 0 14px 0 16px; border: 0; border-radius: var(--radius-base); background: var(--cell); box-shadow: inset 0 0 0 1px var(--rule); color: var(--ink); font: 400 15px/1 var(--font-sans); text-align: left; cursor: pointer; transition: box-shadow var(--dur-std) var(--ease-std), background-color var(--dur-std) var(--ease-std); }
+.vl-ddbtn:hover { box-shadow: inset 0 0 0 1px var(--rule-guide); }
+.vl-dd.is-open .vl-ddbtn { background: var(--cell-raised); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-ddl { font: 500 12px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vl-ddv { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vl-ddbtn > svg { width: 18px; height: 18px; fill: var(--muted); flex: none; transition: transform var(--dur-std) var(--ease-std); }
+.vl-dd.is-open .vl-ddbtn > svg { transform: rotate(180deg); }
+/* the radius switch on the design system page */
+.ds-radius { display: inline-flex; margin: 0 0 24px; box-shadow: inset 0 0 0 1px var(--r); }
+.ds-radius button { display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px; border: 0; border-right: 1px solid var(--r); background: transparent; color: var(--mu); font: 500 12px/1 var(--font); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color 300ms var(--ease); }
+.ds-radius button:last-child { border-right: 0; }
+.ds-radius button i { width: 14px; height: 14px; box-shadow: inset 0 0 0 1px currentColor; }
+.ds-radius button:hover { color: #fff; }
+.ds-radius button[aria-pressed="true"] { color: #fff; background: linear-gradient(180deg, oklch(20% 0.004 264), transparent); box-shadow: inset 0 0 0 1px var(--r2); }
+.ds-radius button:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.ds-base-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.ds-base-col { display: grid; gap: 20px; width: 100%; max-width: 460px; }
+.ds-stage--vx .ds-ground:has(.vl-dd), .ds-stage--vx .ds-ground:has(.vl-search) { overflow: visible; }
+.vl .vl-field-in:focus-visible, .vl .vl-menu:focus-visible { outline: none; }
+
+/* ================= Forced states for the state matrices (the design system shows every state side by side) ================= */
+.vl-key-t { white-space: nowrap; }
+.vl-key.is-hover { background: var(--cell-raised); color: var(--ink); }
+.vl-key.is-pressed { background: var(--lift); color: var(--ink); }
+.vl-key--blue.is-hover { background: var(--blue-hover); color: var(--on-blue); }
+.vl-key--blue.is-pressed { background: var(--blue); }
+.vl-key--line.is-hover { background: var(--cell); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-key.is-focus { outline: var(--stroke-hair) solid var(--ink); outline-offset: -5px; }
+.vl-key--blue.is-focus { outline-color: var(--on-blue); }
+/* Text: no ground, no edge; the quietest action (Cancel, Back) */
+.vl-key--text { background: transparent; color: var(--ink-2); }
+.vl-key--text:hover, .vl-key--text.is-hover { background: var(--cell); color: var(--ink); }
+.vl-key--text[disabled] { background: transparent; }
+/* Loading: the label stays (width does not jump), a 4-step square turns in front of it */
+.vl-key.is-loading { cursor: progress; }
+.vl-key.is-loading[disabled] { color: inherit; }
+.vl-key--blue.is-loading[disabled] { background: var(--blue); color: var(--on-blue); }
+.vl-key--line.is-loading[disabled] { background: transparent; }
+.vl-key.is-loading > svg { display: none; }
+.vl-spin { position: relative; width: 12px; height: 12px; flex: none; box-shadow: inset 0 0 0 1px currentColor; animation: vl-spin 0.8s steps(4) infinite; }
+.vl-spin::before { content: ""; position: absolute; left: 0; top: 0; width: 6px; height: 6px; background: currentColor; }
+.vl-key--compact .vl-spin { width: 10px; height: 10px; } .vl-key--compact .vl-spin::before { width: 5px; height: 5px; }
+@keyframes vl-spin { to { transform: rotate(360deg); } }
+.vl-key--line[disabled] { background: transparent; box-shadow: inset 0 0 0 1px var(--rule); }
+.vl-fld.is-hover .vl-fbox { box-shadow: inset 0 0 0 1px var(--rule-guide); }
+.vl-fld.is-focus .vl-fbox { background: var(--cell-raised); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-fld.is-disabled .vl-fbox { background: transparent; box-shadow: inset 0 0 0 1px var(--rule); }
+.vl-fld.is-disabled .vl-field-in, .vl-fld.is-disabled .vl-fsuf { color: var(--muted); }
+.vl-chip.is-hover { color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule-chosen); }
+.vl-chip.is-focus { outline: 1px solid var(--ink); outline-offset: -5px; }
+.vl-chip[disabled] { color: var(--muted); background: transparent; cursor: not-allowed; }
+.vl-toggle.is-focus { outline: 1px solid var(--ink); outline-offset: 4px; }
+.vl-toggle[disabled] { color: var(--muted); cursor: not-allowed; }
+.vl-toggle[disabled] .vl-toggle-box { opacity: 0.45; }
+.vl-ddbtn.is-hover { box-shadow: inset 0 0 0 1px var(--rule-guide); }
+.vl-ddbtn.is-focus { outline: 1px solid var(--ink); outline-offset: -5px; }
+.vl-ddbtn[disabled] { background: transparent; color: var(--muted); cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) { .vl-spin { animation: none; } }
+.vl-fld { grid-template-columns: minmax(0, 1fr); }
+.vl-field-in { width: 0; }

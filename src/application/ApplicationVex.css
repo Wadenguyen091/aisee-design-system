@@ -1,0 +1,15 @@
+@import './vex-source/vx.css';
+
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:300;font-display:swap;src:url('./vex-source/fonts/be-vietnam-pro-latin-300-normal.woff2') format('woff2')}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:400;font-display:swap;src:url('./vex-source/fonts/be-vietnam-pro-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:500;font-display:swap;src:url('./vex-source/fonts/be-vietnam-pro-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:600;font-display:swap;src:url('./vex-source/fonts/be-vietnam-pro-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Roboto Mono';font-style:normal;font-weight:400;font-display:swap;src:url('./vex-source/fonts/roboto-mono-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Roboto Mono';font-style:normal;font-weight:600;font-display:swap;src:url('./vex-source/fonts/roboto-mono-latin-600-normal.woff2') format('woff2')}
+
+.vex-specimen{width:100%;min-width:0}
+.vex-specimen:empty{min-height:40px}
+.vex-specimen>.vl-risk{display:flex;max-width:100%;overflow:hidden}
+.vex-specimen>.vl-risk svg{max-width:100%;height:auto}
+.vex-specimen>.vl-card,.vex-specimen>.vl-rz,.vex-specimen>.vl-composer,.vex-specimen>.vl-table,.vex-specimen>.vl-ledger,.vex-specimen>.vl-scope,.vex-specimen>.vl-area{width:100%}
+
