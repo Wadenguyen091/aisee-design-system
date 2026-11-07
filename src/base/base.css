@@ -1082,7 +1082,7 @@ input.vault-search:focus-visible {
   height:72px;
   clip-path:polygon(23% 0,77% 0,100% 100%,0 100%);
   background:color-mix(in srgb, var(--ds-color-action) 14%, transparent);
-  transform:translateX(-50%) rotate(calc(var(--vault-radial-active-angle) + 90deg));
+  transform:translateX(-50%) rotate(var(--vault-radial-active-angle));
   transform-origin:50% calc(100% + 40px);
   pointer-events:none;
 }

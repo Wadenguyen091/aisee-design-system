@@ -62,7 +62,8 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
 
   const items = group.items;
   const focus = Math.min(focusFor[group.id] ?? 0, Math.max(0, items.length - 1));
-  const sevenItemAngles = [-90, -135, -45, 180, 0, 135, 45];
+  // The item transform starts at 12 o'clock (0deg), then rotates clockwise.
+  const sevenItemAngles = [0, -45, 45, -90, 90, -135, 135];
   const angleFor = (index: number) => items.length === 7
     ? sevenItemAngles[index]
     : -90 + index * (360 / Math.max(items.length, 1));
