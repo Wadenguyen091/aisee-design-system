@@ -110,23 +110,19 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
     {!inline && <button className="vault-radial__close" type="button" aria-label="Đóng menu" onClick={onClose}><RiCloseLine /></button>}
     <div className="vault-radial__stage">
       <div className="vault-radial__orbit" aria-hidden="true" />
-      <button
-        className="vault-radial__hub"
-        type="button"
-        aria-label={`${group.label}. Chuyển sang nhóm kế tiếp`}
-        title={group.label}
-        onClick={() => switchGroup(1)}
-      >
-        <span aria-hidden="true">{group.icon}</span>
-      </button>
+      <div className="vault-radial__hub" aria-hidden="true" />
 
       <div className="vault-radial__items" role="listbox" aria-label={group.label}>
         {items.map((item, index) => {
           const angle = -90 + index * (360 / Math.max(items.length, 1));
           const active = index === focus;
+          const radians = angle * Math.PI / 180;
+          const labelSide = Math.sin(radians) < -0.55 ? 'top'
+            : Math.sin(radians) > 0.55 ? 'bottom'
+              : Math.cos(radians) >= 0 ? 'right' : 'left';
           const style: RadialStyle = {
             '--vault-radial-angle': `${angle}deg`,
-            '--vault-radial-radius': items.length > 6 ? '132px' : '124px',
+            '--vault-radial-radius': items.length > 6 ? '116px' : '110px',
           };
           return <button
             key={item.id}
@@ -137,16 +133,18 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
             disabled={item.disabled}
             className="vault-radial__item"
             data-active={active || undefined}
+            data-label-side={labelSide}
             style={style}
             onPointerEnter={() => setFocus(index)}
             onFocus={() => setFocus(index)}
             onClick={() => active ? run(index) : setFocus(index)}
           >
             <span className="vault-radial__item-icon" aria-hidden="true">{item.disabled ? <RiLockLine /> : item.icon}</span>
-            <span className="vault-radial__tooltip" role="tooltip">{item.label}{item.hint && <small>{item.hint}</small>}</span>
+            <span className="vault-radial__label">{item.label}{item.hint && <small>{item.hint}</small>}</span>
           </button>;
         })}
       </div>
+      {groups.length > 1 && <button className="vault-radial__more" type="button" onClick={() => switchGroup(1)} aria-label={`Đổi nhóm. Hiện tại: ${group.label}`}>Thêm <span aria-hidden="true">•••</span></button>}
     </div>
   </div>;
 }
