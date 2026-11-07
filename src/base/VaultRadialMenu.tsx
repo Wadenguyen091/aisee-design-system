@@ -114,7 +114,10 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
 
       <div className="vault-radial__items" role="listbox" aria-label={group.label}>
         {items.map((item, index) => {
-          const angle = -90 + index * (360 / Math.max(items.length, 1));
+          // Seven commands use the compact 1–2–2–2 launcher layout: the
+          // lower centre stays clear for the group switcher.
+          const sevenItemAngles = [-90, -135, -45, 180, 0, 135, 45];
+          const angle = items.length === 7 ? sevenItemAngles[index] : -90 + index * (360 / Math.max(items.length, 1));
           const active = index === focus;
           const radians = angle * Math.PI / 180;
           const labelSide = Math.sin(radians) < -0.55 ? 'top'
