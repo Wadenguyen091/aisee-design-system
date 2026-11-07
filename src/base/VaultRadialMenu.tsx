@@ -23,6 +23,10 @@ type RadialStyle = CSSProperties & {
   '--vault-radial-radius': string;
 };
 
+type RadialStageStyle = CSSProperties & {
+  '--vault-radial-active-angle': string;
+};
+
 /**
  * Compact orbital launcher. The current group lives in the centre; its commands sit on one orbit.
  * Persistent labels and HUD decoration are deliberately removed: labels appear only as tooltips.
@@ -58,6 +62,13 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
 
   const items = group.items;
   const focus = Math.min(focusFor[group.id] ?? 0, Math.max(0, items.length - 1));
+  const sevenItemAngles = [-90, -135, -45, 180, 0, 135, 45];
+  const angleFor = (index: number) => items.length === 7
+    ? sevenItemAngles[index]
+    : -90 + index * (360 / Math.max(items.length, 1));
+  const stageStyle: RadialStageStyle = {
+    '--vault-radial-active-angle': `${angleFor(focus)}deg`,
+  };
   const setFocus = (next: number) => setFocusFor(map => ({
     ...map,
     [group.id]: items.length ? (next + items.length) % items.length : 0,
@@ -108,16 +119,16 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
     onMouseDown={event => { if (!inline && event.target === event.currentTarget) onClose(); }}
   >
     {!inline && <button className="vault-radial__close" type="button" aria-label="Đóng menu" onClick={onClose}><RiCloseLine /></button>}
-    <div className="vault-radial__stage">
+    <div className="vault-radial__stage" style={stageStyle}>
       <div className="vault-radial__orbit" aria-hidden="true" />
+      <div className="vault-radial__active-sector" aria-hidden="true" />
       <div className="vault-radial__hub" aria-hidden="true" />
 
       <div className="vault-radial__items" role="listbox" aria-label={group.label}>
         {items.map((item, index) => {
           // Seven commands use the compact 1–2–2–2 launcher layout: the
           // lower centre stays clear for the group switcher.
-          const sevenItemAngles = [-90, -135, -45, 180, 0, 135, 45];
-          const angle = items.length === 7 ? sevenItemAngles[index] : -90 + index * (360 / Math.max(items.length, 1));
+          const angle = angleFor(index);
           const active = index === focus;
           const radians = angle * Math.PI / 180;
           const labelSide = items.length === 7
@@ -129,7 +140,7 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
             '--vault-radial-angle': `${angle}deg`,
             // Geometry belongs to the component contract. Theme variables may
             // colour the launcher, but must not turn this orbit into another shape.
-            '--vault-radial-radius': '66px',
+            '--vault-radial-radius': '112px',
           };
           return <button
             key={item.id}

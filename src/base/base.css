@@ -1049,14 +1049,16 @@ input.vault-search:focus-visible {
   inset:auto;
   z-index:auto;
   width:100%;
-  height:280px;
-  background:var(--ds-color-surface);
+  height:440px;
+  background-color:var(--ds-color-surface);
+  background-image:linear-gradient(var(--ds-color-border-subtle) 1px, transparent 1px),linear-gradient(90deg, var(--ds-color-border-subtle) 1px, transparent 1px);
+  background-size:72px 72px;
   backdrop-filter:none;
 }
 #root .vault-radial__stage, .vault-radial__stage {
   position:relative;
-  width:min(260px, var(--vault-radial-size));
-  height:min(240px, var(--vault-radial-size));
+  width:min(520px, calc(100vw - 48px));
+  height:360px;
   flex:none;
   transform:none;
 }
@@ -1064,11 +1066,24 @@ input.vault-search:focus-visible {
   position:absolute;
   left:50%;
   top:50%;
-  width:132px;
-  height:132px;
+  width:224px;
+  height:224px;
   border:var(--ds-border-width-control) solid color-mix(in srgb, var(--ds-color-text) 16%, transparent);
   border-radius:50%!important;
   transform:translate(-50%, -50%);
+  pointer-events:none;
+}
+.vault-radial__active-sector {
+  position:absolute;
+  left:50%;
+  bottom:calc(50% + 40px);
+  z-index:1;
+  width:96px;
+  height:72px;
+  clip-path:polygon(23% 0,77% 0,100% 100%,0 100%);
+  background:color-mix(in srgb, var(--ds-color-action) 14%, transparent);
+  transform:translateX(-50%) rotate(calc(var(--vault-radial-active-angle) + 90deg));
+  transform-origin:50% calc(100% + 40px);
   pointer-events:none;
 }
 #root .vault-radial__hub, .vault-radial__hub {
@@ -1077,8 +1092,8 @@ input.vault-search:focus-visible {
   top:50%;
   z-index:2;
   display:grid;
-  width:44px;
-  height:44px;
+  width:80px;
+  height:80px;
   place-items:center;
   border:2px solid var(--ds-color-action);
   border-radius:50%!important;
@@ -1095,13 +1110,13 @@ input.vault-search:focus-visible {
   top:50%;
   z-index:3;
   display:grid;
-  width:32px;
-  height:32px;
-  margin:-16px 0 0 -16px;
+  width:52px;
+  height:52px;
+  margin:-26px 0 0 -26px;
   place-items:center;
   padding:0;
   border:var(--ds-border-width-control) solid var(--ds-color-border);
-  border-radius:8px!important;
+  border-radius:12px!important;
   color:var(--ds-color-text);
   background:var(--ds-color-surface-raised);
   box-shadow:0 1px 4px color-mix(in srgb, var(--ds-color-text) 7%, transparent);
@@ -1121,32 +1136,32 @@ input.vault-search:focus-visible {
 }
 #root .vault-radial__item:focus-visible, .vault-radial__item:focus-visible { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
 #root .vault-radial__item:disabled, .vault-radial__item:disabled { cursor:not-allowed; opacity:.38; }
-#root .vault-radial__item-icon, .vault-radial__item-icon { display:grid; width:16px; height:16px; place-items:center; }
-#root .vault-radial__item-icon svg, .vault-radial__item-icon svg { width:15px; height:15px; }
+#root .vault-radial__item-icon, .vault-radial__item-icon { display:grid; width:26px; height:26px; place-items:center; }
+#root .vault-radial__item-icon svg, .vault-radial__item-icon svg { width:24px; height:24px; }
 .vault-radial__label {
   position:absolute;
   display:inline-flex;
   min-width:max-content;
   align-items:center;
-  height:20px;
+  height:34px;
   gap:var(--ds-space-1);
-  padding:0 6px;
+  padding:0 12px;
   border:0;
   border-radius:var(--ds-radius-full)!important;
   color:var(--ds-color-text-secondary);
   background:color-mix(in srgb, var(--ds-color-text) 7%, var(--ds-color-surface));
   box-shadow:none;
-  font-size:10px;
-  line-height:12px;
+  font-size:16px;
+  line-height:20px;
   font-weight:var(--ds-font-weight-medium);
   pointer-events:none;
   white-space:nowrap;
 }
 .vault-radial__label small { color:var(--ds-color-text-muted); font:inherit; }
-.vault-radial__item[data-label-side='top'] .vault-radial__label { left:50%; bottom:calc(100% + 5px); transform:translateX(-50%); }
-.vault-radial__item[data-label-side='bottom'] .vault-radial__label { left:50%; top:calc(100% + 5px); transform:translateX(-50%); }
-.vault-radial__item[data-label-side='left'] .vault-radial__label { right:calc(100% + 5px); top:50%; transform:translateY(-50%); }
-.vault-radial__item[data-label-side='right'] .vault-radial__label { left:calc(100% + 5px); top:50%; transform:translateY(-50%); }
+.vault-radial__item[data-label-side='top'] .vault-radial__label { left:50%; bottom:calc(100% + 10px); transform:translateX(-50%); }
+.vault-radial__item[data-label-side='bottom'] .vault-radial__label { left:50%; top:calc(100% + 10px); transform:translateX(-50%); }
+.vault-radial__item[data-label-side='left'] .vault-radial__label { right:calc(100% + 10px); top:50%; transform:translateY(-50%); }
+.vault-radial__item[data-label-side='right'] .vault-radial__label { left:calc(100% + 10px); top:50%; transform:translateY(-50%); }
 .vault-radial__item[data-active] .vault-radial__label {
   border-color:var(--ds-color-action);
   color:var(--ds-color-on-action);
@@ -1156,18 +1171,18 @@ input.vault-search:focus-visible {
 .vault-radial__more {
   position:absolute;
   left:50%;
-  bottom:7px;
+  bottom:2px;
   display:inline-flex;
   min-width:max-content;
-  height:20px;
+  height:34px;
   align-items:center;
   gap:var(--ds-space-1);
-  padding:0 var(--ds-space-2);
+  padding:0 14px;
   border:0;
   border-radius:var(--ds-radius-full)!important;
   color:var(--ds-color-text-secondary);
   background:color-mix(in srgb, var(--ds-color-text) 7%, var(--ds-color-surface));
-  font-size:10px;
+  font-size:15px;
   font-weight:var(--ds-font-weight-medium);
   transform:translateX(-50%);
   cursor:pointer;
@@ -1194,7 +1209,7 @@ input.vault-search:focus-visible {
 .vault-radial__close:focus-visible { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
 #root .vault-radial__close svg, .vault-radial__close svg { width:20px; height:20px; }
 @media (max-width:420px) {
-  .vault-radial__label { font-size:10px; }
+  #root .vault-radial__stage, .vault-radial__stage { transform:scale(.72); }
 }
 @media (prefers-reduced-motion:reduce) {
   .vault-radial__item { transition:none; }
