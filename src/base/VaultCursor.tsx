@@ -1,13 +1,12 @@
 import { useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { RiChat1Fill, RiQuillPenFill } from '@remixicon/react';
-import { readableInk } from './colorMath';
 
 /*
  * Custom cursor — the Vault presence cursor. One anatomy for every tool:
- *  · the same pointer arrow (20 box, tip exactly on the hotspot) in the person's identity colour,
- *    with a 1px surface halo so it reads on any canvas (no shadow);
- *  · a name label with Badge geometry (pill 24, 12/16, padding 8) in the same identity colour,
- *    readable ink, 16 / 16 from the hotspot. The active tool shows as a 16 icon inside the label
+ *  · the same pointer arrow (22 box, tip exactly on the hotspot) in the person's identity colour,
+ *    with a 1px surface keyline so it reads on any canvas (no shadow);
+ *  · a compact presence label with an identity edge, neutral surface and stable text contrast.
+ *    The active tool shows as an icon inside the label
  *    (comment, pen) — the pointer itself never changes shape.
  * The hotspot is the component's origin: place it with a transform at the pointer.
  */
@@ -16,10 +15,10 @@ export type VaultCursorTool = 'select' | 'comment' | 'pen';
 
 const TOOL_ICONS = { comment: RiChat1Fill, pen: RiQuillPenFill } as const;
 
-/** Pointer arrow on a 20 grid, tip at (0,0) of the glyph box. */
+/** Pointer arrow on a 22 grid, tip at (0,0) of the glyph box. */
 function CursorArrow() {
-  return <svg className="vault-cursor__glyph" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
-    <path d="M0 0V15.2L4.4 11.2L7.4 17.8L10.2 16.6L7.3 10.2H13.2Z" />
+  return <svg className="vault-cursor__glyph" viewBox="0 0 22 22" width="22" height="22" aria-hidden="true" focusable="false">
+    <path d="M1 1.2V17.4L5.8 13.1L9 20.1L12.2 18.7L9.1 11.9H15.5Z" />
   </svg>;
 }
 
@@ -38,10 +37,10 @@ export function VaultCursor({ color, name, tool = 'select', showLabel = true, cl
     className={`vault-cursor ${className}`.trim()}
     data-tool={tool}
     aria-hidden="true"
-    style={{ '--vault-cursor-color': color, '--vault-cursor-ink': readableInk(color), ...style } as CSSProperties}
+    style={{ '--vault-cursor-color': color, ...style } as CSSProperties}
   >
     <CursorArrow />
-    {showLabel && name && <span data-cursor-label className="vault-cursor__label">{ToolIcon && <ToolIcon />}{name}</span>}
+    {showLabel && name && <span data-cursor-label className="vault-cursor__label">{ToolIcon && <span className="vault-cursor__tool"><ToolIcon /></span>}<span>{name}</span></span>}
   </span>;
 }
 

@@ -925,14 +925,15 @@ input.vault-search:focus-visible {
 #root .vault-color-field:has(input:disabled) :is(input, .vault-color-field__swatch) { cursor:not-allowed; }
 
 /* Cursor ---------------------------------------------------------------------
-   One anatomy for every tool: the same pointer arrow (tip on the hotspot) and a Badge-geometry label
-   (pill 24, 12/16, padding 8, icon 16) 16 / 16 from the hotspot, both in the person's identity colour
-   with readable ink. The tool shows as an icon inside the label. 1px surface halo, no shadow.
+   One anatomy for every tool: the same pointer arrow (tip on the hotspot) and a compact presence label.
+   Identity colour lives on the arrow, label edge and tool icon; the label itself stays on a stable surface.
+   The tool shows as an icon inside the label. 1px surface keyline, no shadow.
    Board presence is portaled to <body> (outside #root), so these rules must not depend on #root. */
 .vault-cursor { position:relative; display:block; width:0; height:0; pointer-events:none; font-family:var(--ds-font-family-ui), system-ui, sans-serif; }
-.vault-cursor__glyph { position:absolute; left:0; top:0; width:20px; height:20px; overflow:visible; fill:var(--vault-cursor-color); filter:drop-shadow(0 0 1px var(--ds-color-surface)) drop-shadow(0 0 0.5px var(--ds-color-surface)); }
-.vault-cursor__label, #root .vault-cursor__label { position:absolute; left:var(--ds-space-4); top:var(--ds-space-4); display:inline-flex; height:24px; align-items:center; gap:var(--ds-space-1); border-radius:var(--ds-radius-full)!important; padding:0 var(--ds-space-2); color:var(--vault-cursor-ink); background:var(--vault-cursor-color); font-size:var(--ds-font-size-caption); line-height:16px; font-weight:var(--ds-font-weight-semibold); white-space:nowrap; }
-.vault-cursor__label > svg { width:var(--ds-icon-size-md); height:var(--ds-icon-size-md); flex:none; fill:currentColor; }
+.vault-cursor__glyph { position:absolute; left:0; top:0; width:22px; height:22px; overflow:visible; fill:var(--vault-cursor-color); stroke:var(--ds-color-surface); stroke-width:1.5px; stroke-linejoin:round; paint-order:stroke fill; }
+.vault-cursor__label, #root .vault-cursor__label { position:absolute; left:var(--ds-space-4); top:var(--ds-space-4); display:inline-flex; height:28px; align-items:center; gap:var(--ds-space-1); border:var(--ds-border-width-control) solid color-mix(in srgb,var(--vault-cursor-color) 52%,var(--ds-color-border)); border-left-width:3px; border-radius:var(--ds-radius-sm)!important; padding:0 var(--ds-space-2) 0 7px; color:var(--ds-color-text); background:color-mix(in srgb,var(--vault-cursor-color) 10%,var(--ds-color-surface-raised)); font-size:var(--ds-font-size-caption); line-height:16px; font-weight:var(--ds-font-weight-semibold); white-space:nowrap; }
+.vault-cursor__tool { display:grid; width:16px; height:16px; place-items:center; color:var(--vault-cursor-color); }
+.vault-cursor__tool > svg { width:14px; height:14px; fill:currentColor; }
 /* Cursor area: hides the system pointer inside and draws VaultCursor at the pointer. */
 .vault-cursor-area { position:relative; overflow:hidden; }
 #root .vault-cursor-area, #root .vault-cursor-area * { cursor:none!important; }
