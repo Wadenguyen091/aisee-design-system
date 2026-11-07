@@ -10,6 +10,13 @@ Base design knowledge, semantic tokens and React component contracts shared by A
 - `src/application`: composed application patterns.
 - `src/tokens.manifest.json`: machine-readable token manifest.
 - `AISEE_DESIGN_KNOWLEDGE.md`: design knowledge for humans and AI agents.
+- `docs/`: extracted principles, color engine/variable rules and component-building knowledge.
+
+## Knowledge handbook
+
+- [Design principles](./docs/01-DESIGN-PRINCIPLES.md)
+- [Color engine and variable naming](./docs/02-COLOR-ENGINE-AND-VARIABLES.md)
+- [Component building guide](./docs/03-COMPONENT-BUILDING-GUIDE.md)
 
 ## Use from source
 

@@ -4,7 +4,7 @@
   "description": "Base design knowledge, tokens and React components for AISEE and its Mini Apps.",
   "type": "module",
   "sideEffects": ["**/*.css"],
-  "files": ["src", "AISEE_DESIGN_KNOWLEDGE.md", "README.md"],
+  "files": ["src", "docs", "AISEE_DESIGN_KNOWLEDGE.md", "README.md"],
   "exports": {
     ".": "./src/index.ts",
     "./styles.css": "./src/styles.css",
