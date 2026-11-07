@@ -1029,3 +1029,153 @@ input.vault-search:focus-visible {
 @keyframes vault-radial-in { from { opacity:0; } to { opacity:1; } }
 @keyframes vault-radial-dial { from { transform:scale(.96); opacity:0; } to { transform:scale(1); opacity:1; } }
 @media (prefers-reduced-motion: reduce) { .vault-radial, .vault-radial__dialwrap { animation:none; } .vault-radial__turn, .vault-radial__glyph, .vault-radial__item { transition:none; } }
+
+/* v2 orbital launcher — one quiet orbit, no HUD fan, labels only on demand. */
+#root .vault-radial, .vault-radial {
+  --vault-radial-size:min(360px, calc(100vw - 48px));
+  position:fixed;
+  inset:0;
+  z-index:90;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  color:var(--ds-color-text);
+  background:color-mix(in srgb, var(--ds-color-surface) 92%, transparent);
+  backdrop-filter:blur(12px);
+  outline:0;
+}
+#root .vault-radial.is-inline, .vault-radial.is-inline {
+  position:relative;
+  inset:auto;
+  z-index:auto;
+  width:100%;
+  height:420px;
+  background:var(--ds-color-surface);
+  backdrop-filter:none;
+}
+#root .vault-radial__stage, .vault-radial__stage {
+  position:relative;
+  width:var(--vault-radial-size);
+  height:var(--vault-radial-size);
+  flex:none;
+  transform:none;
+}
+.vault-radial__orbit {
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:248px;
+  height:248px;
+  border:var(--ds-border-width-control) solid var(--ds-color-border);
+  border-radius:50%;
+  transform:translate(-50%, -50%);
+  pointer-events:none;
+}
+#root .vault-radial__hub, .vault-radial__hub {
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:2;
+  display:grid;
+  width:84px;
+  height:84px;
+  place-items:center;
+  padding:0;
+  border:3px solid var(--ds-color-action);
+  border-radius:50%;
+  color:var(--ds-color-text-secondary);
+  background:var(--ds-color-surface);
+  box-shadow:0 0 0 1px color-mix(in srgb, var(--ds-color-action) 18%, transparent), 0 12px 32px color-mix(in srgb, var(--ds-color-text) 8%, transparent);
+  transform:translate(-50%, -50%);
+  cursor:pointer;
+  transition:border-color var(--ds-duration-fast) var(--ds-ease-standard), background var(--ds-duration-fast) var(--ds-ease-standard);
+}
+.vault-radial__hub > span { display:grid; place-items:center; opacity:0; transition:opacity var(--ds-duration-fast) var(--ds-ease-standard); }
+.vault-radial__hub:is(:hover, :focus-visible) { background:var(--ds-color-surface-hover); }
+.vault-radial__hub:is(:hover, :focus-visible) > span { opacity:1; }
+#root .vault-radial__hub svg, .vault-radial__hub svg { width:22px; height:22px; }
+.vault-radial__hub:focus-visible { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
+#root .vault-radial__items, .vault-radial__items { position:absolute; inset:0; margin:0; padding:0; list-style:none; }
+#root .vault-radial__item, .vault-radial__item {
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:3;
+  display:grid;
+  width:48px;
+  height:48px;
+  margin:-24px 0 0 -24px;
+  place-items:center;
+  padding:0;
+  border:var(--ds-border-width-control) solid var(--ds-color-border);
+  border-radius:var(--ds-radius-lg);
+  color:var(--ds-color-text);
+  background:var(--ds-color-surface-raised);
+  box-shadow:0 4px 12px color-mix(in srgb, var(--ds-color-text) 8%, transparent);
+  transform:rotate(var(--vault-radial-angle)) translateY(calc(var(--vault-radial-radius) * -1)) rotate(calc(var(--vault-radial-angle) * -1));
+  transform-origin:center;
+  cursor:pointer;
+  opacity:1;
+  filter:none;
+  transition:border-color var(--ds-duration-fast) var(--ds-ease-standard), color var(--ds-duration-fast) var(--ds-ease-standard), background var(--ds-duration-fast) var(--ds-ease-standard), box-shadow var(--ds-duration-fast) var(--ds-ease-standard);
+}
+#root .vault-radial__item:is(:hover, :focus-visible), .vault-radial__item:is(:hover, :focus-visible),
+#root .vault-radial__item[data-active], .vault-radial__item[data-active] {
+  border-color:var(--ds-color-action);
+  color:var(--ds-color-action);
+  background:var(--ds-color-surface-hover);
+  box-shadow:0 0 0 2px color-mix(in srgb, var(--ds-color-action) 14%, transparent), 0 8px 20px color-mix(in srgb, var(--ds-color-text) 12%, transparent);
+}
+#root .vault-radial__item:focus-visible, .vault-radial__item:focus-visible { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
+#root .vault-radial__item:disabled, .vault-radial__item:disabled { cursor:not-allowed; opacity:.38; }
+#root .vault-radial__item-icon, .vault-radial__item-icon { display:grid; width:22px; height:22px; place-items:center; }
+#root .vault-radial__item-icon svg, .vault-radial__item-icon svg { width:20px; height:20px; }
+.vault-radial__tooltip {
+  position:absolute;
+  left:50%;
+  top:calc(100% + var(--ds-space-2));
+  display:none;
+  min-width:max-content;
+  align-items:center;
+  gap:var(--ds-space-2);
+  padding:var(--ds-space-1) var(--ds-space-2);
+  border:var(--ds-border-width-control) solid var(--ds-color-border);
+  border-radius:var(--ds-radius-sm);
+  color:var(--ds-color-text);
+  background:var(--ds-color-surface-overlay);
+  box-shadow:0 8px 24px color-mix(in srgb, var(--ds-color-text) 14%, transparent);
+  font-size:var(--ds-font-size-caption);
+  line-height:var(--ds-line-height-caption);
+  font-weight:var(--ds-font-weight-medium);
+  transform:translateX(-50%);
+  pointer-events:none;
+  white-space:nowrap;
+}
+.vault-radial__tooltip small { color:var(--ds-color-text-muted); font:inherit; }
+.vault-radial__item:is(:hover, :focus-visible) .vault-radial__tooltip { display:inline-flex; }
+#root .vault-radial__close, .vault-radial__close {
+  position:absolute;
+  right:var(--ds-space-6);
+  top:var(--ds-space-6);
+  z-index:4;
+  display:grid;
+  width:40px;
+  height:40px;
+  place-items:center;
+  padding:0;
+  border:var(--ds-border-width-control) solid var(--ds-color-border);
+  border-radius:var(--ds-radius-md);
+  color:var(--ds-color-text-secondary);
+  background:var(--ds-color-surface-raised);
+  cursor:pointer;
+}
+.vault-radial__close:is(:hover, :focus-visible) { color:var(--ds-color-text); background:var(--ds-color-surface-hover); }
+.vault-radial__close:focus-visible { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
+#root .vault-radial__close svg, .vault-radial__close svg { width:20px; height:20px; }
+@media (max-width:420px) {
+  .vault-radial__orbit { width:216px; height:216px; }
+  #root .vault-radial__item, .vault-radial__item { --vault-radial-radius:108px!important; width:44px; height:44px; margin:-22px 0 0 -22px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .vault-radial__hub, .vault-radial__hub > span, .vault-radial__item { transition:none; }
+}
