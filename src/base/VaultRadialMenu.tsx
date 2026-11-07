@@ -127,7 +127,9 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
                 : Math.cos(radians) >= 0 ? 'right' : 'left';
           const style: RadialStyle = {
             '--vault-radial-angle': `${angle}deg`,
-            '--vault-radial-radius': '88px',
+            // Geometry belongs to the component contract. Theme variables may
+            // colour the launcher, but must not turn this orbit into another shape.
+            '--vault-radial-radius': '66px',
           };
           return <button
             key={item.id}

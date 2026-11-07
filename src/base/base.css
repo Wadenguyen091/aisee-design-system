@@ -1049,14 +1049,14 @@ input.vault-search:focus-visible {
   inset:auto;
   z-index:auto;
   width:100%;
-  height:340px;
+  height:280px;
   background:var(--ds-color-surface);
   backdrop-filter:none;
 }
 #root .vault-radial__stage, .vault-radial__stage {
   position:relative;
-  width:min(300px, var(--vault-radial-size));
-  height:min(300px, var(--vault-radial-size));
+  width:min(260px, var(--vault-radial-size));
+  height:min(240px, var(--vault-radial-size));
   flex:none;
   transform:none;
 }
@@ -1064,8 +1064,8 @@ input.vault-search:focus-visible {
   position:absolute;
   left:50%;
   top:50%;
-  width:176px;
-  height:176px;
+  width:132px;
+  height:132px;
   border:var(--ds-border-width-control) solid color-mix(in srgb, var(--ds-color-text) 16%, transparent);
   border-radius:50%!important;
   transform:translate(-50%, -50%);
@@ -1077,8 +1077,8 @@ input.vault-search:focus-visible {
   top:50%;
   z-index:2;
   display:grid;
-  width:56px;
-  height:56px;
+  width:44px;
+  height:44px;
   place-items:center;
   border:2px solid var(--ds-color-action);
   border-radius:50%!important;
@@ -1095,16 +1095,16 @@ input.vault-search:focus-visible {
   top:50%;
   z-index:3;
   display:grid;
-  width:36px;
-  height:36px;
-  margin:-18px 0 0 -18px;
+  width:32px;
+  height:32px;
+  margin:-16px 0 0 -16px;
   place-items:center;
   padding:0;
   border:var(--ds-border-width-control) solid var(--ds-color-border);
-  border-radius:10px!important;
+  border-radius:8px!important;
   color:var(--ds-color-text);
   background:var(--ds-color-surface-raised);
-  box-shadow:0 2px 8px color-mix(in srgb, var(--ds-color-text) 7%, transparent);
+  box-shadow:0 1px 4px color-mix(in srgb, var(--ds-color-text) 7%, transparent);
   transform:rotate(var(--vault-radial-angle)) translateY(calc(var(--vault-radial-radius) * -1)) rotate(calc(var(--vault-radial-angle) * -1));
   transform-origin:center;
   cursor:pointer;
@@ -1121,23 +1121,23 @@ input.vault-search:focus-visible {
 }
 #root .vault-radial__item:focus-visible, .vault-radial__item:focus-visible { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
 #root .vault-radial__item:disabled, .vault-radial__item:disabled { cursor:not-allowed; opacity:.38; }
-#root .vault-radial__item-icon, .vault-radial__item-icon { display:grid; width:18px; height:18px; place-items:center; }
-#root .vault-radial__item-icon svg, .vault-radial__item-icon svg { width:16px; height:16px; }
+#root .vault-radial__item-icon, .vault-radial__item-icon { display:grid; width:16px; height:16px; place-items:center; }
+#root .vault-radial__item-icon svg, .vault-radial__item-icon svg { width:15px; height:15px; }
 .vault-radial__label {
   position:absolute;
   display:inline-flex;
   min-width:max-content;
   align-items:center;
-  height:22px;
+  height:20px;
   gap:var(--ds-space-1);
-  padding:0 7px;
+  padding:0 6px;
   border:0;
   border-radius:var(--ds-radius-full)!important;
   color:var(--ds-color-text-secondary);
   background:color-mix(in srgb, var(--ds-color-text) 7%, var(--ds-color-surface));
   box-shadow:none;
-  font-size:11px;
-  line-height:14px;
+  font-size:10px;
+  line-height:12px;
   font-weight:var(--ds-font-weight-medium);
   pointer-events:none;
   white-space:nowrap;
@@ -1156,10 +1156,10 @@ input.vault-search:focus-visible {
 .vault-radial__more {
   position:absolute;
   left:50%;
-  bottom:3px;
+  bottom:7px;
   display:inline-flex;
   min-width:max-content;
-  height:24px;
+  height:20px;
   align-items:center;
   gap:var(--ds-space-1);
   padding:0 var(--ds-space-2);
@@ -1167,7 +1167,7 @@ input.vault-search:focus-visible {
   border-radius:var(--ds-radius-full)!important;
   color:var(--ds-color-text-secondary);
   background:color-mix(in srgb, var(--ds-color-text) 7%, var(--ds-color-surface));
-  font-size:11px;
+  font-size:10px;
   font-weight:var(--ds-font-weight-medium);
   transform:translateX(-50%);
   cursor:pointer;
@@ -1194,9 +1194,7 @@ input.vault-search:focus-visible {
 .vault-radial__close:focus-visible { outline:var(--ds-focus-outline-width) solid var(--ds-color-focus); outline-offset:var(--ds-focus-ring-offset); }
 #root .vault-radial__close svg, .vault-radial__close svg { width:20px; height:20px; }
 @media (max-width:420px) {
-  .vault-radial__orbit { width:168px; height:168px; }
-  #root .vault-radial__item, .vault-radial__item { --vault-radial-radius:84px!important; width:34px; height:34px; margin:-17px 0 0 -17px; }
-  .vault-radial__label { font-size:11px; }
+  .vault-radial__label { font-size:10px; }
 }
 @media (prefers-reduced-motion:reduce) {
   .vault-radial__item { transition:none; }
