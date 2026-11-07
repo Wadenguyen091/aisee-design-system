@@ -120,12 +120,14 @@ export function VaultRadialMenu({ open, onClose, groups, initialGroup, label = '
           const angle = items.length === 7 ? sevenItemAngles[index] : -90 + index * (360 / Math.max(items.length, 1));
           const active = index === focus;
           const radians = angle * Math.PI / 180;
-          const labelSide = Math.sin(radians) < -0.55 ? 'top'
-            : Math.sin(radians) > 0.55 ? 'bottom'
-              : Math.cos(radians) >= 0 ? 'right' : 'left';
+          const labelSide = items.length === 7
+            ? index === 0 ? 'top' : index % 2 === 1 ? 'left' : 'right'
+            : Math.sin(radians) < -0.55 ? 'top'
+              : Math.sin(radians) > 0.55 ? 'bottom'
+                : Math.cos(radians) >= 0 ? 'right' : 'left';
           const style: RadialStyle = {
             '--vault-radial-angle': `${angle}deg`,
-            '--vault-radial-radius': items.length > 6 ? '116px' : '110px',
+            '--vault-radial-radius': '88px',
           };
           return <button
             key={item.id}
