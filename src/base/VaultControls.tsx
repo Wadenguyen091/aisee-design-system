@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ButtonHTMLAttributes, type CSSProperties, type InputHTMLAttributes, type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type CSSProperties, type InputHTMLAttributes, type KeyboardEvent, type ReactNode, type SelectHTMLAttributes } from 'react';
 import { publicAsset } from '../assets';
 import {
   RiArrowDownSFill, RiArrowLeftSFill, RiArrowRightSFill, RiArrowRightSLine, RiCheckboxCircleFill, RiCheckFill, RiCloseFill, RiErrorWarningFill,
@@ -255,6 +255,40 @@ export function VaultSwatchButton({ label, color, selected = false, className = 
     className={`vault-swatch-button ${className}`.trim()}
     style={{ ...props.style, '--vault-swatch-color': color } as CSSProperties}
   ><span aria-hidden="true" /></VaultButton>;
+}
+
+export function VaultChoiceButton({ selected = false, className = '', children, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & {
+  selected?: boolean;
+}) {
+  return <button
+    {...props}
+    type={props.type ?? 'button'}
+    aria-pressed={props['aria-pressed'] ?? (selected || undefined)}
+    data-state={selected ? 'selected' : 'default'}
+    className={`vault-choice-button ${className}`.trim()}
+  >{children}</button>;
+}
+
+export function VaultNativeSelect({ label, showLabel = false, className = '', children, id, ...props }: SelectHTMLAttributes<HTMLSelectElement> & {
+  label: string;
+  showLabel?: boolean;
+}) {
+  const generatedId = useId();
+  const controlId = id ?? generatedId;
+  return <label className={`vault-native-select ${className}`.trim()} htmlFor={controlId}>
+    <span className={showLabel ? 'vault-field__label' : 'sr-only'}>{label}</span>
+    <select {...props} id={controlId}>{children}</select>
+    <RiArrowDownSFill aria-hidden="true" />
+  </label>;
+}
+
+export function VaultFileInput({ label, icon, className = '', disabled = false, ...props }: Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+  label: string;
+  icon?: ReactNode;
+}) {
+  return <label className={`vault-file-input ${className}`.trim()} data-disabled={disabled || undefined}>
+    {icon}<span>{label}</span><input {...props} type="file" disabled={disabled} />
+  </label>;
 }
 
 export function VaultBreadcrumb({ items, label = 'Breadcrumb' }: {
