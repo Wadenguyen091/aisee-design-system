@@ -34,7 +34,7 @@ export type ApplicationFolderProps = {
   className?: string;
 };
 
-const SCALE: Record<ApplicationFolderState, number> = { default: 1, hover: 1.012, selected: 1.018, dragOver: 1.018 };
+const SCALE: Record<ApplicationFolderState, number> = { default: 1, hover: 1.018, selected: 1.012, dragOver: 1.018 };
 
 export function folderRecapSummary(groups: Record<string, number>) {
   return Object.entries(groups).filter(([, count]) => count > 0).slice(0, 3)
@@ -90,8 +90,9 @@ export function ApplicationFolder({ title, count, meta, mark, selected = false, 
         {(isDrop || mark) && <span className="vault-folder__mark" aria-hidden="true">{isDrop ? '+' : mark}</span>}
         <span className="vault-folder__copy">
           <h3>{title}</h3>
-          <small>{isDrop ? 'Thả vào đây' : meta ?? `${count.toLocaleString('vi-VN')} mục`}</small>
+          <small>{isDrop ? 'Thả vào đây' : meta ?? 'Thư mục'}</small>
         </span>
+        {!isDrop && !meta && <span className="vault-folder__count" aria-label={`${count.toLocaleString('vi-VN')} mục`}>{count.toLocaleString('vi-VN')}</span>}
       </div>
     </div>
   </div>;

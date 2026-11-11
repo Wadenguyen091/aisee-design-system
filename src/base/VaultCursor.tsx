@@ -15,10 +15,10 @@ export type VaultCursorTool = 'select' | 'comment' | 'pen';
 
 const TOOL_ICONS = { comment: RiChat1Fill, pen: RiQuillPenFill } as const;
 
-/** Pointer arrow on a 22 grid, tip at (0,0) of the glyph box. */
+/** Compact pointer arrow; the tip stays at the component origin. */
 function CursorArrow() {
-  return <svg className="vault-cursor__glyph" viewBox="0 0 22 22" width="22" height="22" aria-hidden="true" focusable="false">
-    <path d="M1 1.2V17.4L5.8 13.1L9 20.1L12.2 18.7L9.1 11.9H15.5Z" />
+  return <svg className="vault-cursor__glyph" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+    <path d="M1.2 1.1 17.9 8.1 10.7 10.6 7.8 18.1Z" />
   </svg>;
 }
 
