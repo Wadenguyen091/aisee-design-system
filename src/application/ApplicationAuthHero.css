@@ -1,5 +1,5 @@
 .application-auth-hero{position:relative;display:flex;min-width:0;min-height:640px;flex-direction:column;overflow:hidden;color:var(--ds-color-on-action);background:radial-gradient(125% 62% at 50% 100%,#ff9c82 0%,#ff5a3e 14%,#d90b0b 32%,#7a0606 50%,#2a0505 68%,#0a0a0a 86%)}
-.application-auth-hero::after{position:absolute;inset:auto 0 0;z-index:0;height:48px;pointer-events:none;background:linear-gradient(to bottom,transparent,#0a0a0a);content:""}
+.application-auth-hero::after{display:none}
 .application-auth-hero>canvas{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%}
 .application-auth-hero__copy{position:relative;z-index:1;display:grid;max-width:720px;gap:var(--ds-space-4);padding:var(--ds-space-12) var(--ds-space-10) 0}
 .application-auth-hero__copy>span{font-family:var(--ds-font-family-mono);font-size:var(--ds-font-size-caption);font-weight:var(--ds-font-weight-bold);letter-spacing:.14em}

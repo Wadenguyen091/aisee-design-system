@@ -16,6 +16,7 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let width = 0, height = 0, dpr = 1, cx = 0, cy = 0, radius = 0, cell = 6;
     let rings: Ring[] = [];
+    const smoothGaze = { x: 0, y: 0, lastTime: 0 };
 
     const layout = () => {
       const box = host.getBoundingClientRect();
@@ -47,6 +48,11 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       return 1 - Math.max(pulse(2.82, .13), pulse(3.14, .09)) * .93;
     };
     const draw = (time: number) => {
+      const delta = smoothGaze.lastTime ? Math.min(.05, time - smoothGaze.lastTime) : 0;
+      smoothGaze.lastTime = time;
+      const follow = still ? 1 : 1 - Math.exp(-delta * 7.5);
+      smoothGaze.x += (gaze.current.x - smoothGaze.x) * follow;
+      smoothGaze.y += (gaze.current.y - smoothGaze.y) * follow;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
       for (const ring of rings) {
@@ -66,8 +72,8 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
         }
       }
       const eyeHeight = Math.max(.018, .24 * blinkScale(time));
-      const eyeCenterY = -.04 + gaze.current.y * .055;
-      const eyeOffsetX = gaze.current.x * .065;
+      const eyeCenterY = -.04 + smoothGaze.y * .055;
+      const eyeOffsetX = smoothGaze.x * .065;
       for (let gridY = -radius; gridY <= radius; gridY += cell) for (let gridX = -radius; gridX <= radius; gridX += cell) {
         const normalizedX = gridX / radius, normalizedY = gridY / radius;
         const distance = normalizedX * normalizedX + normalizedY * normalizedY;
