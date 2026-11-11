@@ -6,7 +6,7 @@
 .application-auth-hero__copy>h1{max-width:9em;margin:0;font-size:clamp(48px,5.4vw,80px);font-weight:var(--ds-font-weight-bold);line-height:.94;letter-spacing:-.045em;text-transform:uppercase;text-wrap:balance}
 .application-auth-hero__stage{position:relative;z-index:0;display:grid;min-height:320px;flex:1;place-items:center}
 .application-auth-agent-face{position:relative;display:block;width:132px;height:104px;transform:translate(var(--aisee-look-x),var(--aisee-look-y));transition:transform 180ms cubic-bezier(.2,.8,.2,1)}
-.application-auth-agent-face__eye{position:absolute;display:block;width:31px;height:52px;border-radius:999px;background:#fff;box-shadow:0 0 20px rgba(255,255,255,.16);transform:rotate(-36deg);transform-origin:center;animation:aisee-agent-blink 6.4s ease-in-out infinite}
+.application-auth-agent-face__eye{position:absolute;display:block;width:31px;height:52px;border-radius:999px!important;background:#fff;box-shadow:0 0 20px rgba(255,255,255,.16);transform:rotate(-36deg);transform-origin:center;animation:aisee-agent-blink 6.4s ease-in-out infinite}
 .application-auth-agent-face__eye--left{top:35px;left:25px}
 .application-auth-agent-face__eye--right{top:8px;right:23px;animation-delay:.04s}
 @keyframes aisee-agent-blink{0%,44%,48%,100%{scale:1 1}46%{scale:1 .08}}
