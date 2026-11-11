@@ -14,7 +14,7 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
     const ctx = el?.getContext('2d');
     if (!el || !host || !ctx) return;
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let width = 0, height = 0, dpr = 1, cx = 0, cy = 0, radius = 0, cell = 6;
+    let width = 0, height = 0, dpr = 1, cx = 0, cy = 0, radius = 0;
     let rings: Ring[] = [];
     const smoothGaze = { x: 0, y: 0, lastTime: 0 };
 
@@ -31,7 +31,6 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       cx = width / 2;
       cy = top + areaHeight / 2;
       radius = Math.max(56, Math.min(116, (areaHeight - 32) / 2, width * .23));
-      cell = width < 620 ? 5 : 6;
       const base = Math.max(radius * 1.85, Math.min(width, height * 1.2) * .3);
       rings = [1, 1.38, 1.8].map((scale, index) => ({ r: base * scale, step: 9 + index * 2, speed: (index % 2 ? -1 : 1) * (.012 + index * .004), alpha: .52 - index * .1 }));
     };
@@ -74,32 +73,50 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       const eyeHeight = Math.max(.018, .24 * blinkScale(time));
       const eyeCenterY = -.04 + smoothGaze.y * .1;
       const eyeOffsetX = smoothGaze.x * .12;
-      const headAngle = smoothGaze.x * .11;
-      const headCosine = Math.cos(headAngle), headSine = Math.sin(headAngle);
-      const headScaleX = 1 - Math.abs(smoothGaze.x) * .045;
-      const headScaleY = 1 - Math.abs(smoothGaze.y) * .025;
       const headCenterX = cx + smoothGaze.x * 8;
       const headCenterY = cy + smoothGaze.y * 6;
-      for (let gridY = -radius; gridY <= radius; gridY += cell) for (let gridX = -radius; gridX <= radius; gridX += cell) {
-        const normalizedX = gridX / radius, normalizedY = gridY / radius;
-        const distance = normalizedX * normalizedX + normalizedY * normalizedY;
-        if (distance > 1) continue;
-        const normalizedZ = Math.sqrt(1 - distance);
-        const eyeDistance = Math.min(
-          roundedRectDistance(normalizedX, normalizedY, -.22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
-          roundedRectDistance(normalizedX, normalizedY, .22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
-        );
-        const eyeStrength = Math.max(0, Math.min(1, (.035 - eyeDistance) / .07));
-        const shade = Math.max(0, normalizedX * -.45 + normalizedY * -.55 + normalizedZ * .7);
-        const edge = 1 - Math.pow(distance, 3);
-        const baseAlpha = .08 + .22 * shade;
-        const alpha = (baseAlpha + (.98 - baseAlpha) * eyeStrength) * edge;
+      const yaw = smoothGaze.x * .34 + Math.sin(time * .22) * .035;
+      const pitch = smoothGaze.y * -.22 + Math.sin(time * .17) * .018;
+      const yawCosine = Math.cos(yaw), yawSine = Math.sin(yaw);
+      const pitchCosine = Math.cos(pitch), pitchSine = Math.sin(pitch);
+      const latitudeSteps = width < 620 ? 18 : 25;
+      const longitudeSteps = width < 620 ? 36 : 50;
+      const points: Array<{ x: number; y: number; z: number; eye: number }> = [];
+      for (let latitudeIndex = 1; latitudeIndex < latitudeSteps; latitudeIndex += 1) {
+        const latitude = -Math.PI / 2 + latitudeIndex / latitudeSteps * Math.PI;
+        const latitudeCosine = Math.cos(latitude);
+        const latitudeSine = Math.sin(latitude);
+        const stagger = latitudeIndex % 2 ? .5 : 0;
+        for (let longitudeIndex = 0; longitudeIndex < longitudeSteps; longitudeIndex += 1) {
+          const longitude = (longitudeIndex + stagger) / longitudeSteps * Math.PI * 2;
+          const sourceX = latitudeCosine * Math.sin(longitude);
+          const sourceY = latitudeSine;
+          const sourceZ = latitudeCosine * Math.cos(longitude);
+          const yawX = sourceX * yawCosine + sourceZ * yawSine;
+          const yawZ = -sourceX * yawSine + sourceZ * yawCosine;
+          const rotatedY = sourceY * pitchCosine - yawZ * pitchSine;
+          const rotatedZ = sourceY * pitchSine + yawZ * pitchCosine;
+          const perspective = 1 / (1.08 - rotatedZ * .08);
+          const projectedX = yawX * perspective;
+          const projectedY = rotatedY * perspective;
+          const eyeDistance = Math.min(
+            roundedRectDistance(projectedX, projectedY, -.22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
+            roundedRectDistance(projectedX, projectedY, .22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
+          );
+          const eyeStrength = rotatedZ > .32 ? Math.max(0, Math.min(1, (.035 - eyeDistance) / .07)) : 0;
+          points.push({ x: projectedX, y: projectedY, z: rotatedZ, eye: eyeStrength });
+        }
+      }
+      points.sort((a, b) => a.z - b.z);
+      for (const point of points) {
+        const depth = (point.z + 1) / 2;
+        const directionalLight = Math.max(0, point.z * .72 - point.x * .2 - point.y * .14);
+        const baseAlpha = .025 + depth * .055 + directionalLight * .16;
+        const alpha = baseAlpha + (.98 - baseAlpha) * point.eye;
         if (alpha < .02) continue;
-        const pixel = cell * (.54 + .18 * eyeStrength);
+        const pixel = 1.25 + depth * 1.7 + point.eye * 1.2;
         ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
-        const projectedX = (gridX * headCosine - gridY * headSine) * headScaleX;
-        const projectedY = (gridX * headSine + gridY * headCosine) * headScaleY;
-        ctx.fillRect(headCenterX + projectedX - pixel / 2, headCenterY + projectedY - pixel / 2, pixel, pixel);
+        ctx.fillRect(headCenterX + point.x * radius - pixel / 2, headCenterY + point.y * radius - pixel / 2, pixel, pixel);
       }
     };
 
