@@ -1,4 +1,4 @@
-.application-auth-hero{position:relative;display:flex;min-width:0;min-height:640px;flex-direction:column;overflow:hidden;color:var(--ds-color-on-action);background:radial-gradient(125% 62% at 50% 100%,#ff9c82 0%,#ff5a3e 14%,#d90b0b 32%,#7a0606 50%,#2a0505 68%,#0a0a0a 86%)}
+.application-auth-hero{position:relative;display:flex;min-width:0;min-height:640px;flex-direction:column;overflow:hidden;color:var(--ds-color-on-action);background:radial-gradient(ellipse 76% 46% at 50% 108%,rgba(255,100,72,.72) 0%,rgba(238,35,29,.62) 28%,rgba(178,0,0,.4) 52%,rgba(92,0,0,.16) 72%,transparent 88%),linear-gradient(180deg,#080808 0%,#080808 40%,#120303 56%,#350000 72%,#670000 87%,#a80000 100%)}
 .application-auth-hero::after{display:none}
 .application-auth-hero>canvas{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%}
 .application-auth-hero__copy{position:relative;z-index:1;display:grid;max-width:720px;gap:var(--ds-space-4);padding:var(--ds-space-12) var(--ds-space-10) 0}
