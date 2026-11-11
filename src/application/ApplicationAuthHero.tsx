@@ -13,7 +13,7 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
     const ctx = el?.getContext('2d');
     if (!el || !host || !ctx) return;
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let width = 0, height = 0, dpr = 1, cx = 0, cy = 0, radius = 0;
+    let width = 0, height = 0, dpr = 1, cx = 0, cy = 0, radius = 0, cell = 6;
     let rings: Ring[] = [];
 
     const layout = () => {
@@ -29,10 +29,12 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       cx = width / 2;
       cy = top + areaHeight / 2;
       radius = Math.max(56, Math.min(116, (areaHeight - 32) / 2, width * .23));
+      cell = width < 620 ? 5 : 6;
       const base = Math.max(radius * 1.85, Math.min(width, height * 1.2) * .3);
       rings = [1, 1.38, 1.8].map((scale, index) => ({ r: base * scale, step: 9 + index * 2, speed: (index % 2 ? -1 : 1) * (.012 + index * .004), alpha: .52 - index * .1 }));
     };
 
+    const land = (x: number, y: number, z: number) => Math.sin(x * 3.1 + 1.3) * Math.sin(y * 2.6 - .4) * Math.cos(z * 2.9 + .7) + .55 * Math.sin(x * 6.3 + y * 4.1 + z * 2.2) + .3 * Math.cos(y * 9.5 - x * 3.3);
     const draw = (time: number) => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
@@ -51,6 +53,26 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
           const size = bright ? 2.6 : 1.8;
           ctx.fillRect(x - size / 2, y - size / 2, size, size);
         }
+      }
+      const turn = time * .18, cosine = Math.cos(turn), sine = Math.sin(turn);
+      const tilt = -.35, tiltCosine = Math.cos(tilt), tiltSine = Math.sin(tilt);
+      const pixel = cell * .62;
+      for (let gridY = -radius; gridY <= radius; gridY += cell) for (let gridX = -radius; gridX <= radius; gridX += cell) {
+        const normalizedX = gridX / radius, normalizedY = gridY / radius;
+        const distance = normalizedX * normalizedX + normalizedY * normalizedY;
+        if (distance > 1) continue;
+        const normalizedZ = Math.sqrt(1 - distance);
+        const tiltedY = normalizedY * tiltCosine - normalizedZ * tiltSine;
+        const tiltedZ = normalizedY * tiltSine + normalizedZ * tiltCosine;
+        const turnedX = normalizedX * cosine + tiltedZ * sine;
+        const turnedZ = -normalizedX * sine + tiltedZ * cosine;
+        const lit = land(turnedX, tiltedY, turnedZ) > .35;
+        const shade = Math.max(0, normalizedX * -.45 + normalizedY * -.55 + normalizedZ * .7);
+        const edge = 1 - Math.pow(distance, 3);
+        const alpha = lit ? (.35 + .65 * shade) * edge : .07 * edge;
+        if (alpha < .02) continue;
+        ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
+        ctx.fillRect(cx + gridX - pixel / 2, cy + gridY - pixel / 2, pixel, pixel);
       }
     };
 
@@ -81,37 +103,10 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
     <canvas ref={canvas} aria-hidden="true" />
     <div className="application-auth-hero__copy"><span>{eyebrow}</span><h1>{title}</h1></div>
     <div ref={stage} className="application-auth-hero__stage" aria-hidden="true">
-      <svg className="application-auth-agent" viewBox="0 0 240 220" role="presentation">
-        <defs>
-          <linearGradient id="aisee-agent-shell" x1="42" y1="30" x2="194" y2="194" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#FFFFFF" />
-            <stop offset="1" stopColor="#D9D9D9" />
-          </linearGradient>
-          <filter id="aisee-agent-shadow" x="-40%" y="-40%" width="180%" height="200%">
-            <feDropShadow dx="0" dy="16" stdDeviation="14" floodColor="#260000" floodOpacity=".42" />
-          </filter>
-        </defs>
-        <g className="application-auth-agent__float" filter="url(#aisee-agent-shadow)">
-          <path d="M120 22c48 0 82 31 82 77v31c0 43-35 78-78 78h-8c-43 0-78-35-78-78V99c0-46 34-77 82-77Z" fill="url(#aisee-agent-shell)" />
-          <path d="M65 92c0-26 22-47 49-47h12c27 0 49 21 49 47v25c0 29-23 52-52 52h-6c-29 0-52-23-52-52V92Z" fill="#0A0A0A" />
-          <path d="M40 104H29c-8 0-14 6-14 14v8c0 8 6 14 14 14h11v-36Zm160 0h11c8 0 14 6 14 14v8c0 8-6 14-14 14h-11v-36Z" fill="#F2F2F2" />
-          <g className="application-auth-agent__eyes">
-            <g className="application-auth-agent__eye application-auth-agent__eye--left">
-              <rect x="82" y="83" width="25" height="38" rx="12.5" fill="#FFFFFF" />
-              <circle className="application-auth-agent__pupil" cx="94.5" cy="103" r="5.5" fill="#0A0A0A" />
-            </g>
-            <g className="application-auth-agent__eye application-auth-agent__eye--right">
-              <rect x="133" y="83" width="25" height="38" rx="12.5" fill="#FFFFFF" />
-              <circle className="application-auth-agent__pupil" cx="145.5" cy="103" r="5.5" fill="#0A0A0A" />
-            </g>
-          </g>
-          <path d="M105 141c9 7 21 7 30 0" fill="none" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" />
-          <circle cx="69" cy="133" r="5" fill="#E00000" opacity=".78" />
-          <circle cx="171" cy="133" r="5" fill="#E00000" opacity=".78" />
-          <path d="M120 22V9" stroke="#F2F2F2" strokeWidth="6" strokeLinecap="round" />
-          <circle cx="120" cy="7" r="7" fill="#FFFFFF" />
-        </g>
-      </svg>
+      <span className="application-auth-agent-face">
+        <i className="application-auth-agent-face__eye application-auth-agent-face__eye--left" />
+        <i className="application-auth-agent-face__eye application-auth-agent-face__eye--right" />
+      </span>
     </div>
   </section>;
 }
