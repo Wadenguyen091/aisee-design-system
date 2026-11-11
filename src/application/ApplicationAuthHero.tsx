@@ -36,11 +36,11 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       rings = [1, 1.38, 1.8].map((scale, index) => ({ r: base * scale, step: 9 + index * 2, speed: (index % 2 ? -1 : 1) * (.012 + index * .004), alpha: .52 - index * .1 }));
     };
 
-    const roundedRect = (x: number, y: number, centerX: number, centerY: number, halfWidth: number, halfHeight: number) => {
+    const roundedRectDistance = (x: number, y: number, centerX: number, centerY: number, halfWidth: number, halfHeight: number) => {
       const corner = Math.min(halfWidth, halfHeight);
       const qx = Math.abs(x - centerX) - halfWidth + corner;
       const qy = Math.abs(y - centerY) - halfHeight + corner;
-      return Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0) <= corner;
+      return Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0) - corner;
     };
     const blinkScale = (time: number) => {
       const phase = time % 6.4;
@@ -72,20 +72,24 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
         }
       }
       const eyeHeight = Math.max(.018, .24 * blinkScale(time));
-      const eyeCenterY = -.04 + smoothGaze.y * .055;
-      const eyeOffsetX = smoothGaze.x * .065;
+      const eyeCenterY = -.04 + smoothGaze.y * .1;
+      const eyeOffsetX = smoothGaze.x * .12;
       for (let gridY = -radius; gridY <= radius; gridY += cell) for (let gridX = -radius; gridX <= radius; gridX += cell) {
         const normalizedX = gridX / radius, normalizedY = gridY / radius;
         const distance = normalizedX * normalizedX + normalizedY * normalizedY;
         if (distance > 1) continue;
         const normalizedZ = Math.sqrt(1 - distance);
-        const eye = roundedRect(normalizedX, normalizedY, -.22 + eyeOffsetX, eyeCenterY, .125, eyeHeight)
-          || roundedRect(normalizedX, normalizedY, .22 + eyeOffsetX, eyeCenterY, .125, eyeHeight);
+        const eyeDistance = Math.min(
+          roundedRectDistance(normalizedX, normalizedY, -.22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
+          roundedRectDistance(normalizedX, normalizedY, .22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
+        );
+        const eyeStrength = Math.max(0, Math.min(1, (.035 - eyeDistance) / .07));
         const shade = Math.max(0, normalizedX * -.45 + normalizedY * -.55 + normalizedZ * .7);
         const edge = 1 - Math.pow(distance, 3);
-        const alpha = (eye ? .98 : .08 + .22 * shade) * edge;
+        const baseAlpha = .08 + .22 * shade;
+        const alpha = (baseAlpha + (.98 - baseAlpha) * eyeStrength) * edge;
         if (alpha < .02) continue;
-        const pixel = cell * (eye ? .72 : .54);
+        const pixel = cell * (.54 + .18 * eyeStrength);
         ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
         ctx.fillRect(cx + gridX - pixel / 2, cy + gridY - pixel / 2, pixel, pixel);
       }
