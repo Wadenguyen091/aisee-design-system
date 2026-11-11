@@ -286,6 +286,7 @@ export function VaultNativeSelect({ label, showLabel = false, className = '', ch
 export function VaultFileInput({ label, icon, className = '', disabled = false, ...props }: Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   label: string;
   icon?: ReactNode;
+  ref?: Ref<HTMLInputElement>;
 }) {
   return <label className={`vault-file-input ${className}`.trim()} data-disabled={disabled || undefined}>
     {icon}<span>{label}</span><input {...props} type="file" disabled={disabled} />
