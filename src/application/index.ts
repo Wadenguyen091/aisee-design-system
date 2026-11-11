@@ -1,5 +1,6 @@
 /** Application components: composed patterns assembled only from base components. */
 export * from './ApplicationComponents';
+export * from './ApplicationAuthHero';
 export * from './ApplicationSearch';
 export * from './ApplicationDashboard';
 export * from './ApplicationMap';
