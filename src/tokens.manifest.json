@@ -965,9 +965,9 @@
     "group": "Text",
     "token": "text/disabled",
     "source": "neutral/700",
-    "hex": "#333333",
+    "hex": "#242424",
     "note": "Trạng thái vô hiệu",
-    "contrast": 1.4705661285102438
+    "contrast": 1.28275590431952
    },
    {
     "group": "Text",
@@ -1129,14 +1129,14 @@
     "group": "System BG",
     "token": "system-bg/fg-under",
     "source": "neutral/950",
-    "hex": "#131313",
+    "hex": "#090909",
     "note": "Lớp nền thấp nhất · tối nhất trong hệ nền"
    },
    {
     "group": "System BG",
     "token": "system-bg/fg-alpha",
     "source": "neutral/900",
-    "hex": "#1C1C1C",
+    "hex": "#0F0F0F",
     "note": "Foreground trong suốt",
     "opacity": 5
    },
@@ -1144,28 +1144,28 @@
     "group": "System BG",
     "token": "system-bg/fg-base",
     "source": "neutral/900",
-    "hex": "#1C1C1C",
+    "hex": "#0F0F0F",
     "note": "Foreground mặc định"
    },
    {
     "group": "System BG",
     "token": "system-bg/fg-alt",
     "source": "neutral/800",
-    "hex": "#262626",
+    "hex": "#181818",
     "note": "Foreground thay thế"
    },
    {
     "group": "System BG",
     "token": "system-bg/fg-weak",
     "source": "neutral/700",
-    "hex": "#333333",
+    "hex": "#242424",
     "note": "Foreground yếu · sáng nhất trong hệ nền"
    },
    {
     "group": "System BG",
     "token": "system-bg/modal",
     "source": "neutral/800",
-    "hex": "#262626",
+    "hex": "#181818",
     "note": "Nền modal"
    },
    {
