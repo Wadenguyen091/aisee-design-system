@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type CSSProperties, type InputHTMLAttributes, type KeyboardEvent, type ReactNode, type SelectHTMLAttributes } from 'react';
+import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type CSSProperties, type InputHTMLAttributes, type KeyboardEvent, type ReactNode, type Ref, type SelectHTMLAttributes } from 'react';
 import { publicAsset } from '../assets';
 import {
   RiArrowDownSFill, RiArrowLeftSFill, RiArrowRightSFill, RiArrowRightSLine, RiCheckboxCircleFill, RiCheckFill, RiCloseFill, RiErrorWarningFill,
@@ -10,6 +10,7 @@ export type VaultControlTone = 'brand' | 'neutral' | 'danger' | 'semantic';
 type LegacyVariant = 'primary' | 'secondary' | 'tertiary' | 'text';
 
 export type VaultButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  ref?: Ref<HTMLButtonElement>;
   /** @deprecated Prefer priority + tone. Kept while application controls migrate. */
   variant?: 'primary' | 'secondary' | 'tertiary';
   priority?: VaultControlPriority;
