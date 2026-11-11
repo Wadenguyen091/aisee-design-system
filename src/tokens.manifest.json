@@ -1129,14 +1129,14 @@
     "group": "System BG",
     "token": "system-bg/fg-under",
     "source": "neutral/950",
-    "hex": "#090909",
+    "hex": "#080808",
     "note": "Lớp nền thấp nhất · tối nhất trong hệ nền"
    },
    {
     "group": "System BG",
     "token": "system-bg/fg-alpha",
     "source": "neutral/900",
-    "hex": "#0F0F0F",
+    "hex": "#0D0D0D",
     "note": "Foreground trong suốt",
     "opacity": 5
    },
@@ -1144,28 +1144,28 @@
     "group": "System BG",
     "token": "system-bg/fg-base",
     "source": "neutral/900",
-    "hex": "#0F0F0F",
+    "hex": "#0D0D0D",
     "note": "Foreground mặc định"
    },
    {
     "group": "System BG",
     "token": "system-bg/fg-alt",
     "source": "neutral/800",
-    "hex": "#181818",
+    "hex": "#141414",
     "note": "Foreground thay thế"
    },
    {
     "group": "System BG",
     "token": "system-bg/fg-weak",
     "source": "neutral/700",
-    "hex": "#242424",
+    "hex": "#1F1F1F",
     "note": "Foreground yếu · sáng nhất trong hệ nền"
    },
    {
     "group": "System BG",
     "token": "system-bg/modal",
     "source": "neutral/800",
-    "hex": "#181818",
+    "hex": "#1A1A1A",
     "note": "Nền modal"
    },
    {

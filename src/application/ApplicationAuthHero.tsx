@@ -74,6 +74,12 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       const eyeHeight = Math.max(.018, .24 * blinkScale(time));
       const eyeCenterY = -.04 + smoothGaze.y * .1;
       const eyeOffsetX = smoothGaze.x * .12;
+      const headAngle = smoothGaze.x * .11;
+      const headCosine = Math.cos(headAngle), headSine = Math.sin(headAngle);
+      const headScaleX = 1 - Math.abs(smoothGaze.x) * .045;
+      const headScaleY = 1 - Math.abs(smoothGaze.y) * .025;
+      const headCenterX = cx + smoothGaze.x * 8;
+      const headCenterY = cy + smoothGaze.y * 6;
       for (let gridY = -radius; gridY <= radius; gridY += cell) for (let gridX = -radius; gridX <= radius; gridX += cell) {
         const normalizedX = gridX / radius, normalizedY = gridY / radius;
         const distance = normalizedX * normalizedX + normalizedY * normalizedY;
@@ -91,7 +97,9 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
         if (alpha < .02) continue;
         const pixel = cell * (.54 + .18 * eyeStrength);
         ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
-        ctx.fillRect(cx + gridX - pixel / 2, cy + gridY - pixel / 2, pixel, pixel);
+        const projectedX = (gridX * headCosine - gridY * headSine) * headScaleX;
+        const projectedY = (gridX * headSine + gridY * headCosine) * headScaleY;
+        ctx.fillRect(headCenterX + projectedX - pixel / 2, headCenterY + projectedY - pixel / 2, pixel, pixel);
       }
     };
 
