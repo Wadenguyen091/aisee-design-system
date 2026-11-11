@@ -1,9 +1,9 @@
-import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react';
 
 /**
  * Folder — the Board's one container object. Neutral (no per-folder hue): back panel with a right tab,
  * a paper sheet that rises on hover / drop, and a front face with title and count.
- * Shell 208×162 inside a 240 wrapper (Board drop zones depend on it). Hovering for 150ms opens a recap
+ * Shell 208×148 inside a responsive wrapper (Board drop zones depend on it). Hovering for 150ms opens a recap
  * of the first items above the folder. Composed only from tokens; the Board passes its own thumbnails.
  */
 export type ApplicationFolderState = 'default' | 'hover' | 'selected' | 'dragOver';
@@ -82,7 +82,7 @@ export function ApplicationFolder({ title, count, meta, mark, selected = false, 
         <p>{recap.summary}</p>
       </div>
     </div>}
-    <div className="vault-folder__shell" style={{ transform: `scale(${SCALE[state]})` }}>
+    <div className="vault-folder__shell" style={{ '--folder-state-scale': SCALE[state] } as CSSProperties}>
       <div data-folder-back className="vault-folder__back" />
       <div data-folder-tab className="vault-folder__tab" />
       <div data-folder-paper className="vault-folder__paper" />
