@@ -1,10 +1,17 @@
 {
   "name": "@aisee/design-system",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Base design knowledge, tokens and React components for AISEE and its Mini Apps.",
   "type": "module",
-  "sideEffects": ["**/*.css"],
-  "files": ["src", "docs", "AISEE_DESIGN_KNOWLEDGE.md", "README.md"],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "src",
+    "docs",
+    "AISEE_DESIGN_KNOWLEDGE.md",
+    "README.md"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./styles.css": "./src/styles.css",
