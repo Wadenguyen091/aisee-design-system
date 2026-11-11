@@ -71,8 +71,6 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
         }
       }
       const eyeHeight = Math.max(.018, .24 * blinkScale(time));
-      const eyeCenterY = -.04 + smoothGaze.y * .1;
-      const eyeOffsetX = smoothGaze.x * .12;
       const headCenterX = cx + smoothGaze.x * 8;
       const headCenterY = cy + smoothGaze.y * 6;
       const yaw = smoothGaze.x * .34 + Math.sin(time * .22) * .035;
@@ -92,6 +90,11 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
           const sourceX = latitudeCosine * Math.sin(longitude);
           const sourceY = latitudeSine;
           const sourceZ = latitudeCosine * Math.cos(longitude);
+          const eyeDistance = Math.min(
+            roundedRectDistance(sourceX, sourceY, -.22, -.04, .125, eyeHeight),
+            roundedRectDistance(sourceX, sourceY, .22, -.04, .125, eyeHeight),
+          );
+          const eyeStrength = sourceZ > .32 ? Math.max(0, Math.min(1, (.035 - eyeDistance) / .07)) : 0;
           const yawX = sourceX * yawCosine + sourceZ * yawSine;
           const yawZ = -sourceX * yawSine + sourceZ * yawCosine;
           const rotatedY = sourceY * pitchCosine - yawZ * pitchSine;
@@ -99,11 +102,6 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
           const perspective = 1 / (1.08 - rotatedZ * .08);
           const projectedX = yawX * perspective;
           const projectedY = rotatedY * perspective;
-          const eyeDistance = Math.min(
-            roundedRectDistance(projectedX, projectedY, -.22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
-            roundedRectDistance(projectedX, projectedY, .22 + eyeOffsetX, eyeCenterY, .125, eyeHeight),
-          );
-          const eyeStrength = rotatedZ > .32 ? Math.max(0, Math.min(1, (.035 - eyeDistance) / .07)) : 0;
           points.push({ x: projectedX, y: projectedY, z: rotatedZ, eye: eyeStrength });
         }
       }
