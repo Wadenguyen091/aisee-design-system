@@ -958,6 +958,41 @@ input.vault-search:focus-visible {
 .vault-dropdown-field { position:relative; }
 #root .vault-dropdown-field > .vault-dropdown-menu { position:absolute; z-index:var(--ds-z-popover); top:calc(100% + var(--ds-space-1)); right:0; left:0; width:auto; margin:0; }
 
+/* Refined dropdown language: controls stay quiet; the open menu reads as one
+   floating surface instead of a compact data table with divider rails. */
+#root .vault-dropdown-trigger {
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ds-color-surface) 38%,transparent);
+  transition:color var(--ds-duration-fast) var(--ds-ease-standard),background-color var(--ds-duration-fast) var(--ds-ease-standard),border-color var(--ds-duration-fast) var(--ds-ease-standard),box-shadow var(--ds-duration-fast) var(--ds-ease-standard);
+}
+#root .vault-dropdown-trigger[aria-expanded='true'] {
+  border-color:var(--ds-control-border-hover)!important;
+  background:var(--ds-color-surface-raised)!important;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--ds-color-focus) 10%,transparent)!important;
+}
+#root .vault-dropdown-menu {
+  gap:2px;
+  overflow:visible;
+  border:0!important;
+  border-radius:12px!important;
+  padding:6px;
+  background:color-mix(in srgb,var(--ds-color-surface) 96%,transparent);
+  box-shadow:0 18px 48px color-mix(in srgb,#000 18%,transparent),0 3px 10px color-mix(in srgb,#000 10%,transparent);
+  backdrop-filter:blur(18px);
+}
+#root .vault-dropdown-menu::after { border-radius:12px!important; }
+#root .vault-dropdown-menu > button {
+  min-height:40px;
+  border:0!important;
+  border-radius:8px!important;
+  padding-inline:10px;
+  color:var(--ds-color-text-secondary);
+}
+#root .vault-dropdown-menu > button + button { border-top:0!important; }
+#root .vault-dropdown-menu > button:is(:hover,:focus-visible):not(:disabled) { color:var(--ds-color-text); background:var(--vault-row-hover); }
+#root .vault-dropdown-menu > button[aria-selected='true'] { color:var(--ds-color-text); background:var(--vault-row-selected); }
+#root .vault-dropdown-menu > button[aria-selected='true']::before { content:none; }
+#root .vault-dropdown-menu > button[aria-selected='true']::after { position:absolute; inset:0; z-index:-1; border-radius:8px; background:var(--vault-row-selected); content:''; }
+
 /* Single divider lines fade out from the content they separate (100% → 0). */
 .vault-fade-rule::before { background:linear-gradient(90deg, transparent, var(--ds-color-border-subtle))!important; }
 .vault-fade-rule::after { background:linear-gradient(90deg, var(--ds-color-border-subtle), transparent)!important; }
