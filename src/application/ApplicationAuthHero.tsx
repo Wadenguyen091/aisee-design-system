@@ -6,6 +6,7 @@ type Ring = { r: number; step: number; speed: number; alpha: number };
 export function ApplicationAuthHero({ title = 'Where your studio works with AI.', eyebrow = 'AISEE' }: { title?: string; eyebrow?: string }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const stage = useRef<HTMLDivElement>(null);
+  const gaze = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const el = canvas.current;
@@ -34,7 +35,17 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       rings = [1, 1.38, 1.8].map((scale, index) => ({ r: base * scale, step: 9 + index * 2, speed: (index % 2 ? -1 : 1) * (.012 + index * .004), alpha: .52 - index * .1 }));
     };
 
-    const land = (x: number, y: number, z: number) => Math.sin(x * 3.1 + 1.3) * Math.sin(y * 2.6 - .4) * Math.cos(z * 2.9 + .7) + .55 * Math.sin(x * 6.3 + y * 4.1 + z * 2.2) + .3 * Math.cos(y * 9.5 - x * 3.3);
+    const roundedRect = (x: number, y: number, centerX: number, centerY: number, halfWidth: number, halfHeight: number) => {
+      const corner = Math.min(halfWidth, halfHeight);
+      const qx = Math.abs(x - centerX) - halfWidth + corner;
+      const qy = Math.abs(y - centerY) - halfHeight + corner;
+      return Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0) <= corner;
+    };
+    const blinkScale = (time: number) => {
+      const phase = time % 6.4;
+      const pulse = (center: number, width: number) => Math.max(0, 1 - Math.abs(phase - center) / width);
+      return 1 - Math.max(pulse(2.82, .13), pulse(3.14, .09)) * .93;
+    };
     const draw = (time: number) => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
@@ -54,23 +65,21 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
           ctx.fillRect(x - size / 2, y - size / 2, size, size);
         }
       }
-      const turn = time * .18, cosine = Math.cos(turn), sine = Math.sin(turn);
-      const tilt = -.35, tiltCosine = Math.cos(tilt), tiltSine = Math.sin(tilt);
-      const pixel = cell * .62;
+      const eyeHeight = Math.max(.018, .24 * blinkScale(time));
+      const eyeCenterY = -.04 + gaze.current.y * .055;
+      const eyeOffsetX = gaze.current.x * .065;
       for (let gridY = -radius; gridY <= radius; gridY += cell) for (let gridX = -radius; gridX <= radius; gridX += cell) {
         const normalizedX = gridX / radius, normalizedY = gridY / radius;
         const distance = normalizedX * normalizedX + normalizedY * normalizedY;
         if (distance > 1) continue;
         const normalizedZ = Math.sqrt(1 - distance);
-        const tiltedY = normalizedY * tiltCosine - normalizedZ * tiltSine;
-        const tiltedZ = normalizedY * tiltSine + normalizedZ * tiltCosine;
-        const turnedX = normalizedX * cosine + tiltedZ * sine;
-        const turnedZ = -normalizedX * sine + tiltedZ * cosine;
-        const lit = land(turnedX, tiltedY, turnedZ) > .35;
+        const eye = roundedRect(normalizedX, normalizedY, -.22 + eyeOffsetX, eyeCenterY, .125, eyeHeight)
+          || roundedRect(normalizedX, normalizedY, .22 + eyeOffsetX, eyeCenterY, .125, eyeHeight);
         const shade = Math.max(0, normalizedX * -.45 + normalizedY * -.55 + normalizedZ * .7);
         const edge = 1 - Math.pow(distance, 3);
-        const alpha = lit ? (.35 + .65 * shade) * edge : .07 * edge;
+        const alpha = (eye ? .98 : .08 + .22 * shade) * edge;
         if (alpha < .02) continue;
+        const pixel = cell * (eye ? .72 : .54);
         ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
         ctx.fillRect(cx + gridX - pixel / 2, cy + gridY - pixel / 2, pixel, pixel);
       }
@@ -90,23 +99,14 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
     const box = event.currentTarget.getBoundingClientRect();
     const x = Math.max(-1, Math.min(1, (event.clientX - box.left) / box.width * 2 - 1));
     const y = Math.max(-1, Math.min(1, (event.clientY - box.top) / box.height * 2 - 1));
-    event.currentTarget.style.setProperty('--aisee-look-x', `${(x * 5).toFixed(2)}px`);
-    event.currentTarget.style.setProperty('--aisee-look-y', `${(y * 4).toFixed(2)}px`);
+    gaze.current = { x, y };
   };
 
-  const rest = (event: PointerEvent<HTMLElement>) => {
-    event.currentTarget.style.setProperty('--aisee-look-x', '0px');
-    event.currentTarget.style.setProperty('--aisee-look-y', '0px');
-  };
+  const rest = () => { gaze.current = { x: 0, y: 0 }; };
 
   return <section className="application-auth-hero" aria-label={title} onPointerMove={look} onPointerLeave={rest}>
     <canvas ref={canvas} aria-hidden="true" />
     <div className="application-auth-hero__copy"><span>{eyebrow}</span><h1>{title}</h1></div>
-    <div ref={stage} className="application-auth-hero__stage" aria-hidden="true">
-      <span className="application-auth-agent-face">
-        <i className="application-auth-agent-face__eye application-auth-agent-face__eye--left" />
-        <i className="application-auth-agent-face__eye application-auth-agent-face__eye--right" />
-      </span>
-    </div>
+    <div ref={stage} className="application-auth-hero__stage" aria-hidden="true" />
   </section>;
 }
