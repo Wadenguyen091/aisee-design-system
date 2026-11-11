@@ -379,16 +379,17 @@ const passwordScore = (value: string) => [value.length >= 8, /[A-Z]/.test(value)
 const SCORE_LABEL = ['Quá ngắn', 'Yếu', 'Trung bình', 'Khá', 'Mạnh'];
 
 /** Auth card shell: centred mark + title (+ optional line), the form body, and an optional muted footer. */
-export function ApplicationAuthCard({ title, description, label, mark = 'V', children, footer, className = '' }: {
+export function ApplicationAuthCard({ title, description, label, mark = 'V', children, footer, variant = 'card', className = '' }: {
   title: ReactNode;
   description?: ReactNode;
   label?: string;
   mark?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
+  variant?: 'card' | 'embedded';
   className?: string;
 }) {
-  return <section className={`application-auth ${className}`.trim()} aria-label={label}>
+  return <section className={`application-auth${variant === 'embedded' ? ' is-embedded' : ''} ${className}`.trim()} aria-label={label}>
     <div className="application-auth__body">
       <header><span className="application-auth__mark" aria-hidden="true">{mark}</span><h2>{title}</h2>{description && <p>{description}</p>}</header>
       {children}
