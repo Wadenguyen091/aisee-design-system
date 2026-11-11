@@ -79,8 +79,8 @@ export function ApplicationAuthHero({ title = 'Where your studio works with AI.'
       const pitch = smoothGaze.y * -.22 + Math.sin(time * .17) * .018;
       const yawCosine = Math.cos(yaw), yawSine = Math.sin(yaw);
       const pitchCosine = Math.cos(pitch), pitchSine = Math.sin(pitch);
-      const latitudeSteps = width < 620 ? 18 : 25;
-      const longitudeSteps = width < 620 ? 36 : 50;
+      const latitudeSteps = width < 620 ? 24 : 35;
+      const longitudeSteps = width < 620 ? 48 : 70;
       const points: Array<{ x: number; y: number; z: number; eye: number }> = [];
       for (let latitudeIndex = 1; latitudeIndex < latitudeSteps; latitudeIndex += 1) {
         const latitude = -Math.PI / 2 + latitudeIndex / latitudeSteps * Math.PI;
