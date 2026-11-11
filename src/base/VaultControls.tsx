@@ -218,6 +218,45 @@ export function VaultTooltip({ label, children, placement = 'top' }: { label: st
   </span>;
 }
 
+export function VaultToolButton({ label, shortcut, active = false, icon, className = '', ...props }: Omit<VaultButtonProps, 'children' | 'iconOnly' | 'icon'> & {
+  label: string;
+  shortcut?: string;
+  active?: boolean;
+  icon: ReactNode;
+}) {
+  return <VaultTooltip label={shortcut ? `${label} · ${shortcut}` : label}>
+    <VaultButton
+      {...props}
+      type={props.type ?? 'button'}
+      appearance="ghost"
+      iconOnly
+      icon={icon}
+      aria-label={label}
+      aria-pressed={active || undefined}
+      data-state={active ? 'selected' : 'default'}
+      className={`vault-tool-button ${className}`.trim()}
+    />
+  </VaultTooltip>;
+}
+
+export function VaultSwatchButton({ label, color, selected = false, className = '', ...props }: Omit<VaultButtonProps, 'children' | 'iconOnly' | 'icon'> & {
+  label: string;
+  color: string;
+  selected?: boolean;
+}) {
+  return <VaultButton
+    {...props}
+    type={props.type ?? 'button'}
+    appearance="ghost"
+    iconOnly
+    aria-label={label}
+    aria-pressed={selected}
+    data-state={selected ? 'selected' : 'default'}
+    className={`vault-swatch-button ${className}`.trim()}
+    style={{ ...props.style, '--vault-swatch-color': color } as CSSProperties}
+  ><span aria-hidden="true" /></VaultButton>;
+}
+
 export function VaultBreadcrumb({ items, label = 'Breadcrumb' }: {
   items: Array<{ label: string; href?: string; icon?: ReactNode; onClick?: () => void }>;
   label?: string;
