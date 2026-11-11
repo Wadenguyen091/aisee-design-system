@@ -9,40 +9,42 @@
   cursor:grab;
   user-select:none;
   --folder-accent:var(--ds-color-text-muted);
-  --folder-back:color-mix(in srgb,var(--folder-accent) 22%,var(--ds-color-surface-raised));
-  --folder-paper:color-mix(in srgb,var(--ds-color-text) 9%,var(--ds-color-surface));
-  --folder-face:color-mix(in srgb,var(--folder-accent) 5%,var(--ds-color-surface-muted));
-  --folder-edge:color-mix(in srgb,var(--folder-accent) 30%,var(--ds-color-border-subtle));
-  --folder-mark: var(--ds-color-inverse-surface);
-  --folder-mark-ink: var(--ds-color-on-inverse-surface);
+  --folder-back:#242424;
+  --folder-paper:#8d8d8d;
+  --folder-face:#1b1b1b;
+  --folder-edge:rgba(255,255,255,.08);
+  --folder-mark:#696969;
+  --folder-mark-ink:#f5f5f5;
 }
 :root[data-theme='dark'] .vault-folder,
 [data-theme-scope='dark'] .vault-folder {
-  --folder-back:color-mix(in srgb,var(--folder-accent) 30%,var(--ds-color-surface-raised));
-  --folder-paper:color-mix(in srgb,var(--folder-accent) 8%,color-mix(in srgb,var(--ds-color-text) 12%,var(--ds-color-surface)));
-  --folder-face:color-mix(in srgb,var(--folder-accent) 7%,var(--ds-color-surface-muted));
-  --folder-edge:color-mix(in srgb,var(--folder-accent) 42%,var(--ds-color-border-subtle));
-  --folder-mark: var(--ds-color-surface);
-  --folder-mark-ink: var(--ds-color-text);
+  --folder-back:#242424;
+  --folder-paper:#929292;
+  --folder-face:#1a1a1a;
+  --folder-edge:rgba(255,255,255,.09);
+  --folder-mark:#666;
+  --folder-mark-ink:#fff;
 }
 .vault-folder:active { cursor:grabbing; }
 .vault-folder__shell { position:relative; width:208px; height:148px; margin:0 auto; transform-origin:50% 72%; transition:transform var(--ds-duration-normal) var(--ds-ease-standard),filter var(--ds-duration-normal) var(--ds-ease-standard); }
-#root .vault-folder__back { position:absolute; top:17px; right:16px; bottom:4px; left:16px; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:12px!important; background:linear-gradient(145deg,color-mix(in srgb,var(--folder-accent) 18%,var(--folder-back)),var(--folder-back) 64%); box-shadow:0 14px 30px color-mix(in srgb,#000 28%,transparent); }
-#root .vault-folder__tab { position:absolute; top:5px; right:16px; width:62px; height:31px; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-bottom:0!important; border-radius:10px 10px 0 0!important; background:linear-gradient(145deg,color-mix(in srgb,var(--folder-accent) 22%,var(--folder-back)),var(--folder-back)); }
-#root .vault-folder__paper { position:absolute; top:20px; right:25px; left:25px; height:43px; border:0!important; border-radius:6px 6px 2px 2px!important; background:linear-gradient(180deg,color-mix(in srgb,var(--ds-color-text) 42%,var(--folder-paper)),color-mix(in srgb,var(--ds-color-text) 26%,var(--folder-paper))); box-shadow:0 -2px 12px color-mix(in srgb,#000 16%,transparent); clip-path:polygon(0 0,31% 0,43% 16px,100% 16px,100% 100%,0 100%); opacity:.9; transform:translateY(2px); transition:transform var(--ds-duration-normal) var(--ds-ease-standard),opacity var(--ds-duration-fast) var(--ds-ease-standard); }
-#root .vault-folder__face { position:absolute; right:16px; bottom:4px; left:16px; display:flex; height:100px; align-items:flex-end; gap:var(--ds-space-3); overflow:hidden; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:11px!important; padding:14px; color:var(--ds-color-text); background:radial-gradient(ellipse at 50% 16%,color-mix(in srgb,#000 20%,transparent),transparent 42%),linear-gradient(150deg,color-mix(in srgb,var(--folder-accent) 7%,var(--folder-face)),var(--folder-face) 64%); box-shadow:inset 0 1px color-mix(in srgb,var(--ds-color-text) 5%,transparent),0 14px 32px color-mix(in srgb,#000 30%,transparent); transition:border-color var(--ds-duration-fast) var(--ds-ease-standard),background-color var(--ds-duration-fast) var(--ds-ease-standard),box-shadow var(--ds-duration-fast) var(--ds-ease-standard); }
-#root .vault-folder__face::before { position:absolute; top:0; right:0; left:0; height:1px; background:linear-gradient(90deg,color-mix(in srgb,var(--folder-accent) 72%,transparent),color-mix(in srgb,var(--ds-color-text) 9%,transparent),transparent); content:''; opacity:.8; }
-#root .vault-folder__mark { display:grid; width:30px; height:30px; flex:none; place-items:center; border-radius:9px!important; color:var(--folder-mark-ink); background:var(--folder-mark); font-size:var(--ds-font-size-body); line-height:20px; font-weight:var(--ds-font-weight-semibold); }
-.vault-folder__copy { display:grid; min-width:0; flex:1; gap:1px; }
-.vault-folder__copy > h3 { overflow:hidden; margin:0; font-size:var(--ds-font-size-body); line-height:20px; font-weight:var(--ds-font-weight-semibold); letter-spacing:-.015em; text-overflow:ellipsis; white-space:nowrap; }
-.vault-folder__copy > small { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:16px; }
-.vault-folder__count { display:grid; min-width:28px; height:24px; flex:none; place-items:center; border:var(--ds-border-width-control) solid color-mix(in srgb,var(--folder-accent) 30%,var(--ds-color-border-subtle)); border-radius:999px; padding:0 7px; color:color-mix(in srgb,var(--folder-accent) 58%,var(--ds-color-text)); background:color-mix(in srgb,var(--folder-accent) 9%,var(--ds-color-surface)); font-size:var(--ds-font-size-caption); line-height:1; font-variant-numeric:tabular-nums; }
+#root .vault-folder__back { position:absolute; top:26px; right:28px; bottom:10px; left:28px; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:11px!important; background:linear-gradient(145deg,#303030,var(--folder-back) 58%,#1d1d1d); box-shadow:0 18px 32px rgba(0,0,0,.32); }
+#root .vault-folder__tab { position:absolute; top:17px; right:39px; width:52px; height:22px; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-bottom:0!important; border-radius:9px 9px 0 0!important; background:linear-gradient(180deg,#2d2d2d,var(--folder-back)); }
+#root .vault-folder__paper { position:absolute; top:28px; right:36px; left:36px; height:31px; border:0!important; border-radius:5px 5px 2px 2px!important; background:linear-gradient(180deg,#9d9d9d,var(--folder-paper)); box-shadow:0 -2px 10px rgba(0,0,0,.2); clip-path:polygon(0 0,30% 0,44% 13px,100% 13px,100% 100%,0 100%); opacity:.96; transform:translateY(1px); transition:transform var(--ds-duration-normal) var(--ds-ease-standard),opacity var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-folder__face { position:absolute; right:28px; bottom:10px; left:28px; display:flex; height:88px; align-items:flex-end; gap:9px; overflow:hidden; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:10px!important; padding:12px; color:#f2f2f2; background:radial-gradient(ellipse at 52% 12%,rgba(0,0,0,.3),transparent 38%),linear-gradient(145deg,rgba(48,48,48,.98),rgba(22,22,22,.99) 70%); box-shadow:inset 0 1px rgba(255,255,255,.055),inset 14px 0 22px rgba(255,255,255,.018),0 16px 30px rgba(0,0,0,.34); backdrop-filter:blur(14px); transition:border-color var(--ds-duration-fast) var(--ds-ease-standard),background-color var(--ds-duration-fast) var(--ds-ease-standard),box-shadow var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-folder__face::before { position:absolute; top:0; right:0; left:0; height:1px; background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.045),transparent); content:''; }
+#root .vault-folder__mark { display:grid; width:26px; height:26px; flex:none; place-items:center; border-radius:7px!important; color:var(--folder-mark-ink); background:var(--folder-mark); font-size:var(--ds-font-size-caption); line-height:18px; font-weight:var(--ds-font-weight-semibold); }
+.vault-folder__symbol { position:relative; display:block; width:27px; height:24px; flex:none; border-radius:6px; background:linear-gradient(145deg,#777,#4c4c4c); box-shadow:inset 0 1px rgba(255,255,255,.15); }
+.vault-folder__symbol > i { position:absolute; top:6px; width:9px; height:12px; border-top:3px solid #d0d0d0; border-left:3px solid #d0d0d0; transform:rotate(-45deg); }
+.vault-folder__symbol > i:first-child { left:6px; }
+.vault-folder__symbol > i:last-child { left:12px; opacity:.72; }
+.vault-folder__copy { display:grid; min-width:0; flex:1; gap:0; }
+.vault-folder__copy > h3 { overflow:hidden; margin:0; color:#f2f2f2; font-size:13px; line-height:17px; font-weight:var(--ds-font-weight-semibold); letter-spacing:-.015em; text-overflow:ellipsis; white-space:nowrap; }
+.vault-folder__copy > small { color:#888; font-size:11px; line-height:14px; }
 .vault-folder:is([data-interaction-state='hover'], [data-interaction-state='dragOver']) .vault-folder__paper { opacity:1; transform:translateY(-7px); }
 .vault-folder[data-interaction-state='hover'] .vault-folder__shell { filter:brightness(1.035); }
-.vault-folder[data-interaction-state='hover'] .vault-folder__face { border-color:color-mix(in srgb,var(--folder-accent) 64%,var(--ds-color-border))!important; box-shadow:inset 0 1px color-mix(in srgb,var(--ds-color-text) 8%,transparent),0 18px 38px color-mix(in srgb,#000 32%,transparent); }
+.vault-folder[data-interaction-state='hover'] .vault-folder__face { border-color:rgba(255,255,255,.16)!important; box-shadow:inset 0 1px rgba(255,255,255,.08),0 20px 38px rgba(0,0,0,.38); }
 .vault-folder[data-interaction-state='selected'] .vault-folder__face { border-color:var(--ds-color-text)!important; box-shadow:0 0 0 2px color-mix(in srgb,var(--ds-color-text) 15%,transparent),0 16px 34px color-mix(in srgb,#000 30%,transparent)!important; }
-.vault-folder[data-interaction-state='selected'] .vault-folder__count { border-color:color-mix(in srgb,var(--ds-color-text) 30%,transparent); color:var(--ds-color-text); }
-.vault-folder[data-interaction-state='dragOver'] .vault-folder__face { border-color:var(--folder-accent)!important; background:linear-gradient(155deg,color-mix(in srgb,var(--folder-accent) 20%,var(--folder-face)),color-mix(in srgb,var(--folder-accent) 10%,var(--folder-face))); }
+.vault-folder[data-interaction-state='dragOver'] .vault-folder__face { border-color:rgba(255,255,255,.34)!important; background:linear-gradient(145deg,#3b3b3b,#202020); }
 @media (prefers-reduced-motion: reduce) { .vault-folder__shell, .vault-folder__paper { transition:none; } .vault-folder__recap { animation:none; } }
 
 /* Folder recap (hover preview): floating panel on the surface grammar — one 6% edge, padding 8. */

@@ -88,11 +88,11 @@ export function ApplicationFolder({ title, count, meta, mark, selected = false, 
       <div data-folder-paper className="vault-folder__paper" />
       <div data-folder-face data-selection-shadow={state === 'selected' ? 'true' : undefined} className="vault-folder__face">
         {(isDrop || mark) && <span className="vault-folder__mark" aria-hidden="true">{isDrop ? '+' : mark}</span>}
+        {!isDrop && !mark && <span className="vault-folder__symbol" aria-hidden="true"><i /><i /></span>}
         <span className="vault-folder__copy">
           <h3>{title}</h3>
-          <small>{isDrop ? 'Thả vào đây' : meta ?? 'Thư mục'}</small>
+          <small>{isDrop ? 'Thả vào đây' : meta ?? `${count.toLocaleString('vi-VN')} mục`}</small>
         </span>
-        {!isDrop && !meta && <span className="vault-folder__count" aria-label={`${count.toLocaleString('vi-VN')} mục`}>{count.toLocaleString('vi-VN')}</span>}
       </div>
     </div>
   </div>;
