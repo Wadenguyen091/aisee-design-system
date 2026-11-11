@@ -33,10 +33,10 @@
 #root .vault-folder__face { position:absolute; right:28px; bottom:10px; left:28px; display:flex; height:88px; align-items:flex-end; gap:9px; overflow:hidden; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:10px!important; padding:12px; color:#f2f2f2; background:radial-gradient(ellipse at 52% 12%,rgba(0,0,0,.3),transparent 38%),linear-gradient(145deg,rgba(48,48,48,.98),rgba(22,22,22,.99) 70%); box-shadow:inset 0 1px rgba(255,255,255,.055),inset 14px 0 22px rgba(255,255,255,.018),0 16px 30px rgba(0,0,0,.34); backdrop-filter:blur(14px); transition:border-color var(--ds-duration-fast) var(--ds-ease-standard),background-color var(--ds-duration-fast) var(--ds-ease-standard),box-shadow var(--ds-duration-fast) var(--ds-ease-standard); }
 #root .vault-folder__face::before { position:absolute; top:0; right:0; left:0; height:1px; background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.045),transparent); content:''; }
 #root .vault-folder__mark { display:grid; width:26px; height:26px; flex:none; place-items:center; border-radius:7px!important; color:var(--folder-mark-ink); background:var(--folder-mark); font-size:var(--ds-font-size-caption); line-height:18px; font-weight:var(--ds-font-weight-semibold); }
-.vault-folder__symbol { position:relative; display:block; width:27px; height:24px; flex:none; border-radius:6px; background:linear-gradient(145deg,#777,#4c4c4c); box-shadow:inset 0 1px rgba(255,255,255,.15); }
-.vault-folder__symbol > i { position:absolute; top:6px; width:9px; height:12px; border-top:3px solid #d0d0d0; border-left:3px solid #d0d0d0; transform:rotate(-45deg); }
-.vault-folder__symbol > i:first-child { left:6px; }
-.vault-folder__symbol > i:last-child { left:12px; opacity:.72; }
+.vault-folder__symbol { display:grid; width:27px; height:24px; flex:none; place-items:center; border-radius:6px; background:linear-gradient(145deg,#777,#4c4c4c); box-shadow:inset 0 1px rgba(255,255,255,.15); }
+.vault-folder__symbol > svg { display:block; width:23px; height:20px; overflow:visible; }
+.vault-folder__symbol path { stroke:#dedede; stroke-width:3.2; stroke-linecap:square; stroke-linejoin:miter; }
+.vault-folder__symbol path:last-child { opacity:.68; }
 .vault-folder__copy { display:grid; min-width:0; flex:1; gap:0; }
 .vault-folder__copy > h3 { overflow:hidden; margin:0; color:#f2f2f2; font-size:13px; line-height:17px; font-weight:var(--ds-font-weight-semibold); letter-spacing:-.015em; text-overflow:ellipsis; white-space:nowrap; }
 .vault-folder__copy > small { color:#888; font-size:11px; line-height:14px; }
