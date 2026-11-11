@@ -1,46 +1,44 @@
 /* Application · Folder (ApplicationFolder.tsx) — moved from BoardChrome.css in v69 so the Board and the
    Design System render the same object. */
-/* Neutral folder ------------------------------------------------------------
-   One monochrome folder for every item (no per-folder hue). Shell 208×162 inside the 240 wrapper
-   (drop zones in spatialLayout depend on it). Back panel with a right tab, a paper sheet that rises
-   on hover / drop, a front face with title 14/20 and count 12/16, padding 16. */
+/* Folder --------------------------------------------------------------------
+   A quiet, almost-flat object on the canvas. The 240px wrapper remains stable
+   for Board spatial math; colour is an accent on the tab and edge, not a fill. */
 .vault-folder {
   position:relative;
   width:240px;
   cursor:grab;
   user-select:none;
-  --folder-back: color-mix(in srgb, var(--ds-color-text) 12%, var(--ds-color-surface));
-  --folder-paper: var(--vault-chip);
-  --folder-face-top: var(--vault-chip);
-  --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 4%, var(--ds-color-surface));
-  --folder-edge: color-mix(in srgb, var(--ds-color-text) 10%, transparent);
+  --folder-accent:var(--ds-color-text-muted);
+  --folder-back:var(--ds-color-surface-raised);
+  --folder-paper:color-mix(in srgb,var(--ds-color-text) 7%,var(--ds-color-surface));
+  --folder-face:var(--ds-color-surface-muted);
+  --folder-edge:color-mix(in srgb,var(--ds-color-text) 10%,transparent);
   --folder-mark: var(--ds-color-inverse-surface);
   --folder-mark-ink: var(--ds-color-on-inverse-surface);
 }
 :root[data-theme='dark'] .vault-folder,
 [data-theme-scope='dark'] .vault-folder {
-  --folder-back: color-mix(in srgb, var(--ds-color-text) 6%, var(--ds-color-surface));
-  --folder-paper: color-mix(in srgb, var(--ds-color-text) 80%, var(--ds-color-surface));
-  --folder-face-top: color-mix(in srgb, var(--ds-color-text) 14%, var(--ds-color-surface));
-  --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 9%, var(--ds-color-surface));
+  --folder-back:color-mix(in srgb,var(--folder-accent) 18%,var(--ds-color-surface-raised));
+  --folder-paper:color-mix(in srgb,var(--ds-color-text) 10%,var(--ds-color-surface));
+  --folder-face:color-mix(in srgb,var(--folder-accent) 5%,var(--ds-color-surface-muted));
+  --folder-edge:color-mix(in srgb,var(--folder-accent) 34%,var(--ds-color-border-subtle));
   --folder-mark: var(--ds-color-surface);
   --folder-mark-ink: var(--ds-color-text);
 }
 .vault-folder:active { cursor:grabbing; }
-.vault-folder__shell { position:relative; margin:0 auto; transform-origin:center; width:208px; height:162px; transition:transform var(--ds-duration-normal) var(--ds-ease-standard); }
-#root .vault-folder__back { position:absolute; inset:16px 0 0; border:0!important; border-radius:12px!important; background:var(--folder-back); }
-#root .vault-folder__tab { position:absolute; top:4px; right:0; width:88px; height:24px; border:0!important; border-radius:12px 12px 0 0!important; background:var(--folder-back); }
-#root .vault-folder__paper { position:absolute; top:28px; right:12px; left:12px; height:48px; border:0!important; border-radius:8px!important; background:var(--folder-paper); transition:transform var(--ds-duration-normal) var(--ds-ease-standard); }
-#root .vault-folder__face { position:absolute; right:0; bottom:0; left:0; display:flex; height:116px; align-items:flex-end; gap:var(--ds-space-3); border:0!important; border-top:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:12px!important; padding:var(--ds-space-4); background:linear-gradient(180deg, var(--folder-face-top), var(--folder-face-bottom)); color:var(--ds-color-text); transition:background-color var(--ds-duration-normal) var(--ds-ease-standard); }
-#root .vault-folder__mark { display:grid; width:32px; height:32px; flex:none; place-items:center; border-radius:8px!important; color:var(--folder-mark-ink); background:var(--folder-mark); font-size:var(--ds-font-size-body); line-height:20px; font-weight:var(--ds-font-weight-semibold); }
+.vault-folder__shell { position:relative; width:208px; height:148px; margin:0 auto; transform-origin:center; transition:transform var(--ds-duration-normal) var(--ds-ease-standard); }
+#root .vault-folder__back { position:absolute; inset:18px 0 6px; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:14px!important; background:var(--folder-back); }
+#root .vault-folder__tab { position:absolute; top:8px; left:0; width:78px; height:30px; border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-bottom:0!important; border-radius:12px 12px 0 0!important; background:var(--folder-back); }
+#root .vault-folder__paper { position:absolute; top:30px; right:10px; left:10px; height:28px; border:var(--ds-border-width-control) solid color-mix(in srgb,var(--ds-color-text) 8%,transparent)!important; border-radius:9px 9px 3px 3px!important; background:var(--folder-paper); opacity:.72; transition:transform var(--ds-duration-normal) var(--ds-ease-standard),opacity var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-folder__face { position:absolute; right:0; bottom:0; left:0; display:flex; height:112px; align-items:flex-end; gap:var(--ds-space-3); border:var(--ds-border-width-control) solid var(--folder-edge)!important; border-radius:14px!important; padding:var(--ds-space-4); color:var(--ds-color-text); background:var(--folder-face); box-shadow:0 10px 26px color-mix(in srgb,#000 16%,transparent); transition:border-color var(--ds-duration-fast) var(--ds-ease-standard),background-color var(--ds-duration-fast) var(--ds-ease-standard),box-shadow var(--ds-duration-fast) var(--ds-ease-standard); }
+#root .vault-folder__mark { display:grid; width:28px; height:28px; flex:none; place-items:center; border-radius:8px!important; color:var(--folder-mark-ink); background:var(--folder-mark); font-size:var(--ds-font-size-body); line-height:20px; font-weight:var(--ds-font-weight-semibold); }
 .vault-folder__copy { display:grid; min-width:0; }
 .vault-folder__copy > h3 { overflow:hidden; margin:0; font-size:var(--ds-font-size-body); line-height:20px; font-weight:var(--ds-font-weight-semibold); letter-spacing:-.01em; text-overflow:ellipsis; white-space:nowrap; }
 .vault-folder__copy > small { color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:16px; }
-.vault-folder:is([data-interaction-state='hover'], [data-interaction-state='dragOver']) .vault-folder__paper { transform:translateY(-8px); }
-.vault-folder[data-interaction-state='selected'] { --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 9%, var(--ds-color-surface)); }
-:is(:root[data-theme='dark'], [data-theme-scope='dark']) .vault-folder[data-interaction-state='selected'] { --folder-face-top: color-mix(in srgb, var(--ds-color-text) 18%, var(--ds-color-surface)); }
-.vault-folder[data-interaction-state='dragOver'] { --folder-face-bottom: color-mix(in srgb, var(--ds-color-text) 12%, var(--ds-color-surface)); }
-:is(:root[data-theme='dark'], [data-theme-scope='dark']) .vault-folder[data-interaction-state='dragOver'] { --folder-face-top: color-mix(in srgb, var(--ds-color-text) 20%, var(--ds-color-surface)); }
+.vault-folder:is([data-interaction-state='hover'], [data-interaction-state='dragOver']) .vault-folder__paper { opacity:1; transform:translateY(-5px); }
+.vault-folder[data-interaction-state='hover'] .vault-folder__face { border-color:color-mix(in srgb,var(--folder-accent) 46%,var(--ds-color-border))!important; background:color-mix(in srgb,var(--folder-accent) 7%,var(--ds-color-surface-muted)); box-shadow:0 14px 34px color-mix(in srgb,#000 22%,transparent); }
+.vault-folder[data-interaction-state='selected'] .vault-folder__face { border-color:color-mix(in srgb,var(--ds-color-text) 34%,transparent)!important; box-shadow:0 0 0 2px color-mix(in srgb,var(--ds-color-text) 9%,transparent),0 16px 34px color-mix(in srgb,#000 24%,transparent); }
+.vault-folder[data-interaction-state='dragOver'] .vault-folder__face { border-color:var(--folder-accent)!important; background:color-mix(in srgb,var(--folder-accent) 12%,var(--ds-color-surface-muted)); }
 @media (prefers-reduced-motion: reduce) { .vault-folder__shell, .vault-folder__paper { transition:none; } .vault-folder__recap { animation:none; } }
 
 /* Folder recap (hover preview): floating panel on the surface grammar — one 6% edge, padding 8. */

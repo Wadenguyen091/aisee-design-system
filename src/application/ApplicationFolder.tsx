@@ -34,7 +34,7 @@ export type ApplicationFolderProps = {
   className?: string;
 };
 
-const SCALE: Record<ApplicationFolderState, number> = { default: 1, hover: 1.02, selected: 1.04, dragOver: 1.04 };
+const SCALE: Record<ApplicationFolderState, number> = { default: 1, hover: 1.012, selected: 1.018, dragOver: 1.018 };
 
 export function folderRecapSummary(groups: Record<string, number>) {
   return Object.entries(groups).filter(([, count]) => count > 0).slice(0, 3)

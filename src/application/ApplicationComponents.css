@@ -745,3 +745,30 @@
 .application-profile__name { display:grid; min-width:0; text-align:left; }
 .application-profile__name > span { overflow:hidden; color:var(--ds-color-text); font-size:var(--ds-font-size-body); line-height:16px; font-weight:var(--ds-font-weight-semibold); text-overflow:ellipsis; white-space:nowrap; }
 .application-profile__name > small { overflow:hidden; color:var(--ds-color-text-muted); font-size:var(--ds-font-size-caption); line-height:16px; text-overflow:ellipsis; white-space:nowrap; }
+
+/* Profile menu — compact identity sheet, calm grouped commands. */
+#root .application-profile__menu {
+  width:288px;
+  padding:6px;
+  border:0!important;
+  border-radius:14px!important;
+  background:color-mix(in srgb,var(--ds-color-surface) 96%,transparent);
+  outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle);
+  outline-offset:calc(var(--ds-border-width-control) * -1);
+  box-shadow:0 22px 60px color-mix(in srgb,#000 34%,transparent),0 3px 10px color-mix(in srgb,#000 20%,transparent);
+  backdrop-filter:blur(20px);
+}
+#root .application-profile__identity {
+  height:62px;
+  margin:0 0 4px;
+  padding:0 10px;
+  border:0;
+  border-radius:10px!important;
+  background:var(--ds-color-surface-muted);
+}
+#root .application-profile__identity strong { font-size:var(--ds-font-size-label); }
+#root .application-profile__menu > .vault-menu { gap:2px; margin:0; padding:0; border:0!important; border-radius:0!important; background:transparent; outline:0!important; box-shadow:none; backdrop-filter:none; }
+#root .application-profile__menu > .vault-menu .vault-menu__item { min-height:36px; height:36px; padding-inline:10px; }
+#root .application-profile__notice { margin:0 0 4px; border:0; border-radius:10px; overflow:hidden; }
+#root .application-profile__panel-head { height:44px; margin-bottom:2px; border:0; }
+#root .application-profile__panel { padding:var(--ds-space-3); }
