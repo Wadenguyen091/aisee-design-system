@@ -555,7 +555,7 @@
 .application-auth.is-embedded .application-auth__body { gap:var(--ds-space-5); padding:0; }
 .application-auth.is-embedded .application-auth__body > header { gap:var(--ds-space-3); }
 .application-auth.is-embedded .application-auth__mark { margin-bottom:var(--ds-space-2); color:var(--ds-color-text); background:var(--ds-color-surface-raised); outline:var(--ds-border-width-control) solid var(--ds-color-border-subtle); }
-.application-auth.is-embedded :is(.vault-field__control,.application-auth__submit) { border-radius:var(--ds-radius-sm)!important; }
+#root .vault-app .application-auth.is-embedded :is(.vault-field__control,.application-auth__submit) { border-radius:var(--ds-radius-sm)!important; }
 .application-auth.is-embedded > footer { height:auto; margin-top:var(--ds-space-4); border:0; padding:0; background:transparent; font-size:var(--ds-font-size-caption); line-height:var(--ds-line-height-label); }
 /* Breadcrumb as the top bar's title: current page 14 semibold. Phones: profile collapses to the avatar. */
 #root .application-topbar__lead .vault-breadcrumb a, #root .application-topbar__lead .vault-breadcrumb span { font-size:var(--ds-font-size-body); line-height:20px; }

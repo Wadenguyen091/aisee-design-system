@@ -1,6 +1,6 @@
 {
   "name": "@aisee/design-system",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Base design knowledge, tokens and React components for AISEE and its Mini Apps.",
   "type": "module",
   "sideEffects": [
