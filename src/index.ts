@@ -1,5 +1,5 @@
 /**
- * Visal Design System — public entry point.
+ * AISEE Design System — public entry point.
  *
  *   tokens    theme.css (generated from Pallet) + tokens.css (scales, semantic aliases)
  *   base/     building blocks every app has (button, field, tabs, badge, charts…)
@@ -12,5 +12,6 @@ export * from './base';
 export * from './application';
 export * from './icons';
 export * from './theme';
+export * from './foundations';
 export { tokenManifest } from './manifest';
 export type { DesignSystemManifest, PrimitiveEntry, ShadeEntry, TokenEntry, TokenGroup, ThemeMode } from './manifest';

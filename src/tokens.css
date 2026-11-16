@@ -1,5 +1,5 @@
 /*
- * Vault design-system contract
+ * AISEE design-system contract
  * ----------------------------
  * Primitive tokens describe fixed design decisions. Semantic tokens below
  * deliberately point at the Pallet-powered --vault-* runtime variables, so
@@ -8,12 +8,13 @@
 
 :root,
 [data-theme-scope] {
-  /* Brand primitives remain fixed across light and dark modes. */
+  /* 03 COLOR PALLET / COLOR APPLICATION VARIABLES
+     Brand primitives remain fixed across consuming modes. */
   --ds-primitive-red-500: #B30000;
   --ds-primitive-red-600: color-mix(in srgb, var(--ds-primitive-red-500) 88%, #000);
   --ds-primitive-on-red: #FFF;
 
-  /* Typography */
+  /* 01 TYPOGRAPHY */
   --ds-font-family-ui: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --ds-font-family-sans: var(--ds-font-family-ui);
   --ds-font-family-editorial: 'Red Rose', Georgia, serif;
@@ -68,7 +69,7 @@
   --ds-font-weight-semibold: 600;
   --ds-font-weight-bold: 700;
 
-  /* Geometry */
+  /* 02 SPACING */
   --ds-space-0: 0;
   --ds-space-0-5: 2px;
   --ds-space-1: 4px;
@@ -86,6 +87,7 @@
   --ds-space-24: 96px;
   --ds-space-32: 128px;
 
+  /* 05 WEIGHT · stroke weights */
   --ds-weight-xs: 1px;
   --ds-weight-sm: 1.2px;
   --ds-weight-md: 1.6px;
@@ -104,6 +106,7 @@
   --ds-spacing-page-block: var(--ds-space-6);
   --ds-spacing-page-end: var(--ds-space-8);
 
+  /* 04 RADIUS */
   --ds-radius-none: 0;
   --ds-radius-xs: 2px;
   --ds-radius-sm: 2px;
@@ -135,7 +138,7 @@
   --ds-icon-stroke-regular: 1.75;
   --ds-icon-stroke-strong: 2;
 
-  /* Motion and interaction states */
+  /* Interaction aliases consume the five foundations above. */
   --ds-duration-fast: 120ms;
   --ds-duration-normal: 160ms;
   --ds-duration-slow: 240ms;
@@ -162,7 +165,8 @@
   --ds-shadow-dialog: none;
   --ds-shadow-subtle: none;
 
-  /* Semantic colors. Pallet remains the source of truth at runtime. */
+  /* 03 COLOR APPLICATION VARIABLES
+     Pallet remains the source of truth at build time. */
   --ds-color-canvas: var(--vault-app-bg);
   --ds-color-canvas-workspace: var(--vault-canvas-bg);
   --ds-color-surface: var(--vault-surface);

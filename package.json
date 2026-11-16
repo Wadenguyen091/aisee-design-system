@@ -23,6 +23,7 @@
     "./assets": "./src/assets.ts",
     "./icons": "./src/icons.tsx",
     "./theme": "./src/theme.ts",
+    "./foundations": "./src/foundations.ts",
     "./base/colorMath": "./src/base/colorMath.ts",
     "./base/useDialogBehavior": "./src/base/useDialogBehavior.ts",
     "./base/*.css": "./src/base/*.css",
@@ -32,7 +33,7 @@
     "./application/*": "./src/application/*.tsx"
   },
   "scripts": {
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && node scripts/check-foundations.mjs",
     "test": "npm run check"
   },
   "peerDependencies": {
