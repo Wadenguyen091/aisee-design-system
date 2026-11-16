@@ -30,6 +30,7 @@
   --ds-text-body-lg-line: 24px;
   --ds-text-headline-xl-size: 20px;
   --ds-text-headline-xl-line: 28px;
+  --ds-text-headline-lg-size: var(--ds-text-headline-xl-size);
   --ds-text-headline-2xl-size: 24px;
   --ds-text-headline-2xl-line: 32px;
   --ds-text-headline-3xl-size: 30px;
