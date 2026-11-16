@@ -155,12 +155,12 @@
   --ds-color-focus-border: var(--ds-color-text-muted);
   --ds-focus-outline: var(--ds-focus-outline-width) solid var(--ds-color-focus-border);
   --ds-color-scrim: var(--vault-scrim, color-mix(in srgb, #050505 54%, transparent));
-  --ds-shadow-color-subtle: color-mix(in srgb, var(--ds-color-text) 8%, transparent);
-  --ds-shadow-color-overlay: color-mix(in srgb, var(--ds-color-text) 18%, transparent);
-  --ds-shadow-color-dialog: color-mix(in srgb, var(--ds-color-text) 32%, transparent);
-  --ds-shadow-overlay: 0 16px 36px var(--ds-shadow-color-overlay);
-  --ds-shadow-dialog: 0 30px 80px var(--ds-shadow-color-dialog);
-  --ds-shadow-subtle: 0 6px 18px var(--ds-shadow-color-subtle);
+  --ds-shadow-color-subtle: transparent;
+  --ds-shadow-color-overlay: transparent;
+  --ds-shadow-color-dialog: transparent;
+  --ds-shadow-overlay: none;
+  --ds-shadow-dialog: none;
+  --ds-shadow-subtle: none;
 
   /* Semantic colors. Pallet remains the source of truth at runtime. */
   --ds-color-canvas: var(--vault-app-bg);
