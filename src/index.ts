@@ -13,5 +13,6 @@ export * from './application';
 export * from './icons';
 export * from './theme';
 export * from './foundations';
+export * from './boundaryPolicy';
 export { tokenManifest } from './manifest';
 export type { DesignSystemManifest, PrimitiveEntry, ShadeEntry, TokenEntry, TokenGroup, ThemeMode } from './manifest';

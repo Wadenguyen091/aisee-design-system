@@ -153,6 +153,11 @@
      than inventing border weights, focus alpha, scrims, or shadow colours. */
   --ds-border-width-control: var(--ds-weight-xs);
   --ds-border-width-selected: var(--ds-weight-lg);
+  /* Boundary roles combine Color + Weight. Use them only when a component
+     needs a visible hit area, a structural divider or a state boundary. */
+  --ds-boundary-control: var(--ds-border-width-control) solid var(--ds-color-border);
+  --ds-boundary-divider: var(--ds-border-width-control) solid var(--ds-color-border-divider);
+  --ds-boundary-state: var(--ds-border-width-selected) solid var(--ds-color-border-strong);
   --ds-focus-outline-width: var(--ds-weight-lg);
   --ds-color-focus-soft: color-mix(in srgb, var(--ds-color-focus) 16%, transparent);
   --ds-color-focus-border: var(--ds-color-text-muted);
